@@ -74,6 +74,7 @@ class Paquete(models.Model):
     precio_regular = models.DecimalField(max_digits=12, decimal_places=2)
     precio_descuento = models.DecimalField(max_digits=12, decimal_places=2, blank=True, null=True)
     moneda = models.CharField(max_length=10, default='USD')
+    aplica_iva = models.BooleanField(default=False)
     es_destacado = models.BooleanField(default=False)
     orden = models.PositiveIntegerField(default=0)
 

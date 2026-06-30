@@ -34,7 +34,172 @@
     <style>
         body { font-family: 'Raleway', sans-serif; }
         [x-cloak] { display: none !important; }
+
+        /* RICH EDITOR */
+        .rich-field { position: relative; }
+
+        .rich-toolbar {
+            display: flex;
+            gap: 4px;
+            padding: 6px 8px;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .rich-toolbar-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 5px;
+            border: 1px solid #2a2a2a;
+            background: transparent;
+            color: #737373;
+            font-size: 12px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .rich-toolbar-btn:hover { background: #1a1a1a; color: #C8A96E; border-color: #C8A96E; }
+        .rich-toolbar-btn svg { width: 13px; height: 13px; }
+
+        .rich-editor {
+            width: 100%;
+            min-height: 80px;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 0 0 8px 8px;
+            padding: 12px 16px;
+            color: #e5e5e5;
+            font-family: 'Raleway', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            outline: none;
+            transition: border-color 0.2s;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .rich-editor:focus { border-color: #C8A96E; }
+        .rich-editor a { color: #C8A96E; text-decoration: underline; cursor: pointer; }
+        .rich-editor:empty:before { content: attr(data-placeholder); color: #4a4a4a; }
+
+        /* Link dialog */
+        .link-dialog {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            z-index: 50;
+            background: #141414;
+            border: 1px solid #C8A96E;
+            border-radius: 12px;
+            padding: 16px;
+            width: 320px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+        }
+        .link-dialog input {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 7px;
+            padding: 8px 12px;
+            color: #e5e5e5;
+            font-family: 'Raleway', sans-serif;
+            font-size: 13px;
+            outline: none;
+            margin-bottom: 8px;
+            transition: border-color 0.2s;
+        }
+        .link-dialog input:focus { border-color: #C8A96E; }
+        .link-dialog-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #C8A96E;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
     </style>
+
+    <script>
+    function _richMethods() {
+        return {
+            showLink: false,
+            savedRange: null,
+            linkUrl: '',
+            linkText: '',
+
+            init() {
+                this.$nextTick(() => {
+                    if (this.$refs.editor) this.$refs.editor.innerHTML = this.val || '';
+                });
+            },
+
+            sync() {
+                this.val = this.$refs.editor ? this.$refs.editor.innerHTML : '';
+            },
+
+            saveRange() {
+                const sel = window.getSelection();
+                if (sel && sel.rangeCount && this.$refs.editor && this.$refs.editor.contains(sel.anchorNode)) {
+                    this.savedRange = sel.getRangeAt(0).cloneRange();
+                }
+            },
+
+            openLink() {
+                const sel = window.getSelection();
+                if (sel && sel.rangeCount) {
+                    this.savedRange = sel.getRangeAt(0).cloneRange();
+                    this.linkText = sel.toString();
+                } else {
+                    this.linkText = '';
+                }
+                this.linkUrl = '';
+                this.showLink = true;
+                this.$nextTick(() => this.$refs.linkUrlInput && this.$refs.linkUrlInput.focus());
+            },
+
+            confirmLink() {
+                if (!this.linkUrl) { this.showLink = false; return; }
+                this.$refs.editor.focus();
+                if (this.savedRange) {
+                    const sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(this.savedRange);
+                }
+                const label = this.linkText.trim() || this.linkUrl;
+                document.execCommand('insertHTML', false,
+                    `<a href="${this.linkUrl}" target="_blank" rel="noopener">${label}</a>`
+                );
+                this.sync();
+                this.showLink = false;
+                this.linkUrl = '';
+                this.linkText = '';
+                this.savedRange = null;
+            }
+        };
+    }
+
+    // Para campos estáticos: x-data="richEditor('nombre_campo', 'html inicial')"
+    function richEditor(fieldName, initialHTML) {
+        return { fieldName, val: initialHTML || '', ..._richMethods() };
+    }
+
+    // Para campos dinámicos dentro de x-for: x-data="richEditorInline(getter, setter)"
+    // val se inicializa desde getter() y al sincronizar actualiza mediante setter()
+    function richEditorInline(getter, setter) {
+        const methods = _richMethods();
+        const originalSync = methods.sync;
+        methods.sync = function() {
+            originalSync.call(this);
+            setter(this.val);
+        };
+        return { val: getter() || '', ...methods };
+    }
+    </script>
 </head>
 <body class="bg-cntxt-dark text-cntxt-text min-h-screen">
     <nav class="border-b border-cntxt-border bg-cntxt-card/80 backdrop-blur-sm sticky top-0 z-50">

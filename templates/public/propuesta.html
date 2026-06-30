@@ -618,6 +618,13 @@
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
         .text-accent { color: var(--accent); }
+        .section p a, .section li a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.2s;
+        }
+        .section p a:hover, .section li a:hover { opacity: 0.75; }
         .bg-accent { background-color: var(--accent); }
     </style>
 </head>
@@ -747,7 +754,7 @@
     </div>
 
     <p class="reveal" style="font-size: 18px; line-height: 1.8; color: var(--text); max-width: 800px; margin-bottom: 60px;">
-        {{ propuesta.objetivo_texto|linebreaksbr }}
+        {{ propuesta.objetivo_texto|safe }}
     </p>
 
     {% if propuesta.objetivos.count %}
@@ -791,13 +798,13 @@
             {% if paquete.que_es %}
             <div>
                 <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Qué es?</h4>
-                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.que_es }}</p>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.que_es|safe }}</p>
             </div>
             {% endif %}
             {% if paquete.para_que %}
             <div>
                 <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Para qué es?</h4>
-                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.para_que }}</p>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.para_que|safe }}</p>
             </div>
             {% endif %}
         </div>
@@ -805,7 +812,7 @@
         {% if paquete.incluye_texto %}
         <div style="margin-top: 24px;">
             <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Qué incluye?</h4>
-            <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.incluye_texto|linebreaksbr }}</p>
+            <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.incluye_texto|safe }}</p>
         </div>
         {% endif %}
 
@@ -844,7 +851,7 @@
 
     {% if propuesta.requisitos_texto %}
     <p class="reveal" style="font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; max-width: 700px;">
-        {{ propuesta.requisitos_texto }}
+        {{ propuesta.requisitos_texto|safe }}
     </p>
     {% endif %}
 
@@ -860,7 +867,7 @@
     {% if propuesta.consideraciones_texto %}
     <div class="reveal" style="margin-top: 40px; background: var(--card); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 24px 32px;">
         <h4 style="font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Consideraciones</h4>
-        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">{{ propuesta.consideraciones_texto }}</p>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">{{ propuesta.consideraciones_texto|safe }}</p>
     </div>
     {% endif %}
 </section>
@@ -923,6 +930,12 @@
                 <div class="pkg-price text-accent">$ <span class="counter" data-target="{{ paquete.precio_descuento|floatformat:0 }}">0</span> <span style="font-size: 18px; font-weight: 400; color: var(--muted);">{{ paquete.moneda }}</span></div>
                 {% else %}
                 <div class="pkg-price text-accent">$ <span class="counter" data-target="{{ paquete.precio_regular|floatformat:0 }}">0</span> <span style="font-size: 18px; font-weight: 400; color: var(--muted);">{{ paquete.moneda }}</span></div>
+                {% endif %}
+                {% if paquete.aplica_iva %}
+                <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; background: rgba(200,169,110,0.08); border: 1px solid rgba(200,169,110,0.25); border-radius: 20px; padding: 5px 12px;">
+                    <svg width="13" height="13" fill="none" stroke="var(--accent)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span style="font-size: 11px; color: var(--accent); font-weight: 600; letter-spacing: 0.5px;">Precio no incluye IVA (19%)</span>
+                </div>
                 {% endif %}
             </div>
 

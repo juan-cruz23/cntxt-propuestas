@@ -101,6 +101,7 @@ def _guardar_propuesta(request, propuesta=None):
                     precio_regular=data.get(f'pkg_precio_{pkg_idx}', 0),
                     precio_descuento=data.get(f'pkg_precio_desc_{pkg_idx}') or None,
                     moneda=data.get(f'pkg_moneda_{pkg_idx}', 'USD'),
+                    aplica_iva=f'pkg_iva_{pkg_idx}' in data,
                     es_destacado=f'pkg_destacado_{pkg_idx}' in data,
                     orden=pkg_idx,
                 )
@@ -202,7 +203,7 @@ def admin_duplicar(request, pk):
                 incluye_texto=pkg.incluye_texto, dias_entrega=pkg.dias_entrega,
                 precio_regular=pkg.precio_regular,
                 precio_descuento=pkg.precio_descuento,
-                moneda=pkg.moneda, es_destacado=pkg.es_destacado, orden=pkg.orden,
+                moneda=pkg.moneda, aplica_iva=pkg.aplica_iva, es_destacado=pkg.es_destacado, orden=pkg.orden,
             )
             for ent in pkg.entregables.all():
                 Entregable.objects.create(

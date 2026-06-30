@@ -1,0 +1,34 @@
+<div x-data="richEditor('{{ field_name }}', `{{ initial|escapejs }}`)" class="rich-field">
+    <div class="rich-toolbar">
+        <button type="button" class="rich-toolbar-btn" @mousedown.prevent="openLink()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+            Enlace
+        </button>
+    </div>
+    <div contenteditable="true"
+         class="rich-editor"
+         style="min-height: {{ rows|default:3 }}00px; max-height: none;"
+         x-ref="editor"
+         data-placeholder="{{ placeholder }}"
+         @input="sync()"
+         @mouseup="saveRange()"
+         @keyup="saveRange()">
+    </div>
+    <input type="hidden" :name="fieldName" :value="val">
+
+    <div x-show="showLink" class="link-dialog" @keydown.escape.window="showLink=false">
+        <div class="link-dialog-title">Insertar enlace</div>
+        <input x-ref="linkUrlInput" x-model="linkUrl" placeholder="https://..." type="url">
+        <input x-model="linkText" placeholder="Texto visible del enlace (opcional)">
+        <div class="flex gap-2 mt-1">
+            <button type="button" @click="confirmLink()"
+                class="flex-1 bg-cntxt-gold text-cntxt-dark text-xs font-bold py-2 rounded-lg hover:opacity-90 transition">
+                Insertar
+            </button>
+            <button type="button" @click="showLink=false"
+                class="px-3 py-2 text-cntxt-muted text-xs border border-cntxt-border rounded-lg hover:bg-cntxt-border transition">
+                ×
+            </button>
+        </div>
+    </div>
+</div>
