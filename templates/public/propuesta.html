@@ -626,22 +626,43 @@
 <div class="noise"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- LOGO HEADER -->
+<!-- GLASS HEADER BAR -->
 {% load static %}
 <header id="siteHeader" style="
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 150;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px 24px;
-    pointer-events: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: none;
 ">
+    <!-- Logo -->
     <img src="{% static 'img/logo-cntxt.png' %}"
          alt="CNTXT"
-         style="width: 120px; height: auto; display: block; opacity: 0.85; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.6));"
-         onerror="this.outerHTML='<span style=\'font-family:Raleway,sans-serif;font-size:13px;font-weight:800;letter-spacing:5px;color:white;opacity:0.85\'>CNTXT</span>'">
+         style="height: 22px; width: auto; display: block; opacity: 0.9;"
+         onerror="this.outerHTML='<span style=\'font-family:Raleway,sans-serif;font-size:13px;font-weight:800;letter-spacing:5px;color:white;opacity:0.9\'>CNTXT</span>'">
+
+    <!-- Propuesta info -->
+    <div style="text-align: center; position: absolute; left: 50%; transform: translateX(-50%);">
+        <span style="font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase;">
+            {{ propuesta.nombre_proyecto }}{% if propuesta.nombre_proyecto_subtitulo %} <span style="color: var(--accent);">·</span> {{ propuesta.nombre_proyecto_subtitulo }}{% endif %}
+        </span>
+    </div>
+
+    <!-- Número de propuesta -->
+    <span style="font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 2px; font-family: monospace;">
+        #{{ propuesta.numero }}
+    </span>
 </header>
 
 <!-- PILL NAV (desktop + mobile) -->
@@ -1082,6 +1103,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         glow.style.display = 'none';
     }
+
+    // ── GLASS HEADER BAR ──
+    gsap.to('#siteHeader', {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        delay: 0.2,
+        ease: 'power2.out'
+    });
 
     // ── HERO ANIMATION ──
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
