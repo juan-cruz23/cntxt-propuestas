@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ propuesta.nombre_proyecto }} | CNTXT</title>
+    <meta name="description" content="Propuesta comercial - {{ propuesta.nombre_proyecto }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <style>
+        :root {
+            --accent: {{ propuesta.color_acento }};
+            --accent-rgb: {{ propuesta.color_acento }};
+            --dark: #050505;
+            --card: #0e0e0e;
+            --card-hover: #161616;
+            --border: #1e1e1e;
+            --text: #e8e8e8;
+            --muted: #6b6b6b;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--dark);
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-display { font-family: 'Raleway', sans-serif; }
+
+        /* CURSOR */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(200,169,110,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200,169,110,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
+        }
+
+        .hero-gradient {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+        }
+
+        .hero-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.3;
+        }
+
+        /* NAV */
+        /* SECTIONS */
+        .section {
+            padding: 120px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Raleway', sans-serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 40px;
+        }
+
+        /* OBJECTIVE CARDS */
+        .obj-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .obj-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .obj-card:hover {
+            border-color: rgba(200,169,110,0.3);
+            transform: translateY(-4px);
+            background: var(--card-hover);
+        }
+
+        .obj-card:hover::before { opacity: 1; }
+
+        /* PACKAGES */
+        .pkg-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pkg-card.featured {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(200,169,110,0.08) 0%, var(--card) 40%);
+        }
+
+        .pkg-card.featured::after {
+            content: 'RECOMENDADO';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--dark);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 6px 40px;
+            transform: rotate(45deg);
+        }
+
+        .pkg-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .pkg-price {
+            font-family: 'Raleway', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        .pkg-price-old {
+            text-decoration: line-through;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .pkg-deliverable {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .pkg-deliverable:last-child { border-bottom: none; }
+
+        .pkg-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(200,169,110,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pkg-check svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--accent);
+        }
+
+        /* GANTT TIMELINE */
+        .gantt {
+            margin-top: 50px;
+        }
+
+        .gantt-scale {
+            display: flex;
+            justify-content: space-between;
+            padding-left: var(--gantt-label-w, 180px);
+            margin-bottom: 12px;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .gantt-scale span { flex: 1; text-align: left; }
+        .gantt-scale span:last-child { text-align: right; flex: 0; }
+
+        .gantt-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            cursor: pointer;
+        }
+
+        .gantt-row:last-child { border-bottom: none; }
+
+        .gantt-label {
+            width: var(--gantt-label-w, 180px);
+            flex-shrink: 0;
+        }
+
+        .gantt-label-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            transition: color 0.3s;
+        }
+
+        .gantt-label-sub {
+            font-size: 10px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .gantt-track {
+            position: relative;
+            flex: 1;
+            height: 36px;
+        }
+
+        .gantt-bar-wrap {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .gantt-grid-line {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .gantt-bar {
+            position: absolute;
+            top: 3px; bottom: 3px;
+            left: 0;
+            width: 0%;
+            border-radius: 6px;
+            background: linear-gradient(90deg, rgba(200,169,110,0.5), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            transition: filter 0.25s, box-shadow 0.25s;
+            box-sizing: border-box;
+        }
+
+        .gantt-row.featured .gantt-bar {
+            background: linear-gradient(90deg, var(--accent), #fff3da);
+            box-shadow: 0 0 18px rgba(200,169,110,0.35);
+        }
+
+        .gantt-row:hover .gantt-bar,
+        .gantt-row.active .gantt-bar {
+            filter: brightness(1.15);
+            box-shadow: 0 0 24px rgba(200,169,110,0.5);
+        }
+
+        .gantt-bar-days {
+            font-size: 12px;
+            font-weight: 800;
+            color: #050505;
+            white-space: nowrap;
+        }
+
+        .gantt-row:hover .gantt-label-name,
+        .gantt-row.active .gantt-label-name {
+            color: var(--accent);
+        }
+
+        .gantt-tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 0;
+            background: #0e0e0e;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: var(--text);
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(6px);
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 5;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        .gantt-row:hover .gantt-tooltip,
+        .gantt-row.active .gantt-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gantt-tooltip strong { color: var(--accent); }
+
+        /* PAYMENT DONUT */
+        .pay-donut-wrap {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px;
+        }
+
+        .pay-donut-chart {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            flex-shrink: 0;
+        }
+
+        .pay-donut-chart svg { width: 100%; height: 100%; }
+
+        .donut-segment {
+            cursor: pointer;
+            transition: stroke-width 0.25s, opacity 0.25s, filter 0.25s;
+            filter: none;
+        }
+
+        .donut-segment.dimmed { opacity: 0.35; }
+
+        .donut-segment.highlighted {
+            filter: drop-shadow(0 0 10px rgba(200,169,110,0.6));
+        }
+
+        .pay-donut-center {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .pay-donut-pct {
+            font-family: 'Raleway', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text);
+            transition: color 0.25s;
+            line-height: 1;
+        }
+
+        .pay-donut-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 8px;
+            max-width: 140px;
+            transition: color 0.25s;
+        }
+
+        .pay-legend { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+
+        .pay-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+
+        .pay-legend-item:hover,
+        .pay-legend-item.highlighted {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .pay-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: transform 0.25s;
+        }
+
+        .pay-legend-item.highlighted .pay-legend-dot { transform: scale(1.3); }
+
+        .pay-legend-text { flex: 1; min-width: 0; }
+
+        .pay-legend-concept {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .pay-legend-date {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .pay-legend-pct {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* REQUIREMENTS */
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .req-bullet {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+            transform: rotate(45deg);
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 24px;
+            text-align: center;
+        }
+
+        /* REVEAL ANIMATION */
+        .reveal { opacity: 0; transform: translateY(40px); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); }
+        .reveal-right { opacity: 0; transform: translateX(40px); }
+        .reveal-scale { opacity: 0; transform: scale(0.9); }
+
+        /* NUMBER COUNTER */
+        .counter { display: inline-block; }
+
+        /* PILL NAV (desktop + mobile) */
+        .mobile-pill-nav {
+            display: flex;
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 200;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-top: 1px solid rgba(255,255,255,0.18);
+            border-radius: 100px;
+            padding: 6px;
+            align-items: center;
+            gap: 2px;
+            box-shadow:
+                0 8px 32px rgba(0,0,0,0.4),
+                0 2px 8px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .pill-item {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            padding: 10px 14px;
+            border-radius: 100px;
+            text-decoration: none;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .pill-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .pill-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-width 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s, margin 0.3s;
+            margin-left: 0;
+        }
+
+        .pill-item.active {
+            background: var(--accent);
+            color: #050505;
+            box-shadow: 0 2px 16px rgba(200,169,110,0.35);
+        }
+
+        .pill-item.active .pill-label {
+            max-width: 100px;
+            opacity: 1;
+            margin-left: 7px;
+        }
+
+        .pill-item.active svg {
+            color: #050505;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .section { padding: 80px 20px; }
+            .pkg-grid { grid-template-columns: 1fr !important; }
+            .section { padding-bottom: 100px; }
+            .obj-grid { grid-template-columns: 1fr !important; }
+            .gantt { --gantt-label-w: 92px; }
+            .gantt-label-name { font-size: 12px; }
+            .gantt-label-sub { display: none; }
+            .gantt-scale { font-size: 9px; }
+            .gantt-tooltip { left: auto; right: 0; }
+            .pay-donut-wrap { flex-direction: column; gap: 32px; padding: 32px 20px; }
+            .pay-donut-chart { width: 200px; height: 200px; }
+            .pay-donut-pct { font-size: 32px; }
+            .pay-legend { width: 100%; }
+        }
+
+        /* NOISE TEXTURE */
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        .text-accent { color: var(--accent); }
+        .bg-accent { background-color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- LOGO HEADER -->
+{% load static %}
+<header id="siteHeader" style="
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 150;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 24px;
+    pointer-events: none;
+">
+    <img src="{% static 'img/logo-cntxt.png' %}"
+         alt="CNTXT"
+         style="width: 120px; height: auto; display: block; opacity: 0.85; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.6));"
+         onerror="this.outerHTML='<span style=\'font-family:Raleway,sans-serif;font-size:13px;font-weight:800;letter-spacing:5px;color:white;opacity:0.85\'>CNTXT</span>'">
+</header>
+
+<!-- PILL NAV (desktop + mobile) -->
+<nav class="mobile-pill-nav" id="mobilePillNav">
+    <a href="#objetivo" class="pill-item active" data-section="objetivo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        <span class="pill-label">Objetivo</span>
+    </a>
+    <a href="#alcances" class="pill-item" data-section="alcances">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
+        <span class="pill-label">Alcances</span>
+    </a>
+    <a href="#requisitos" class="pill-item" data-section="requisitos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 12h6M9 16h4"/></svg>
+        <span class="pill-label">Requisitos</span>
+    </a>
+    <a href="#tiempos" class="pill-item" data-section="tiempos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <span class="pill-label">Tiempos</span>
+    </a>
+    <a href="#inversion" class="pill-item" data-section="inversion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
+        <span class="pill-label">Inversión</span>
+    </a>
+    <a href="#pagos" class="pill-item" data-section="pagos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <span class="pill-label">Pagos</span>
+    </a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-gradient" style="background: var(--accent); top: 20%; left: 30%;"></div>
+    <div class="hero-gradient" style="background: var(--accent); bottom: 10%; right: 20%; opacity: 0.08;"></div>
+    <div class="hero-line" style="top: 30%; width: 100%;"></div>
+    <div class="hero-line" style="top: 70%; width: 100%;"></div>
+
+    <div style="position: relative; z-index: 2; padding: 0 24px;">
+        <div id="heroLabel" class="section-label" style="margin-bottom: 24px; opacity: 0;">
+            Propuesta Comercial
+        </div>
+        <h1 id="heroTitle" class="font-display" style="font-size: clamp(48px, 8vw, 96px); font-weight: 900; line-height: 1; letter-spacing: -2px; opacity: 0;">
+            {{ propuesta.nombre_proyecto }}
+        </h1>
+        {% if propuesta.nombre_proyecto_subtitulo %}
+        <p id="heroSub" class="font-display" style="font-size: clamp(20px, 3vw, 36px); font-weight: 500; color: var(--accent); margin-top: 16px; opacity: 0;">
+            {{ propuesta.nombre_proyecto_subtitulo }}
+        </p>
+        {% endif %}
+
+        <div id="heroMeta" style="margin-top: 48px; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; opacity: 0;">
+            <div>
+                <span style="display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">Dirigido a</span>
+                <span style="font-size: 16px; font-weight: 500;">{{ propuesta.dirigido_a }}{% if propuesta.empresa_cliente %} | {{ propuesta.empresa_cliente }}{% endif %}</span>
+            </div>
+            <div>
+                <span style="display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">De</span>
+                <span style="font-size: 16px; font-weight: 500;">{{ propuesta.de }}</span>
+            </div>
+            <div>
+                <span style="display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">Fecha</span>
+                <span style="font-size: 16px; font-weight: 500;">{{ propuesta.fecha_presentacion|date:"d \d\e F \d\e Y" }}</span>
+            </div>
+        </div>
+
+        <div id="heroScroll" style="margin-top: 80px; opacity: 0;">
+            <a href="#objetivo" style="color: var(--muted); text-decoration: none; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                Explorar Propuesta
+                <svg width="20" height="20" fill="none" stroke="currentColor" style="animation: bounce 2s infinite;"><path d="M5 8l5 5 5-5" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ OBJETIVO ============ -->
+<section class="section" id="objetivo">
+    <div class="reveal">
+        <div class="section-label">A. Objetivo de la Propuesta</div>
+        <h2 class="section-title">¿Por qué<br><span class="text-accent">esta propuesta?</span></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <p class="reveal" style="font-size: 18px; line-height: 1.8; color: var(--text); max-width: 800px; margin-bottom: 60px;">
+        {{ propuesta.objetivo_texto|linebreaksbr }}
+    </p>
+
+    {% if propuesta.objetivos.count %}
+    <div class="section-label reveal" style="margin-bottom: 24px;">Objetivos Alineados</div>
+    <div class="obj-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        {% for obj in propuesta.objetivos.all %}
+        <div class="obj-card reveal" style="transition-delay: {{ forloop.counter0 }}00ms;">
+            <div style="font-size: 28px; margin-bottom: 16px;">
+                {% if obj.icono == 'target' %}🎯{% elif obj.icono == 'chart' %}📊{% elif obj.icono == 'heart' %}❤️{% elif obj.icono == 'shield' %}🛡️{% elif obj.icono == 'rocket' %}🚀{% elif obj.icono == 'gem' %}💎{% elif obj.icono == 'eye' %}👁️{% else %}⭐{% endif %}
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">{{ obj.titulo }}</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">{{ obj.descripcion }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>
+
+<!-- ============ ALCANCES / PAQUETES ============ -->
+<section class="section" id="alcances">
+    <div class="reveal">
+        <div class="section-label">B. Alcances Propuestos</div>
+        <h2 class="section-title">Elige tu<br><span class="text-accent">nivel de acceso</span></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    {% for paquete in propuesta.paquetes.all %}
+    <div class="reveal" style="margin-bottom: 80px;">
+        <!-- Package Header -->
+        <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;">
+            <h3 class="font-display" style="font-size: 28px; font-weight: 700;">{{ paquete.nombre }}</h3>
+            {% if paquete.nombre_en %}
+            <span style="color: var(--accent); font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">| {{ paquete.nombre_en }}</span>
+            {% endif %}
+            {% if paquete.es_destacado %}
+            <span style="background: var(--accent); color: var(--dark); font-size: 10px; font-weight: 700; letter-spacing: 2px; padding: 4px 16px; border-radius: 20px; text-transform: uppercase;">Recomendado</span>
+            {% endif %}
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;" class="pkg-detail-grid">
+            {% if paquete.que_es %}
+            <div>
+                <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Qué es?</h4>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.que_es }}</p>
+            </div>
+            {% endif %}
+            {% if paquete.para_que %}
+            <div>
+                <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Para qué es?</h4>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.para_que }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if paquete.incluye_texto %}
+        <div style="margin-top: 24px;">
+            <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Qué incluye?</h4>
+            <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.incluye_texto|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+
+        {% if paquete.entregables.count %}
+        <div style="margin-top: 32px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px;">
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 20px;">Entregables</h4>
+            {% regroup paquete.entregables.all by categoria as cats %}
+            {% for cat in cats %}
+            <div style="margin-bottom: 16px;">
+                <span style="color: var(--accent); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600;">{{ cat.grouper }}</span>
+                {% for ent in cat.list %}
+                <div class="pkg-deliverable">
+                    <div class="pkg-check">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span style="font-size: 14px; color: var(--text);">{{ ent.descripcion }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div style="margin-top: 24px; height: 1px; background: linear-gradient(90deg, var(--accent), transparent);"></div>
+    </div>
+    {% endfor %}
+</section>
+
+<!-- ============ REQUISITOS ============ -->
+<section class="section" id="requisitos">
+    <div class="reveal">
+        <div class="section-label">C. Requisitos Previos</div>
+        <h2 class="section-title">Lo que<br><span class="text-accent">necesitamos</span></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    {% if propuesta.requisitos_texto %}
+    <p class="reveal" style="font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; max-width: 700px;">
+        {{ propuesta.requisitos_texto }}
+    </p>
+    {% endif %}
+
+    <div style="max-width: 700px;">
+        {% for req in propuesta.requisitos.all %}
+        <div class="req-item reveal">
+            <div class="req-bullet"></div>
+            <span style="font-size: 15px;">{{ req.texto }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if propuesta.consideraciones_texto %}
+    <div class="reveal" style="margin-top: 40px; background: var(--card); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 24px 32px;">
+        <h4 style="font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Consideraciones</h4>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">{{ propuesta.consideraciones_texto }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- ============ TIEMPOS ============ -->
+<section class="section" id="tiempos">
+    <div class="reveal">
+        <div class="section-label">D. Tiempos de Entrega</div>
+        <h2 class="section-title">Línea de<br><span class="text-accent">tiempo</span></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="gantt reveal" id="ganttTimeline">
+        <div class="gantt-scale" id="ganttScale"></div>
+        {% for paquete in propuesta.paquetes.all %}
+        <div class="gantt-row {% if paquete.es_destacado %}featured{% endif %}" data-days="{{ paquete.dias_entrega }}">
+            <div class="gantt-label">
+                <div class="gantt-label-name">{{ paquete.nombre }}</div>
+                {% if paquete.nombre_en %}<div class="gantt-label-sub">{{ paquete.nombre_en }}</div>{% endif %}
+            </div>
+            <div class="gantt-track">
+                <div class="gantt-bar-wrap">
+                    <div class="gantt-bar">
+                        <span class="gantt-bar-days">{{ paquete.dias_entrega }}d</span>
+                    </div>
+                </div>
+                <div class="gantt-tooltip">
+                    Entrega en <strong>{{ paquete.dias_entrega }} días calendario</strong>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+            <span style="font-size: 11px; color: var(--muted); letter-spacing: 1px;">días calendario desde el inicio del proyecto</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============ INVERSIÓN / PRICING CARDS ============ -->
+<section class="section" id="inversion">
+    <div class="reveal">
+        <div class="section-label">E. Propuesta Económica</div>
+        <h2 class="section-title">Inversión del<br><span class="text-accent">proyecto</span></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="pkg-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px;">
+        {% for paquete in propuesta.paquetes.all %}
+        <div class="pkg-card reveal-scale {% if paquete.es_destacado %}featured{% endif %}">
+            <div style="margin-bottom: 24px;">
+                <h3 style="font-size: 20px; font-weight: 700;">{{ paquete.nombre }}</h3>
+                {% if paquete.nombre_en %}
+                <span style="font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px;">{{ paquete.nombre_en }}</span>
+                {% endif %}
+            </div>
+
+            <div style="margin-bottom: 32px;">
+                {% if paquete.precio_descuento %}
+                <div class="pkg-price-old">$ <span class="counter" data-target="{{ paquete.precio_regular|floatformat:0 }}">0</span> {{ paquete.moneda }}</div>
+                <div class="pkg-price text-accent">$ <span class="counter" data-target="{{ paquete.precio_descuento|floatformat:0 }}">0</span> <span style="font-size: 18px; font-weight: 400; color: var(--muted);">{{ paquete.moneda }}</span></div>
+                {% else %}
+                <div class="pkg-price text-accent">$ <span class="counter" data-target="{{ paquete.precio_regular|floatformat:0 }}">0</span> <span style="font-size: 18px; font-weight: 400; color: var(--muted);">{{ paquete.moneda }}</span></div>
+                {% endif %}
+            </div>
+
+            <div style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">
+                <span style="color: var(--accent); font-weight: 600;">{{ paquete.dias_entrega }} días</span> de entrega
+            </div>
+
+            {% if paquete.entregables.count %}
+            <div style="border-top: 1px solid var(--border); padding-top: 20px;">
+                {% for ent in paquete.entregables.all %}
+                <div class="pkg-deliverable">
+                    <div class="pkg-check">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div>
+                        <span style="font-size: 13px;">{{ ent.descripcion }}</span>
+                        <span style="font-size: 11px; color: var(--muted); display: block;">{{ ent.categoria }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ============ FORMA DE PAGO ============ -->
+<section class="section" id="pagos">
+    <div class="reveal">
+        <div class="section-label">F. Forma de Pago</div>
+        <h2 class="section-title">Condiciones<br><span class="text-accent">de pago</span></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="pay-donut-wrap reveal">
+        <div class="pay-donut-chart">
+            <svg viewBox="0 0 200 200" id="payDonutSvg">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="22"/>
+                {% for fp in propuesta.formas_pago.all %}
+                <circle class="donut-segment" data-index="{{ forloop.counter0 }}" data-pct="{{ fp.porcentaje }}"
+                    cx="100" cy="100" r="80" fill="none" stroke-width="22"
+                    stroke-dasharray="0 502.65" transform="rotate(-90 100 100)"/>
+                {% endfor %}
+            </svg>
+            <div class="pay-donut-center">
+                <div class="pay-donut-pct" id="payDonutPct">100%</div>
+                <div class="pay-donut-label" id="payDonutLabel">Total del proyecto</div>
+            </div>
+        </div>
+
+        <div class="pay-legend">
+            {% for fp in propuesta.formas_pago.all %}
+            <div class="pay-legend-item" data-index="{{ forloop.counter0 }}" data-pct="{{ fp.porcentaje }}"
+                 data-concepto="{{ fp.concepto|escapejs }}" data-fecha="{{ fp.fecha_pago|escapejs }}">
+                <span class="pay-legend-dot" data-index="{{ forloop.counter0 }}"></span>
+                <div class="pay-legend-text">
+                    <div class="pay-legend-concept">{{ fp.concepto }}</div>
+                    <div class="pay-legend-date">{{ fp.fecha_pago }}</div>
+                </div>
+                <div class="pay-legend-pct">{{ fp.porcentaje }}%</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ============ ACEPTAR PROPUESTA ============ -->
+<section class="section" id="aceptar" style="text-align: center;">
+    {% if aceptacion %}
+    <div class="reveal" id="ctaAceptada">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4); margin-bottom: 24px;">
+            <svg width="28" height="28" fill="none" stroke="#22c55e" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="section-title" style="color: #22c55e; font-size: clamp(24px, 4vw, 40px);">Propuesta Aceptada</h2>
+        <p style="color: var(--muted); font-size: 16px; margin-top: 8px;">
+            Aceptada por <strong style="color: var(--text);">{{ aceptacion.nombre }}</strong>
+            {% if aceptacion.email %} ({{ aceptacion.email }}){% endif %}
+        </p>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 8px;">{{ aceptacion.fecha|date:"d \d\e F \d\e Y, H:i" }}</p>
+    </div>
+    {% else %}
+    <div class="reveal" id="ctaAceptar">
+        <div class="section-label" style="margin-bottom: 16px;">¿Todo claro?</div>
+        <h2 class="section-title" style="font-size: clamp(28px, 5vw, 52px);">¿Listo para<br><span class="text-accent">comenzar?</span></h2>
+        <p style="color: var(--muted); font-size: 16px; max-width: 480px; margin: 0 auto 40px; line-height: 1.7;">
+            Al aceptar esta propuesta confirmas tu interés en iniciar el proyecto bajo los términos presentados.
+        </p>
+        <button id="btnAceptar"
+            style="background: var(--accent); color: #050505; font-family: 'Raleway', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 18px 48px; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 40px rgba(200,169,110,0.3);">
+            Aceptar Propuesta
+        </button>
+    </div>
+    {% endif %}
+</section>
+
+<!-- MODAL ACEPTACIÓN -->
+<div id="modalOverlay" style="position: fixed; inset: 0; z-index: 9000; display: none; align-items: center; justify-content: center; padding: 20px;">
+    <div id="modalBg" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);"></div>
+    <div id="modalBox" style="position: relative; z-index: 1; background: #0e0e0e; border: 1px solid #2a2a2a; border-radius: 24px; padding: 48px 40px; width: 100%; max-width: 480px; transform: scale(0.9); opacity: 0;">
+
+        <!-- Estado: Formulario -->
+        <div id="modalForm">
+            <h3 style="font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 8px;">Confirmar Aceptación</h3>
+            <p style="color: #6b6b6b; font-size: 14px; margin-bottom: 32px;">{{ propuesta.nombre_proyecto }}{% if propuesta.nombre_proyecto_subtitulo %} — {{ propuesta.nombre_proyecto_subtitulo }}{% endif %}</p>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #6b6b6b; margin-bottom: 8px;">Tu nombre *</label>
+                <input id="inputNombre" type="text" placeholder="Nombre completo"
+                    style="width: 100%; background: #050505; border: 1px solid #2a2a2a; border-radius: 10px; padding: 14px 16px; font-family: 'Raleway', sans-serif; font-size: 15px; color: #e8e8e8; outline: none; transition: border-color 0.2s; box-sizing: border-box;">
+            </div>
+            <div style="margin-bottom: 28px;">
+                <label style="display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #6b6b6b; margin-bottom: 8px;">Tu email</label>
+                <input id="inputEmail" type="email" placeholder="email@empresa.com"
+                    style="width: 100%; background: #050505; border: 1px solid #2a2a2a; border-radius: 10px; padding: 14px 16px; font-family: 'Raleway', sans-serif; font-size: 15px; color: #e8e8e8; outline: none; transition: border-color 0.2s; box-sizing: border-box;">
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 32px;">
+                <input type="checkbox" id="inputCheck" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0;">
+                <label for="inputCheck" style="font-size: 13px; color: #6b6b6b; cursor: pointer; line-height: 1.5;">
+                    He revisado esta propuesta y confirmo mi interés en iniciar el proyecto bajo los términos presentados.
+                </label>
+            </div>
+            <div id="modalError" style="color: #f87171; font-size: 13px; margin-bottom: 16px; display: none;"></div>
+            <div style="display: flex; gap: 12px;">
+                <button id="btnCancelar"
+                    style="flex: 1; background: transparent; border: 1px solid #2a2a2a; color: #6b6b6b; font-family: 'Raleway', sans-serif; font-size: 14px; font-weight: 600; padding: 14px; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+                    Cancelar
+                </button>
+                <button id="btnConfirmar"
+                    style="flex: 2; background: var(--accent); border: none; color: #050505; font-family: 'Raleway', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 14px; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+
+        <!-- Estado: Éxito -->
+        <div id="modalSuccess" style="display: none; text-align: center;">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4); margin-bottom: 24px;">
+                <svg width="32" height="32" fill="none" stroke="#22c55e" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 style="font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 800; color: #22c55e; margin-bottom: 12px;">¡Propuesta Aceptada!</h3>
+            <p id="successMsg" style="color: #6b6b6b; font-size: 15px; line-height: 1.6; margin-bottom: 8px;"></p>
+            <p style="color: #444; font-size: 13px;">Nos pondremos en contacto contigo pronto.</p>
+        </div>
+
+        <!-- Botón cerrar -->
+        <button id="btnCerrarModal"
+            style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #6b6b6b; cursor: pointer; padding: 4px;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+    </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="reveal" style="max-width: 600px; margin: 0 auto;">
+        <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px;">Diseñado con ❤️ por</div>
+        <div class="font-display" style="font-size: 32px; font-weight: 700; color: var(--accent); margin-bottom: 8px;">CNTXT</div>
+        <div style="font-size: 14px; color: var(--muted);">Casa de Diseño en Medellín — Colombia</div>
+        <div style="margin-top: 32px; font-size: 12px; color: var(--muted);">
+            Propuesta #{{ propuesta.numero }} · {{ propuesta.fecha_presentacion|date:"Y" }}
+        </div>
+    </div>
+</footer>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    // ── CURSOR GLOW ──
+    const glow = document.getElementById('cursorGlow');
+    if (window.innerWidth > 768) {
+        document.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+    } else {
+        glow.style.display = 'none';
+    }
+
+    // ── HERO ANIMATION ──
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+        .to('#heroLabel', { opacity: 1, duration: 0.8, delay: 0.3 })
+        .to('#heroTitle', { opacity: 1, y: 0, duration: 1 }, '-=0.4')
+        .to('#heroSub', { opacity: 1, y: 0, duration: 0.8 }, '-=0.5')
+        .to('#heroMeta', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+        .to('#heroScroll', { opacity: 1, duration: 0.8 }, '-=0.2');
+
+    // Parallax hero elements
+    gsap.to('.hero-gradient', {
+        y: -100,
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+    gsap.to('.hero-bg-grid', {
+        scale: 1.2,
+        opacity: 0,
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+
+    // ── REVEAL ANIMATIONS ──
+    gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.to(el, {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+        });
+    });
+
+    gsap.utils.toArray('.reveal-left').forEach(el => {
+        gsap.to(el, {
+            opacity: 1, x: 0, duration: 0.8, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+        });
+    });
+
+    gsap.utils.toArray('.reveal-scale').forEach(el => {
+        gsap.to(el, {
+            opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.4)',
+            scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+        });
+    });
+
+    // ── COUNTER ANIMATION ──
+    gsap.utils.toArray('.counter').forEach(counter => {
+        const target = parseFloat(counter.dataset.target);
+        const obj = { val: 0 };
+        gsap.to(obj, {
+            val: target,
+            duration: 2,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: counter,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            },
+            onUpdate: () => {
+                counter.textContent = Math.round(obj.val).toLocaleString('es-CO');
+            }
+        });
+    });
+
+    // ── GANTT TIMELINE ──
+    const gantt = document.getElementById('ganttTimeline');
+    if (gantt) {
+        const rows = Array.from(gantt.querySelectorAll('.gantt-row'));
+        const days = rows.map(r => parseFloat(r.dataset.days));
+        const maxDays = Math.max(...days);
+        // Round scale ceiling up to a clean multiple (5, 10, 25...)
+        const niceMax = Math.ceil(maxDays / 5) * 5;
+
+        // Build scale labels (0, 1/4, 1/2, 3/4, max)
+        const scaleEl = document.getElementById('ganttScale');
+        const steps = 4;
+        for (let i = 0; i <= steps; i++) {
+            const val = Math.round((niceMax / steps) * i);
+            const span = document.createElement('span');
+            span.textContent = i === 0 ? '0' : val + 'd';
+            scaleEl.appendChild(span);
+        }
+
+        // Vertical grid lines aligned to scale
+        rows.forEach(row => {
+            const track = row.querySelector('.gantt-track');
+            for (let i = 1; i < steps; i++) {
+                const line = document.createElement('div');
+                line.className = 'gantt-grid-line';
+                line.style.left = (i / steps * 100) + '%';
+                track.appendChild(line);
+            }
+        });
+
+        // Animate bars proportionally to days on scroll
+        ScrollTrigger.create({
+            trigger: gantt,
+            start: 'top 75%',
+            onEnter: () => {
+                rows.forEach((row, i) => {
+                    const pct = (parseFloat(row.dataset.days) / niceMax) * 100;
+                    const bar = row.querySelector('.gantt-bar');
+                    gsap.to(bar, { width: pct + '%', duration: 1.1, delay: i * 0.15, ease: 'power3.out' });
+                });
+            }
+        });
+
+        // Tap-to-highlight on mobile (and click on desktop)
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                const wasActive = row.classList.contains('active');
+                rows.forEach(r => r.classList.remove('active'));
+                if (!wasActive) row.classList.add('active');
+            });
+        });
+    }
+
+    // ── PAYMENT DONUT CHART ──
+    const payDonut = document.getElementById('payDonutSvg');
+    if (payDonut) {
+        const segments = Array.from(payDonut.querySelectorAll('.donut-segment'));
+        const legendItems = Array.from(document.querySelectorAll('.pay-legend-item'));
+        const centerPct = document.getElementById('payDonutPct');
+        const centerLabel = document.getElementById('payDonutLabel');
+        const R = 80;
+        const C = 2 * Math.PI * R;
+
+        // Derive a gold-family palette from the accent color (HSL shades)
+        function hexToHsl(hex) {
+            hex = hex.replace('#', '');
+            const r = parseInt(hex.substring(0,2),16)/255, g = parseInt(hex.substring(2,4),16)/255, b = parseInt(hex.substring(4,6),16)/255;
+            const max = Math.max(r,g,b), min = Math.min(r,g,b);
+            let h, s, l = (max+min)/2;
+            if (max === min) { h = s = 0; }
+            else {
+                const d = max-min;
+                s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+                switch(max){
+                    case r: h = (g-b)/d + (g<b?6:0); break;
+                    case g: h = (b-r)/d + 2; break;
+                    case b: h = (r-g)/d + 4; break;
+                }
+                h /= 6;
+            }
+            return [h*360, s*100, l*100];
+        }
+        const accentHex = '{{ propuesta.color_acento }}';
+        const [baseH, baseS] = hexToHsl(accentHex);
+        const colors = segments.map((seg, i) => {
+            const l = Math.max(32, 68 - i * 13);
+            return `hsl(${baseH}, ${baseS}%, ${l}%)`;
+        });
+
+        // Position each segment via cumulative offset, color it, start collapsed
+        let cumPct = 0;
+        const offsets = [];
+        segments.forEach((seg, i) => {
+            const pct = parseFloat(seg.dataset.pct);
+            offsets.push(cumPct);
+            seg.style.stroke = colors[i];
+            seg.style.strokeDashoffset = -(cumPct/100) * C;
+            cumPct += pct;
+        });
+
+        // Sync legend dot colors
+        document.querySelectorAll('.pay-legend-dot').forEach((dot, i) => {
+            dot.style.background = colors[i] || colors[colors.length-1];
+        });
+
+        // Animate fill-in on scroll
+        ScrollTrigger.create({
+            trigger: payDonut,
+            start: 'top 75%',
+            onEnter: () => {
+                segments.forEach((seg, i) => {
+                    const target = parseFloat(seg.dataset.pct);
+                    const obj = { val: 0 };
+                    gsap.to(obj, {
+                        val: target,
+                        duration: 1.1,
+                        delay: i * 0.18,
+                        ease: 'power3.out',
+                        onUpdate: () => {
+                            const len = (obj.val/100) * C;
+                            seg.setAttribute('stroke-dasharray', `${len} ${C - len}`);
+                        }
+                    });
+                });
+            }
+        });
+
+        function highlight(index) {
+            segments.forEach(s => s.classList.toggle('dimmed', s.dataset.index != index));
+            segments.forEach(s => s.classList.toggle('highlighted', s.dataset.index == index));
+            legendItems.forEach(l => l.classList.toggle('highlighted', l.dataset.index == index));
+            const item = legendItems.find(l => l.dataset.index == index);
+            if (item) {
+                centerPct.textContent = item.dataset.pct + '%';
+                centerPct.style.color = colors[index] || colors[colors.length-1];
+                centerLabel.textContent = item.dataset.concepto;
+            }
+        }
+
+        function resetHighlight() {
+            segments.forEach(s => s.classList.remove('dimmed', 'highlighted'));
+            legendItems.forEach(l => l.classList.remove('highlighted'));
+            centerPct.textContent = '100%';
+            centerPct.style.color = '';
+            centerLabel.textContent = 'Total del proyecto';
+        }
+
+        segments.forEach(seg => {
+            seg.addEventListener('mouseenter', () => highlight(seg.dataset.index));
+            seg.addEventListener('mouseleave', resetHighlight);
+            seg.addEventListener('click', () => highlight(seg.dataset.index));
+        });
+
+        legendItems.forEach(item => {
+            item.addEventListener('mouseenter', () => highlight(item.dataset.index));
+            item.addEventListener('mouseleave', resetHighlight);
+            item.addEventListener('click', () => highlight(item.dataset.index));
+        });
+    }
+
+    // ── PILL NAV (desktop + mobile) ──
+    const sections = ['objetivo', 'alcances', 'requisitos', 'tiempos', 'inversion', 'pagos'];
+    const pillNav = document.getElementById('mobilePillNav');
+    if (pillNav) {
+        // Smooth scroll on tap
+        pillNav.querySelectorAll('.pill-item').forEach(item => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(item.getAttribute('href'));
+                if (target) gsap.to(window, { scrollTo: { y: target, offsetY: 20 }, duration: 0.9, ease: 'power2.inOut' });
+            });
+        });
+
+        // Active section tracking
+        sections.forEach(id => {
+            ScrollTrigger.create({
+                trigger: '#' + id,
+                start: 'top 55%',
+                end: 'bottom 55%',
+                onToggle: self => {
+                    if (self.isActive) {
+                        pillNav.querySelectorAll('.pill-item').forEach(a => a.classList.remove('active'));
+                        const link = pillNav.querySelector(`[data-section="${id}"]`);
+                        if (link) link.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Appear after hero
+        gsap.set(pillNav, { opacity: 0, y: 20 });
+        ScrollTrigger.create({
+            trigger: '#objetivo',
+            start: 'top 80%',
+            onEnter: () => gsap.to(pillNav, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.3)' }),
+            onLeaveBack: () => gsap.to(pillNav, { opacity: 0, y: 20, duration: 0.3 })
+        });
+    }
+
+    // ── OBJ CARD TILT ──
+    document.querySelectorAll('.obj-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `translateY(-4px) perspective(800px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) perspective(800px) rotateX(0) rotateY(0)';
+        });
+    });
+
+    // ── PKG CARD TILT ──
+    document.querySelectorAll('.pkg-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    });
+});
+
+// ── MODAL ACEPTACIÓN ──
+(function() {
+    const btnAceptar   = document.getElementById('btnAceptar');
+    const overlay      = document.getElementById('modalOverlay');
+    const modalBox     = document.getElementById('modalBox');
+    const btnCancelar  = document.getElementById('btnCancelar');
+    const btnCerrar    = document.getElementById('btnCerrarModal');
+    const btnConfirmar = document.getElementById('btnConfirmar');
+    const inputNombre  = document.getElementById('inputNombre');
+    const inputEmail   = document.getElementById('inputEmail');
+    const inputCheck   = document.getElementById('inputCheck');
+    const modalError   = document.getElementById('modalError');
+    const modalForm    = document.getElementById('modalForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+    const successMsg   = document.getElementById('successMsg');
+
+    if (!btnAceptar) return;
+
+    function openModal() {
+        overlay.style.display = 'flex';
+        gsap.to(modalBox, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.3)' });
+        setTimeout(() => inputNombre && inputNombre.focus(), 400);
+    }
+
+    function closeModal() {
+        gsap.to(modalBox, {
+            opacity: 0, scale: 0.9, duration: 0.25, ease: 'power2.in',
+            onComplete: () => { overlay.style.display = 'none'; }
+        });
+    }
+
+    btnAceptar.addEventListener('click', openModal);
+    btnCancelar && btnCancelar.addEventListener('click', closeModal);
+    btnCerrar   && btnCerrar.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay || e.target === document.getElementById('modalBg')) closeModal(); });
+
+    // Focus highlight
+    [inputNombre, inputEmail].forEach(inp => {
+        if (!inp) return;
+        inp.addEventListener('focus', () => inp.style.borderColor = 'var(--accent)');
+        inp.addEventListener('blur',  () => inp.style.borderColor = '#2a2a2a');
+    });
+
+    btnConfirmar && btnConfirmar.addEventListener('click', async () => {
+        modalError.style.display = 'none';
+        const nombre = inputNombre.value.trim();
+        if (!nombre) {
+            modalError.textContent = 'Por favor ingresa tu nombre.';
+            modalError.style.display = 'block';
+            inputNombre.style.borderColor = '#f87171';
+            return;
+        }
+        if (!inputCheck.checked) {
+            modalError.textContent = 'Debes confirmar que has revisado la propuesta.';
+            modalError.style.display = 'block';
+            return;
+        }
+        btnConfirmar.textContent = 'Enviando...';
+        btnConfirmar.disabled = true;
+
+        const form = new FormData();
+        form.append('nombre', nombre);
+        form.append('email', inputEmail.value.trim());
+        form.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+        try {
+            const res = await fetch("{% url 'propuestas:aceptar_propuesta' slug=propuesta.slug %}", { method: 'POST', body: form });
+            const data = await res.json();
+            if (data.ok) {
+                modalForm.style.display = 'none';
+                modalSuccess.style.display = 'block';
+                successMsg.textContent = `Gracias, ${data.nombre}. Tu aceptación ha sido registrada el ${data.fecha}.`;
+                gsap.from(modalSuccess, { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' });
+                setTimeout(() => {
+                    closeModal();
+                    // Reemplazar el botón con estado aceptado
+                    const cta = document.getElementById('ctaAceptar');
+                    if (cta) {
+                        cta.innerHTML = `
+                            <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.1);border:2px solid rgba(34,197,94,0.4);margin-bottom:24px;">
+                                <svg width="28" height="28" fill="none" stroke="#22c55e" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <h2 class="section-title" style="color:#22c55e;font-size:clamp(24px,4vw,40px);">Propuesta Aceptada</h2>
+                            <p style="color:var(--muted);font-size:16px;margin-top:8px;">Aceptada por <strong style="color:var(--text);">${data.nombre}</strong></p>
+                            <p style="color:var(--muted);font-size:14px;margin-top:8px;">${data.fecha}</p>
+                        `;
+                        gsap.from(cta.children, { opacity: 0, y: 20, stagger: 0.1, duration: 0.6, ease: 'power2.out' });
+                    }
+                }, 2500);
+            } else {
+                modalError.textContent = data.error === 'ya_aceptada' ? 'Esta propuesta ya fue aceptada anteriormente.' : 'Ocurrió un error. Intenta de nuevo.';
+                modalError.style.display = 'block';
+                btnConfirmar.textContent = 'Confirmar';
+                btnConfirmar.disabled = false;
+            }
+        } catch {
+            modalError.textContent = 'Error de conexión. Intenta de nuevo.';
+            modalError.style.display = 'block';
+            btnConfirmar.textContent = 'Confirmar';
+            btnConfirmar.disabled = false;
+        }
+    });
+})();
+
+// Bounce animation
+const style = document.createElement('style');
+style.textContent = `@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } 60% { transform: translateY(-3px); } }`;
+document.head.appendChild(style);
+
+// Responsive grid fix
+const mq = window.matchMedia('(max-width: 768px)');
+function handleResize(e) {
+    document.querySelectorAll('.pkg-detail-grid').forEach(g => {
+        g.style.gridTemplateColumns = e.matches ? '1fr' : '1fr 1fr';
+    });
+}
+mq.addEventListener('change', handleResize);
+handleResize(mq);
+</script>
+
+</body>
+</html>

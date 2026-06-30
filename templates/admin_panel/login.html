@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | CNTXT Propuestas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Raleway', 'sans-serif'],
+                    },
+                    colors: {
+                        cntxt: { dark: '#0a0a0a', card: '#141414', border: '#2a2a2a', gold: '#C8A96E', text: '#e5e5e5', muted: '#737373' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style> body { font-family: 'Raleway', sans-serif; } </style>
+</head>
+<body class="bg-cntxt-dark min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-sm">
+        <div class="text-center mb-8">
+            <h1 class="text-cntxt-gold font-bold text-3xl tracking-widest">CNTXT</h1>
+            <p class="text-cntxt-muted text-sm mt-2">Creador de Propuestas</p>
+        </div>
+        <form method="post" class="bg-cntxt-card border border-cntxt-border rounded-xl p-8 space-y-6">
+            {% csrf_token %}
+            {% if error %}
+            <div class="bg-red-900/30 border border-red-800 text-red-300 text-sm rounded-lg px-4 py-3">{{ error }}</div>
+            {% endif %}
+            <div>
+                <label class="block text-sm text-cntxt-muted mb-2">Usuario</label>
+                <input type="text" name="username" required autofocus
+                    class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+            </div>
+            <div>
+                <label class="block text-sm text-cntxt-muted mb-2">Contraseña</label>
+                <input type="password" name="password" required
+                    class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+            </div>
+            <button type="submit"
+                class="w-full bg-cntxt-gold text-cntxt-dark font-semibold py-3 rounded-lg hover:bg-cntxt-gold/90 transition">
+                Ingresar
+            </button>
+        </form>
+    </div>
+</body>
+</html>

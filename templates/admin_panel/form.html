@@ -1,0 +1,392 @@
+{% extends "admin_panel/base.html" %}
+{% load l10n %}
+{% block title %}{% if propuesta %}Editar{% else %}Nueva{% endif %} Propuesta{% endblock %}
+
+{% block content %}
+<div x-data="proposalForm()" x-cloak>
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <a href="{% url 'propuestas:admin_dashboard' %}" class="text-cntxt-muted hover:text-cntxt-gold text-sm transition">&larr; Volver</a>
+            <h1 class="text-2xl font-bold mt-2">{% if propuesta %}Editar Propuesta #{{ propuesta.numero }}{% else %}Nueva Propuesta{% endif %}</h1>
+        </div>
+        <button type="submit" form="mainForm"
+            class="bg-cntxt-gold text-cntxt-dark font-semibold px-8 py-3 rounded-lg hover:bg-cntxt-gold/90 transition">
+            Guardar
+        </button>
+    </div>
+
+    <form id="mainForm" method="post" class="space-y-8">
+        {% csrf_token %}
+
+        <!-- DATOS DEL PROYECTO -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">Datos del Proyecto</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="md:col-span-2">
+                    <label class="block text-sm text-cntxt-muted mb-2">Nombre del Proyecto *</label>
+                    <input type="text" name="nombre_proyecto" required
+                        value="{{ propuesta.nombre_proyecto|default:'' }}"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                        placeholder="Ej: De DOM">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm text-cntxt-muted mb-2">Subtítulo del Proyecto</label>
+                    <input type="text" name="nombre_proyecto_subtitulo"
+                        value="{{ propuesta.nombre_proyecto_subtitulo|default:'' }}"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                        placeholder="Ej: Centro de Pádel">
+                </div>
+                <div>
+                    <label class="block text-sm text-cntxt-muted mb-2">Dirigido a *</label>
+                    <input type="text" name="dirigido_a" required
+                        value="{{ propuesta.dirigido_a|default:'' }}"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                        placeholder="Nombre del cliente">
+                </div>
+                <div>
+                    <label class="block text-sm text-cntxt-muted mb-2">Empresa del Cliente</label>
+                    <input type="text" name="empresa_cliente"
+                        value="{{ propuesta.empresa_cliente|default:'' }}"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm text-cntxt-muted mb-2">De</label>
+                    <input type="text" name="de"
+                        value="{{ propuesta.de|default:'Contexto Arquitectura' }}"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm text-cntxt-muted mb-2">Color de Acento</label>
+                    <div class="flex items-center space-x-3">
+                        <input type="color" name="color_acento"
+                            value="{{ propuesta.color_acento|default:'#C8A96E' }}"
+                            class="w-12 h-12 rounded-lg border border-cntxt-border cursor-pointer bg-transparent">
+                        <span class="text-cntxt-muted text-sm">Para la propuesta pública</span>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-cntxt-muted mb-2">Fecha de Presentación *</label>
+                    <input type="date" name="fecha_presentacion" required
+                        value="{{ propuesta.fecha_presentacion|date:'Y-m-d'|default:'' }}"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm text-cntxt-muted mb-2">Fecha de Envío</label>
+                    <input type="date" name="fecha_envio"
+                        value="{{ propuesta.fecha_envio|date:'Y-m-d'|default:'' }}"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm text-cntxt-muted mb-2">Estado</label>
+                    <select name="estado"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                        <option value="borrador" {% if propuesta.estado == 'borrador' or not propuesta %}selected{% endif %}>Borrador</option>
+                        <option value="publicada" {% if propuesta.estado == 'publicada' %}selected{% endif %}>Publicada</option>
+                        <option value="archivada" {% if propuesta.estado == 'archivada' %}selected{% endif %}>Archivada</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- OBJETIVO -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">A. Objetivo de la Propuesta</h2>
+            <div class="mb-6">
+                <label class="block text-sm text-cntxt-muted mb-2">Texto del Objetivo</label>
+                <textarea name="objetivo_texto" rows="5"
+                    class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
+                    placeholder="El objetivo de esta propuesta es...">{{ propuesta.objetivo_texto|default:'' }}</textarea>
+            </div>
+
+            <h3 class="text-sm font-semibold text-cntxt-muted mb-4 uppercase tracking-wider">Objetivos Alineados</h3>
+            <template x-for="(obj, i) in objetivos" :key="i">
+                <div class="flex gap-4 mb-4 items-start bg-cntxt-dark/50 rounded-lg p-4">
+                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="text" :name="'obj_titulo_'+i" x-model="obj.titulo"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                                placeholder="Título del objetivo">
+                        </div>
+                        <div>
+                            <select :name="'obj_icono_'+i" x-model="obj.icono"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                                <option value="star">⭐ Estrella</option>
+                                <option value="target">🎯 Objetivo</option>
+                                <option value="chart">📊 Gráfico</option>
+                                <option value="heart">❤️ Corazón</option>
+                                <option value="shield">🛡️ Escudo</option>
+                                <option value="rocket">🚀 Cohete</option>
+                                <option value="gem">💎 Diamante</option>
+                                <option value="eye">👁️ Visión</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <textarea :name="'obj_desc_'+i" x-model="obj.descripcion" rows="2"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
+                                placeholder="Descripción del objetivo"></textarea>
+                        </div>
+                    </div>
+                    <button type="button" @click="objetivos.splice(i, 1)"
+                        class="p-2 text-red-400 hover:bg-red-900/20 rounded-lg transition mt-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </template>
+            <button type="button" @click="objetivos.push({titulo:'', descripcion:'', icono:'star'})"
+                class="text-sm text-cntxt-gold hover:text-cntxt-gold/80 transition flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Agregar Objetivo</span>
+            </button>
+        </section>
+
+        <!-- PAQUETES / ALCANCES -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">B. Alcances / Paquetes</h2>
+            <template x-for="(pkg, pi) in paquetes" :key="pi">
+                <div class="border border-cntxt-border rounded-xl p-6 mb-6 bg-cntxt-dark/30">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold text-white" x-text="pkg.nombre || 'Nuevo Paquete'"></h3>
+                        <div class="flex items-center space-x-3">
+                            <label class="flex items-center space-x-2 text-sm text-cntxt-muted">
+                                <input type="checkbox" :name="'pkg_destacado_'+pi" x-model="pkg.es_destacado"
+                                    class="rounded border-cntxt-border bg-cntxt-dark text-cntxt-gold focus:ring-cntxt-gold">
+                                <span>Destacado</span>
+                            </label>
+                            <button type="button" @click="paquetes.splice(pi, 1)"
+                                class="p-2 text-red-400 hover:bg-red-900/20 rounded-lg transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">Nombre (ES)</label>
+                            <input type="text" :name="'pkg_nombre_'+pi" x-model="pkg.nombre"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                                placeholder="Ej: Acceso Esencial">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">Nombre (EN)</label>
+                            <input type="text" :name="'pkg_nombre_en_'+pi" x-model="pkg.nombre_en"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                                placeholder="Ej: Essential Access">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">Días de Entrega</label>
+                            <input type="number" :name="'pkg_dias_'+pi" x-model="pkg.dias_entrega" min="1"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">¿Qué es?</label>
+                            <textarea :name="'pkg_que_es_'+pi" x-model="pkg.que_es" rows="3"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
+                                placeholder="Descripción del servicio"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">¿Para qué es?</label>
+                            <textarea :name="'pkg_para_que_'+pi" x-model="pkg.para_que" rows="3"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
+                                placeholder="Ideal para proyectos que..."></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-xs text-cntxt-muted mb-1">¿Qué incluye? (texto general)</label>
+                        <textarea :name="'pkg_incluye_'+pi" x-model="pkg.incluye_texto" rows="3"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
+                            placeholder="Descripción general de lo que incluye"></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">Precio Regular</label>
+                            <input type="number" :name="'pkg_precio_'+pi" x-model="pkg.precio_regular" step="0.01"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">Precio con Descuento</label>
+                            <input type="number" :name="'pkg_precio_desc_'+pi" x-model="pkg.precio_descuento" step="0.01"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-cntxt-muted mb-1">Moneda</label>
+                            <select :name="'pkg_moneda_'+pi" x-model="pkg.moneda"
+                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
+                                <option value="USD">USD</option>
+                                <option value="COP">COP</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Entregables del paquete -->
+                    <div class="mt-4 pt-4 border-t border-cntxt-border">
+                        <h4 class="text-sm font-semibold text-cntxt-muted mb-3 uppercase tracking-wider">Entregables</h4>
+                        <template x-for="(ent, ei) in pkg.entregables" :key="ei">
+                            <div class="flex gap-3 mb-3 items-start">
+                                <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <input type="text" :name="'ent_cat_'+pi+'_'+ei" x-model="ent.categoria"
+                                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                                        placeholder="Categoría (ej: Producción Audiovisual)">
+                                    <input type="text" :name="'ent_desc_'+pi+'_'+ei" x-model="ent.descripcion"
+                                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                                        placeholder="Descripción del entregable">
+                                </div>
+                                <button type="button" @click="pkg.entregables.splice(ei, 1)"
+                                    class="p-1 text-red-400 hover:bg-red-900/20 rounded transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                </button>
+                            </div>
+                        </template>
+                        <button type="button" @click="pkg.entregables.push({categoria:'', descripcion:''})"
+                            class="text-xs text-cntxt-gold hover:text-cntxt-gold/80 transition flex items-center space-x-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                            <span>Agregar Entregable</span>
+                        </button>
+                    </div>
+                </div>
+            </template>
+            <button type="button" @click="agregarPaquete()"
+                class="text-sm text-cntxt-gold hover:text-cntxt-gold/80 transition flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Agregar Paquete</span>
+            </button>
+        </section>
+
+        <!-- REQUISITOS -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">C. Requisitos Previos</h2>
+            <div class="mb-4">
+                <label class="block text-sm text-cntxt-muted mb-2">Texto introductorio</label>
+                <textarea name="requisitos_texto" rows="2"
+                    class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
+                    placeholder="Para garantizar el nivel de calidad visual esperado...">{{ propuesta.requisitos_texto|default:'' }}</textarea>
+            </div>
+            <h3 class="text-sm font-semibold text-cntxt-muted mb-3 uppercase tracking-wider">Lista de requisitos</h3>
+            <template x-for="(req, ri) in requisitos" :key="ri">
+                <div class="flex gap-3 mb-3 items-center">
+                    <input type="text" :name="'req_texto_'+ri" x-model="req.texto"
+                        class="flex-1 bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                        placeholder="Requisito técnico">
+                    <button type="button" @click="requisitos.splice(ri, 1)"
+                        class="p-1 text-red-400 hover:bg-red-900/20 rounded transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </template>
+            <button type="button" @click="requisitos.push({texto:''})"
+                class="text-sm text-cntxt-gold hover:text-cntxt-gold/80 transition flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Agregar Requisito</span>
+            </button>
+            <div class="mt-4">
+                <label class="block text-sm text-cntxt-muted mb-2">Consideraciones</label>
+                <textarea name="consideraciones_texto" rows="3"
+                    class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-3 text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
+                    placeholder="En caso de que la información suministrada no posea...">{{ propuesta.consideraciones_texto|default:'' }}</textarea>
+            </div>
+        </section>
+
+        <!-- FORMA DE PAGO -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">F. Forma de Pago</h2>
+            <template x-for="(pago, pai) in formas_pago" :key="pai">
+                <div class="flex gap-3 mb-3 items-start">
+                    <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <input type="text" :name="'pago_concepto_'+pai" x-model="pago.concepto"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                            placeholder="Concepto (ej: Anticipo)">
+                        <input type="number" :name="'pago_porcentaje_'+pai" x-model="pago.porcentaje" min="0" max="100"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                            placeholder="%">
+                        <input type="text" :name="'pago_fecha_'+pai" x-model="pago.fecha_pago"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
+                            placeholder="Momento de pago">
+                    </div>
+                    <button type="button" @click="formas_pago.splice(pai, 1)"
+                        class="p-1 text-red-400 hover:bg-red-900/20 rounded transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </template>
+            <button type="button" @click="formas_pago.push({concepto:'', porcentaje:'', fecha_pago:''})"
+                class="text-sm text-cntxt-gold hover:text-cntxt-gold/80 transition flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Agregar Forma de Pago</span>
+            </button>
+        </section>
+
+        <div class="flex justify-end">
+            <button type="submit"
+                class="bg-cntxt-gold text-cntxt-dark font-semibold px-8 py-3 rounded-lg hover:bg-cntxt-gold/90 transition">
+                Guardar Propuesta
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+function proposalForm() {
+    {% if propuesta %}{% localize off %}
+    const existingObjetivos = [
+        {% for obj in propuesta.objetivos.all %}
+        {titulo: "{{ obj.titulo|escapejs }}", descripcion: "{{ obj.descripcion|escapejs }}", icono: "{{ obj.icono|escapejs }}"},
+        {% endfor %}
+    ];
+    const existingPaquetes = [
+        {% for pkg in propuesta.paquetes.all %}
+        {
+            nombre: "{{ pkg.nombre|escapejs }}",
+            nombre_en: "{{ pkg.nombre_en|escapejs }}",
+            que_es: "{{ pkg.que_es|escapejs }}",
+            para_que: "{{ pkg.para_que|escapejs }}",
+            incluye_texto: "{{ pkg.incluye_texto|escapejs }}",
+            dias_entrega: {{ pkg.dias_entrega }},
+            precio_regular: {{ pkg.precio_regular }},
+            precio_descuento: {{ pkg.precio_descuento|default:"null" }},
+            moneda: "{{ pkg.moneda|escapejs }}",
+            es_destacado: {{ pkg.es_destacado|yesno:"true,false" }},
+            entregables: [
+                {% for ent in pkg.entregables.all %}
+                {categoria: "{{ ent.categoria|escapejs }}", descripcion: "{{ ent.descripcion|escapejs }}"},
+                {% endfor %}
+            ]
+        },
+        {% endfor %}
+    ];
+    const existingRequisitos = [
+        {% for req in propuesta.requisitos.all %}
+        {texto: "{{ req.texto|escapejs }}"},
+        {% endfor %}
+    ];
+    const existingPagos = [
+        {% for fp in propuesta.formas_pago.all %}
+        {concepto: "{{ fp.concepto|escapejs }}", porcentaje: {{ fp.porcentaje }}, fecha_pago: "{{ fp.fecha_pago|escapejs }}"},
+        {% endfor %}
+    ];
+    {% endlocalize %}{% else %}
+    const existingObjetivos = [];
+    const existingPaquetes = [];
+    const existingRequisitos = [];
+    const existingPagos = [];
+    {% endif %}
+
+    return {
+        objetivos: existingObjetivos.length ? existingObjetivos : [{titulo:'', descripcion:'', icono:'star'}],
+        paquetes: existingPaquetes.length ? existingPaquetes : [],
+        requisitos: existingRequisitos.length ? existingRequisitos : [{texto:''}],
+        formas_pago: existingPagos.length ? existingPagos : [
+            {concepto: 'Anticipo de inicio de proyecto', porcentaje: 80, fecha_pago: 'A la firma del contrato'},
+            {concepto: 'Pago final de proyecto', porcentaje: 20, fecha_pago: 'Contra entrega'},
+        ],
+        agregarPaquete() {
+            this.paquetes.push({
+                nombre: '', nombre_en: '', que_es: '', para_que: '', incluye_texto: '',
+                dias_entrega: 15, precio_regular: 0, precio_descuento: null,
+                moneda: 'USD', es_destacado: false, entregables: []
+            });
+        }
+    };
+}
+</script>
+{% endblock %}

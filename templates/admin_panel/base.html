@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CNTXT{% endblock %} | Creador de Propuestas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Raleway', 'sans-serif'],
+                    },
+                    colors: {
+                        cntxt: {
+                            dark: '#0a0a0a',
+                            card: '#141414',
+                            border: '#2a2a2a',
+                            gold: '#C8A96E',
+                            'gold-light': '#e0c98f',
+                            text: '#e5e5e5',
+                            muted: '#737373',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Raleway', sans-serif; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-cntxt-dark text-cntxt-text min-h-screen">
+    <nav class="border-b border-cntxt-border bg-cntxt-card/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="{% url 'propuestas:admin_dashboard' %}" class="flex items-center space-x-3">
+                    <span class="text-cntxt-gold font-bold text-xl tracking-wider">CNTXT</span>
+                    <span class="text-cntxt-muted text-sm">| Propuestas</span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <span class="text-cntxt-muted text-sm">{{ request.user.username }}</span>
+                    <a href="{% url 'propuestas:admin_logout' %}" class="text-sm text-red-400 hover:text-red-300">Salir</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
