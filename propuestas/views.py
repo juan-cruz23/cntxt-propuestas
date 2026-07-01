@@ -36,11 +36,14 @@ def admin_dashboard(request):
     propuestas = Propuesta.objects.all()
     if estado_filtro in ('borrador', 'publicada', 'archivada'):
         propuestas = propuestas.filter(estado=estado_filtro)
+    elif estado_filtro == 'aceptada':
+        propuestas = propuestas.filter(aceptacion__isnull=False)
     conteos = {
         'todas':    Propuesta.objects.count(),
         'borrador': Propuesta.objects.filter(estado='borrador').count(),
         'publicada': Propuesta.objects.filter(estado='publicada').count(),
         'archivada': Propuesta.objects.filter(estado='archivada').count(),
+        'aceptada': Propuesta.objects.filter(aceptacion__isnull=False).count(),
     }
     return render(request, 'admin_panel/dashboard.html', {
         'propuestas': propuestas,
