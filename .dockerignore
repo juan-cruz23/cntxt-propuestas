@@ -1,0 +1,24 @@
+# Ignorar archivos de entorno
+.env
+
+# Archivos de base de datos local
+db.sqlite3
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Media subida por usuarios
+/media/
+
+# Static files recolectados
+/staticfiles/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
