@@ -15,11 +15,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . .
 
-# Collect static files
+# Make entrypoint executable
+RUN chmod +x docker-entrypoint.sh
+
+# Collect static files at build time
 RUN python manage.py collectstatic --noinput
 
 # Expose port
 EXPOSE 8000
 
-# Run with gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "config.wsgi:application"]
+# Run with entrypoint (auto-migrate + gunicorn)
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
