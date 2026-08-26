@@ -88,6 +88,32 @@
             </div>
         </section>
 
+        <!-- TIPO DE PROPUESTA -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-2">Tipo de Propuesta</h2>
+            <p class="text-xs text-cntxt-muted mb-4">Elige qué formato(s) de propuesta se generan. Si marcas ambos, las secciones exclusivas de cada uno se desbloquean abajo, claramente rotuladas.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <label class="flex items-center gap-3 flex-1 p-4 rounded-lg border cursor-pointer transition"
+                    :class="incluyeCasaDiseno ? 'border-cntxt-gold bg-cntxt-gold/10' : 'border-cntxt-border bg-cntxt-dark/40'">
+                    <input type="checkbox" name="incluye_casa_diseno" x-model="incluyeCasaDiseno"
+                        class="w-5 h-5 rounded border-cntxt-border bg-cntxt-dark text-cntxt-gold focus:ring-cntxt-gold cursor-pointer">
+                    <span>
+                        <span class="block font-semibold text-cntxt-text">Casa de Diseño</span>
+                        <span class="block text-xs text-cntxt-muted">Formato actual: paquetes, Gantt, forma de pago por %</span>
+                    </span>
+                </label>
+                <label class="flex items-center gap-3 flex-1 p-4 rounded-lg border cursor-pointer transition"
+                    :class="incluyePartners ? 'border-blue-400 bg-blue-400/10' : 'border-cntxt-border bg-cntxt-dark/40'">
+                    <input type="checkbox" name="incluye_partners" x-model="incluyePartners"
+                        class="w-5 h-5 rounded border-cntxt-border bg-cntxt-dark text-blue-400 focus:ring-blue-400 cursor-pointer">
+                    <span>
+                        <span class="block font-semibold text-cntxt-text">Partners</span>
+                        <span class="block text-xs text-cntxt-muted">Acompañamiento continuo: un solo alcance, seguimiento mensual, % ventas y/o fee mensual</span>
+                    </span>
+                </label>
+            </div>
+        </section>
+
         <!-- OBJETIVO -->
         <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
             <h2 class="text-lg font-semibold text-cntxt-gold mb-6">A. Objetivo de la Propuesta</h2>
@@ -99,26 +125,26 @@
             <h3 class="text-sm font-semibold text-cntxt-muted mb-4 uppercase tracking-wider">Objetivos Alineados</h3>
             <template x-for="(obj, i) in objetivos" :key="i">
                 <div class="flex gap-4 mb-4 items-start bg-cntxt-dark/50 rounded-lg p-4">
-                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex-1 space-y-3">
                         <div>
                             <input type="text" :name="'obj_titulo_'+i" x-model="obj.titulo"
                                 class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition"
                                 placeholder="Título del objetivo">
                         </div>
                         <div>
-                            <select :name="'obj_icono_'+i" x-model="obj.icono"
-                                class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition">
-                                <option value="star">⭐ Estrella</option>
-                                <option value="target">🎯 Objetivo</option>
-                                <option value="chart">📊 Gráfico</option>
-                                <option value="heart">❤️ Corazón</option>
-                                <option value="shield">🛡️ Escudo</option>
-                                <option value="rocket">🚀 Cohete</option>
-                                <option value="gem">💎 Diamante</option>
-                                <option value="eye">👁️ Visión</option>
-                            </select>
+                            <label class="block text-xs text-cntxt-muted mb-2">Ícono</label>
+                            <input type="hidden" :name="'obj_icono_'+i" :value="obj.icono">
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="opt in iconOptions" :key="opt.value">
+                                    <button type="button" @click="obj.icono = opt.value" :title="opt.label"
+                                        :class="obj.icono === opt.value ? 'border-cntxt-gold bg-cntxt-gold/10 text-cntxt-gold' : 'border-cntxt-border text-cntxt-muted hover:border-cntxt-gold/50 hover:text-cntxt-text'"
+                                        class="p-2 rounded-lg border transition flex items-center justify-center"
+                                        x-html="opt.svg">
+                                    </button>
+                                </template>
+                            </div>
                         </div>
-                        <div class="md:col-span-2">
+                        <div>
                             <textarea :name="'obj_desc_'+i" x-model="obj.descripcion" rows="2"
                                 class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-cntxt-gold focus:outline-none transition resize-y"
                                 placeholder="Descripción del objetivo"></textarea>
@@ -137,9 +163,9 @@
             </button>
         </section>
 
-        <!-- PAQUETES / ALCANCES -->
-        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
-            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">B. Alcances / Paquetes</h2>
+        <!-- PAQUETES / ALCANCES (Casa de Diseño) -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6" x-show="incluyeCasaDiseno" x-cloak>
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">B. Alcances / Paquetes <span class="text-xs font-normal text-cntxt-muted">— Casa de Diseño</span></h2>
             <template x-for="(pkg, pi) in paquetes" :key="pi">
                 <div class="border border-cntxt-border rounded-xl p-6 mb-6 bg-cntxt-dark/30">
                     <div class="flex justify-between items-center mb-4">
@@ -314,6 +340,69 @@
             </button>
         </section>
 
+        <!-- ALCANCE PARTNERS (paquete único) -->
+        <section class="bg-cntxt-card border-2 border-blue-400/40 rounded-xl p-6" x-show="incluyePartners" x-cloak>
+            <h2 class="text-lg font-semibold text-blue-400 mb-1">Alcance Partners</h2>
+            <p class="text-xs text-cntxt-muted mb-6">Sección exclusiva de Partners — un único paquete/acceso.</p>
+            <div class="border border-cntxt-border rounded-xl p-6 bg-cntxt-dark/30">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs text-cntxt-muted mb-1">Nombre (ES)</label>
+                        <input type="text" name="partners_pkg_nombre" x-model="paquetePartners.nombre"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                            placeholder="Ej: Acceso Partners">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-cntxt-muted mb-1">Nombre (EN)</label>
+                        <input type="text" name="partners_pkg_nombre_en" x-model="paquetePartners.nombre_en"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs text-cntxt-muted mb-1">¿Qué es?</label>
+                        <textarea name="partners_pkg_que_es" x-model="paquetePartners.que_es" rows="3"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition resize-y"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-cntxt-muted mb-1">¿Para qué es?</label>
+                        <textarea name="partners_pkg_para_que" x-model="paquetePartners.para_que" rows="3"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition resize-y"></textarea>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-xs text-cntxt-muted mb-1">¿Qué incluye? (texto general)</label>
+                    <textarea name="partners_pkg_incluye" x-model="paquetePartners.incluye_texto" rows="3"
+                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition resize-y"></textarea>
+                </div>
+                <p class="text-xs text-cntxt-muted mb-4 italic">No hay precio ni días de entrega aquí — Partners no tiene línea de tiempo fija (acompañamos todo el proceso) y el pago se define abajo, en "Forma de Pago Partners".</p>
+                <div class="mt-4 pt-4 border-t border-cntxt-border">
+                    <h4 class="text-sm font-semibold text-cntxt-muted mb-3 uppercase tracking-wider">Entregables</h4>
+                    <template x-for="(ent, ei) in paquetePartners.entregables" :key="ei">
+                        <div class="flex gap-3 mb-3 items-start">
+                            <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <input type="text" :name="'partners_ent_cat_'+ei" x-model="ent.categoria"
+                                    class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                                    placeholder="Categoría">
+                                <input type="text" :name="'partners_ent_desc_'+ei" x-model="ent.descripcion"
+                                    class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                                    placeholder="Descripción del entregable">
+                            </div>
+                            <button type="button" @click="paquetePartners.entregables.splice(ei, 1)"
+                                class="p-1 text-red-400 hover:bg-red-900/20 rounded transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                    </template>
+                    <button type="button" @click="paquetePartners.entregables.push({categoria:'', descripcion:''})"
+                        class="text-xs text-blue-400 hover:text-blue-300 transition flex items-center space-x-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        <span>Agregar Entregable</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- REQUISITOS -->
         <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
             <h2 class="text-lg font-semibold text-cntxt-gold mb-6">C. Requisitos Previos</h2>
@@ -344,9 +433,9 @@
             </div>
         </section>
 
-        <!-- FORMA DE PAGO -->
-        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6">
-            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">F. Forma de Pago</h2>
+        <!-- FORMA DE PAGO (Casa de Diseño) -->
+        <section class="bg-cntxt-card border border-cntxt-border rounded-xl p-6" x-show="incluyeCasaDiseno" x-cloak>
+            <h2 class="text-lg font-semibold text-cntxt-gold mb-6">F. Forma de Pago <span class="text-xs font-normal text-cntxt-muted">— Casa de Diseño</span></h2>
             <template x-for="(pago, pai) in formas_pago" :key="pai">
                 <div class="flex gap-3 mb-3 items-start">
                     <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -373,6 +462,91 @@
             </button>
         </section>
 
+        <!-- SEGUIMIENTO MENSUAL (Partners) -->
+        <section class="bg-cntxt-card border-2 border-blue-400/40 rounded-xl p-6" x-show="incluyePartners" x-cloak>
+            <h2 class="text-lg font-semibold text-blue-400 mb-1">Seguimiento Mensual</h2>
+            <p class="text-xs text-cntxt-muted mb-6">Sección exclusiva de Partners — los pasos del ciclo que se repite cada mes (se llenan una sola vez, no mes a mes). Ideal 3-4 pasos.</p>
+            <template x-for="(paso, sti) in partnersPasos" :key="sti">
+                <div class="flex gap-3 mb-3 items-start">
+                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <input type="text" :name="'partners_paso_titulo_'+sti" x-model="paso.titulo"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                            placeholder="Ej: Reunión de seguimiento">
+                        <input type="text" :name="'partners_paso_desc_'+sti" x-model="paso.descripcion"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                            placeholder="Breve descripción del paso">
+                    </div>
+                    <button type="button" @click="partnersPasos.splice(sti, 1)"
+                        class="p-1 text-red-400 hover:bg-red-900/20 rounded transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </template>
+            <button type="button" @click="partnersPasos.push({titulo:'', descripcion:''})"
+                class="text-sm text-blue-400 hover:text-blue-300 transition flex items-center space-x-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Agregar Paso</span>
+            </button>
+        </section>
+
+        <!-- FORMA DE PAGO (Partners) -->
+        <section class="bg-cntxt-card border-2 border-blue-400/40 rounded-xl p-6" x-show="incluyePartners" x-cloak>
+            <h2 class="text-lg font-semibold text-blue-400 mb-1">Forma de Pago Partners</h2>
+            <p class="text-xs text-cntxt-muted mb-6">Sección exclusiva de Partners — activa uno o ambos modos. En público solo se muestra lo que actives.</p>
+            <div class="space-y-4">
+                <label class="flex items-center gap-3 p-3 bg-cntxt-dark/60 rounded-lg border border-cntxt-border cursor-pointer select-none">
+                    <input type="checkbox" x-model="partnersAplicaPct" @change="if (!partnersAplicaPct) partnersPorcentajeVentas = ''"
+                        class="w-4 h-4 rounded border-cntxt-border bg-cntxt-dark text-blue-400 focus:ring-blue-400 cursor-pointer">
+                    <span class="text-sm text-cntxt-text font-medium">Aplica % sobre ventas del proyecto</span>
+                </label>
+                <div x-show="partnersAplicaPct" x-cloak class="pl-4">
+                    <label class="block text-xs text-cntxt-muted mb-1">Porcentaje</label>
+                    <input type="number" name="partners_porcentaje_ventas" x-model="partnersPorcentajeVentas" step="0.01" min="0" max="100"
+                        class="w-full max-w-xs bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                        placeholder="Ej: 2">
+                </div>
+
+                <label class="flex items-center gap-3 p-3 bg-cntxt-dark/60 rounded-lg border border-cntxt-border cursor-pointer select-none">
+                    <input type="checkbox" x-model="partnersAplicaFee" @change="if (!partnersAplicaFee) partnersFeeMensual = ''"
+                        class="w-4 h-4 rounded border-cntxt-border bg-cntxt-dark text-blue-400 focus:ring-blue-400 cursor-pointer">
+                    <span class="text-sm text-cntxt-text font-medium">Aplica fee mensual fijo</span>
+                </label>
+                <div x-show="partnersAplicaFee" x-cloak class="pl-4 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md">
+                    <div>
+                        <label class="block text-xs text-cntxt-muted mb-1">Monto mensual</label>
+                        <input type="number" name="partners_fee_mensual" x-model="partnersFeeMensual" step="0.01"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                            placeholder="Ej: 10000000">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-cntxt-muted mb-1">Moneda</label>
+                        <select name="partners_fee_moneda" x-model="partnersFeeMoneda"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition">
+                            <option value="USD">USD</option>
+                            <option value="COP">COP</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <label class="block text-xs text-cntxt-muted mb-1">Duración del servicio</label>
+                    <div class="grid grid-cols-2 gap-4 max-w-md">
+                        <input type="number" name="partners_duracion_numero" x-model="partnersDuracionNumero" min="1"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition"
+                            placeholder="Ej: 12">
+                        <select name="partners_duracion_unidad" x-model="partnersDuracionUnidad"
+                            class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-cntxt-text focus:border-blue-400 focus:outline-none transition">
+                            <option value="">Unidad...</option>
+                            <option value="semanas">Semanas</option>
+                            <option value="meses">Meses</option>
+                            <option value="anos">Años</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="flex justify-end">
             <button type="submit"
                 class="bg-cntxt-gold text-cntxt-dark font-semibold px-8 py-3 rounded-lg hover:bg-cntxt-gold/90 transition">
@@ -391,7 +565,7 @@ function proposalForm() {
         {% endfor %}
     ];
     const existingPaquetes = [
-        {% for pkg in propuesta.paquetes.all %}
+        {% for pkg in propuesta.paquetes_casa_diseno %}
         {
             nombre: "{{ pkg.nombre|escapejs }}",
             nombre_en: "{{ pkg.nombre_en|escapejs }}",
@@ -422,14 +596,59 @@ function proposalForm() {
         {concepto: "{{ fp.concepto|escapejs }}", porcentaje: {{ fp.porcentaje }}, fecha_pago: "{{ fp.fecha_pago|escapejs }}"},
         {% endfor %}
     ];
+    {% with pp=propuesta.paquete_partners %}
+    const existingPaquetePartners = {% if pp %}{
+        nombre: "{{ pp.nombre|escapejs }}",
+        nombre_en: "{{ pp.nombre_en|escapejs }}",
+        que_es: "{{ pp.que_es|escapejs }}",
+        para_que: "{{ pp.para_que|escapejs }}",
+        incluye_texto: "{{ pp.incluye_texto|escapejs }}",
+        entregables: [
+            {% for ent in pp.entregables.all %}
+            {categoria: "{{ ent.categoria|escapejs }}", descripcion: "{{ ent.descripcion|escapejs }}"},
+            {% endfor %}
+        ]
+    }{% else %}null{% endif %};
+    {% endwith %}
+    const existingPartnersPasos = [
+        {% for paso in propuesta.partners_pasos.all %}
+        {titulo: "{{ paso.titulo|escapejs }}", descripcion: "{{ paso.descripcion|escapejs }}"},
+        {% endfor %}
+    ];
+    const initIncluyeCasaDiseno = {{ propuesta.incluye_casa_diseno|yesno:"true,false" }};
+    const initIncluyePartners = {{ propuesta.incluye_partners|yesno:"true,false" }};
+    const initPartnersPct = {{ propuesta.partners_porcentaje_ventas|default:"null" }};
+    const initPartnersFee = {{ propuesta.partners_fee_mensual|default:"null" }};
+    const initPartnersFeeMoneda = "{{ propuesta.partners_fee_moneda|default:"USD"|escapejs }}";
+    const initPartnersDuracionNumero = {{ propuesta.partners_duracion_numero|default:"null" }};
+    const initPartnersDuracionUnidad = "{{ propuesta.partners_duracion_unidad|default:''|escapejs }}";
     {% endlocalize %}{% else %}
     const existingObjetivos = [];
     const existingPaquetes = [];
     const existingRequisitos = [];
     const existingPagos = [];
+    const existingPaquetePartners = null;
+    const existingPartnersPasos = [];
+    const initIncluyeCasaDiseno = true;
+    const initIncluyePartners = false;
+    const initPartnersPct = null;
+    const initPartnersFee = null;
+    const initPartnersFeeMoneda = 'USD';
+    const initPartnersDuracionNumero = null;
+    const initPartnersDuracionUnidad = '';
     {% endif %}
 
     return {
+        iconOptions: [
+            {value: 'star', label: 'Estrella', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'},
+            {value: 'target', label: 'Objetivo', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>'},
+            {value: 'chart', label: 'Gráfico', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>'},
+            {value: 'heart', label: 'Corazón', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'},
+            {value: 'shield', label: 'Escudo', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'},
+            {value: 'rocket', label: 'Cohete', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>'},
+            {value: 'gem', label: 'Diamante', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>'},
+            {value: 'eye', label: 'Visión', svg: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'},
+        ],
         objetivos: existingObjetivos.length ? existingObjetivos : [{titulo:'', descripcion:'', icono:'star'}],
         paquetes: existingPaquetes.length ? existingPaquetes : [],
         requisitos: existingRequisitos.length ? existingRequisitos : [{texto:''}],
@@ -437,6 +656,21 @@ function proposalForm() {
             {concepto: 'Anticipo de inicio de proyecto', porcentaje: 80, fecha_pago: 'A la firma del contrato'},
             {concepto: 'Pago final de proyecto', porcentaje: 20, fecha_pago: 'Contra entrega'},
         ],
+        incluyeCasaDiseno: initIncluyeCasaDiseno,
+        incluyePartners: initIncluyePartners,
+        paquetePartners: existingPaquetePartners || {
+            nombre: '', nombre_en: '', que_es: '', para_que: '', incluye_texto: '', entregables: []
+        },
+        partnersPasos: existingPartnersPasos.length ? existingPartnersPasos : [
+            {titulo: '', descripcion: ''}, {titulo: '', descripcion: ''}, {titulo: '', descripcion: ''}
+        ],
+        partnersAplicaPct: initPartnersPct !== null,
+        partnersAplicaFee: initPartnersFee !== null,
+        partnersPorcentajeVentas: initPartnersPct !== null ? initPartnersPct : '',
+        partnersFeeMensual: initPartnersFee !== null ? initPartnersFee : '',
+        partnersFeeMoneda: initPartnersFeeMoneda,
+        partnersDuracionNumero: initPartnersDuracionNumero !== null ? initPartnersDuracionNumero : '',
+        partnersDuracionUnidad: initPartnersDuracionUnidad,
         agregarPaquete() {
             this.paquetes.push({
                 nombre: '', nombre_en: '', que_es: '', para_que: '', incluye_texto: '',

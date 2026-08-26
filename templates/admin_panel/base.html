@@ -205,10 +205,13 @@
     <nav class="border-b border-cntxt-border bg-cntxt-card/80 backdrop-blur-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <a href="{% url 'propuestas:admin_dashboard' %}" class="flex items-center space-x-3">
-                    <span class="text-cntxt-gold font-bold text-xl tracking-wider">CNTXT</span>
-                    <span class="text-cntxt-muted text-sm">| Propuestas</span>
-                </a>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ HUB_URL }}" class="text-sm text-cntxt-muted hover:text-cntxt-gold border border-cntxt-border rounded-lg px-3 py-1.5 transition">&larr; Volver al HUB</a>
+                    <a href="{% url 'propuestas:admin_dashboard' %}" class="flex items-center space-x-3">
+                        <span class="text-cntxt-gold font-bold text-xl tracking-wider">CNTXT</span>
+                        <span class="text-cntxt-muted text-sm">| Propuestas</span>
+                    </a>
+                </div>
                 <div class="flex items-center space-x-4">
                     <span class="text-cntxt-muted text-sm">{{ request.user.username }}</span>
                     <a href="{% url 'propuestas:admin_logout' %}" class="text-sm text-red-400 hover:text-red-300">Salir</a>

@@ -17,5 +17,8 @@ urlpatterns = [
     path('admin-panel/archivar/<uuid:pk>/', views.admin_archivar, name='admin_archivar'),
     path('admin-panel/api/propuesta/<uuid:pk>/', views.api_propuesta_json, name='api_propuesta'),
     path('p/<slug:slug>/', views.propuesta_publica, name='propuesta_publica'),
-    path('p/<slug:slug>/aceptar/', views.aceptar_propuesta, name='aceptar_propuesta'),
+    path('p/<slug:slug>/casa-diseno/', views.propuesta_casa_diseno, name='propuesta_casa_diseno'),
+    path('p/<slug:slug>/partners/', views.propuesta_partners, name='propuesta_partners'),
+    path('p/<slug:slug>/casa-diseno/aceptar/', views.aceptar_propuesta, {'tipo': 'casa_diseno'}, name='aceptar_casa_diseno'),
+    path('p/<slug:slug>/partners/aceptar/', views.aceptar_propuesta, {'tipo': 'partners'}, name='aceptar_partners'),
 ]

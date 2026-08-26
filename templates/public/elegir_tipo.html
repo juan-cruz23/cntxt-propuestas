@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ propuesta.nombre_proyecto }} | CNTXT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: {{ propuesta.color_acento }};
+            --dark: #050505;
+            --card: #0e0e0e;
+            --card-hover: #161616;
+            --border: #1e1e1e;
+            --text: #e8e8e8;
+            --muted: #6b6b6b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .wrap { width: 100%; max-width: 880px; text-align: center; }
+        .brand { color: var(--accent); font-weight: 800; letter-spacing: 0.2em; font-size: 14px; text-transform: uppercase; margin-bottom: 24px; }
+        h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 700; margin-bottom: 12px; }
+        .sub { color: var(--muted); font-size: 15px; margin-bottom: 48px; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+        .card {
+            display: block;
+            text-decoration: none;
+            color: var(--text);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 28px;
+            text-align: left;
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+        }
+        .card:hover { background: var(--card-hover); border-color: var(--accent); transform: translateY(-2px); }
+        .card-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+        .card-desc { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+        .card-cta { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 6px; }
+        .card-cta svg { width: 16px; height: 16px; transition: transform 0.2s; }
+        .card:hover .card-cta svg { transform: translateX(4px); }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="brand">CNTXT</div>
+        <h1>{{ propuesta.nombre_proyecto }}</h1>
+        <p class="sub">Elige la propuesta que quieres ver</p>
+        <div class="cards">
+            <a class="card" href="{% url 'propuestas:propuesta_casa_diseno' slug=propuesta.slug %}">
+                <div class="card-title">Ver propuesta de Casa de Diseño</div>
+                <div class="card-desc">Una propuesta creada para desarrollar los productos necesarios para que tu proyecto se haga realidad.</div>
+                <div class="card-cta">Entrar
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </div>
+            </a>
+            <a class="card" href="{% url 'propuestas:propuesta_partners' slug=propuesta.slug %}">
+                <div class="card-title">Ver propuesta Partners</div>
+                <div class="card-desc">Una propuesta creada para el acompañamiento duradero y garantizado del proyecto.</div>
+                <div class="card-cta">Entrar
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

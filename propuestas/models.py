@@ -29,6 +29,25 @@ class Propuesta(models.Model):
 
     color_acento = models.CharField(max_length=7, default='#C8A96E')
 
+    # Tipos de propuesta: Casa de Diseño (formato actual) y/o Partners
+    # (acompañamiento continuo). Una propuesta puede incluir uno o ambos.
+    incluye_casa_diseno = models.BooleanField(default=True)
+    incluye_partners = models.BooleanField(default=False)
+
+    # Forma de pago de Partners: dos modos independientes y opcionales.
+    partners_porcentaje_ventas = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    partners_fee_mensual = models.DecimalField(max_digits=12, decimal_places=2, blank=True, null=True)
+    partners_fee_moneda = models.CharField(max_length=10, default='USD')
+
+    # Duración del servicio Partners (ej. "12 meses"). Opcional.
+    DURACION_UNIDAD_CHOICES = [
+        ('semanas', 'Semanas'),
+        ('meses', 'Meses'),
+        ('anos', 'Años'),
+    ]
+    partners_duracion_numero = models.PositiveIntegerField(blank=True, null=True)
+    partners_duracion_unidad = models.CharField(max_length=20, choices=DURACION_UNIDAD_CHOICES, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -48,6 +67,14 @@ class Propuesta(models.Model):
     def __str__(self):
         return f"#{self.numero} - {self.nombre_proyecto}"
 
+    @property
+    def paquetes_casa_diseno(self):
+        return self.paquetes.filter(tipo='casa_diseno')
+
+    @property
+    def paquete_partners(self):
+        return self.paquetes.filter(tipo='partners').first()
+
 
 class ObjetivoAlineado(models.Model):
     propuesta = models.ForeignKey(Propuesta, on_delete=models.CASCADE, related_name='objetivos')
@@ -64,7 +91,13 @@ class ObjetivoAlineado(models.Model):
 
 
 class Paquete(models.Model):
+    TIPO_CHOICES = [
+        ('casa_diseno', 'Casa de Diseño'),
+        ('partners', 'Partners'),
+    ]
+
     propuesta = models.ForeignKey(Propuesta, on_delete=models.CASCADE, related_name='paquetes')
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='casa_diseno')
     nombre = models.CharField(max_length=200)
     nombre_en = models.CharField(max_length=200, blank=True)
     que_es = models.TextField(blank=True)
@@ -110,6 +143,20 @@ class Requisito(models.Model):
         return self.texto[:50]
 
 
+class PartnersSeguimientoPaso(models.Model):
+    """Un paso del ciclo mensual recurrente de acompañamiento Partners."""
+    propuesta = models.ForeignKey(Propuesta, on_delete=models.CASCADE, related_name='partners_pasos')
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField(blank=True)
+    orden = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['orden']
+
+    def __str__(self):
+        return self.titulo
+
+
 class FormaPago(models.Model):
     propuesta = models.ForeignKey(Propuesta, on_delete=models.CASCADE, related_name='formas_pago')
     concepto = models.CharField(max_length=300)
@@ -125,11 +172,20 @@ class FormaPago(models.Model):
 
 
 class Aceptacion(models.Model):
-    propuesta = models.OneToOneField(Propuesta, on_delete=models.CASCADE, related_name='aceptacion')
+    TIPO_CHOICES = [
+        ('casa_diseno', 'Casa de Diseño'),
+        ('partners', 'Partners'),
+    ]
+
+    propuesta = models.ForeignKey(Propuesta, on_delete=models.CASCADE, related_name='aceptaciones')
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='casa_diseno')
     nombre = models.CharField(max_length=300)
     email = models.EmailField(blank=True)
     fecha = models.DateTimeField(auto_now_add=True)
     ip = models.GenericIPAddressField(blank=True, null=True)
 
+    class Meta:
+        unique_together = [('propuesta', 'tipo')]
+
     def __str__(self):
-        return f"{self.propuesta.nombre_proyecto} — aceptada por {self.nombre}"
+        return f"{self.propuesta.nombre_proyecto} ({self.get_tipo_display()}) — aceptada por {self.nombre}"

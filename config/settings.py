@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,6 +23,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-key-change-in-pro
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',') if o.strip()]
+
+# Cuando vive detrás de nginx bajo /propuestas/, nginx recorta el prefijo
+# antes de reenviar y esta variable lo reconstruye en las URLs generadas.
+FORCE_SCRIPT_NAME = os.getenv('FORCE_SCRIPT_NAME') or None
 
 
 # Application definition
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'propuestas.context_processors.hub_url',
             ],
         },
     },
@@ -72,12 +79,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'data' / 'db.sqlite3',
+# Postgres compartida con hub y briefs vía DATABASE_URL (login único real:
+# las 3 apps leen/escriben la misma tabla auth_user/django_session).
+# Si no está seteada, cae a SQLite para desarrollo local sin cambios.
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'data' / 'db.sqlite3',
+        }
     }
-}
 
 
 # Password validation
@@ -114,11 +128,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# Absolutas y con el mismo prefijo que FORCE_SCRIPT_NAME, para que no se
+# rompan en páginas anidadas (ej. /propuestas/admin-panel/editar/<uuid>/).
+STATIC_URL = f"{FORCE_SCRIPT_NAME or ''}/static/"
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
-MEDIA_URL = 'media/'
+MEDIA_URL = f"{FORCE_SCRIPT_NAME or ''}/media/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -126,4 +147,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/admin-panel/login/'
 LOGIN_REDIRECT_URL = '/admin-panel/'
 
-CORS_ALLOW_ALL_ORIGINS = True
+# URL del hub (portal de login único), para el botón "Volver al HUB".
+HUB_URL = os.getenv('HUB_URL', '/')
+
+# Mismo nombre de cookie que hub y briefs: permite el login único (SSO).
+SESSION_COOKIE_NAME = 'cntxt_sso_session'
+
+# Dominio compartido entre subdominios (ej. '.n1w197.easypanel.host'): hace
+# que la sesión iniciada en el hub sea válida acá también.
+SESSION_COOKIE_DOMAIN = os.getenv('SESSION_COOKIE_DOMAIN') or None
+
+# CORS abierto solo tiene sentido en desarrollo; en producción no se necesita
+# porque las 3 apps viven bajo el mismo dominio.
+CORS_ALLOW_ALL_ORIGINS = DEBUG

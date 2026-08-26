@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ propuesta.nombre_proyecto }} — Partners | CNTXT</title>
+    <meta name="description" content="Propuesta Partners - {{ propuesta.nombre_proyecto }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: {{ propuesta.color_acento }};
+            --dark: #050505;
+            --card: #0e0e0e;
+            --card-hover: #161616;
+            --border: #1e1e1e;
+            --text: #e8e8e8;
+            --muted: #6b6b6b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Raleway', sans-serif; background: var(--dark); color: var(--text); }
+        .font-display { font-family: 'Raleway', sans-serif; }
+
+        .section { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 600; }
+        .section-title { font-size: clamp(30px, 4.5vw, 48px); font-weight: 700; line-height: 1.15; margin-bottom: 24px; }
+        .section-divider { width: 60px; height: 2px; background: var(--accent); margin-bottom: 40px; }
+        .text-accent { color: var(--accent); }
+
+        /* TOP BRAND / META */
+        .top-brand { position: fixed; top: 20px; left: 20px; z-index: 150; display: flex; align-items: center; padding: 10px 20px; border-radius: 999px; background: rgba(20,17,14,0.55); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.09); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+        .top-brand span { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; color: var(--accent); }
+        .top-meta { position: fixed; top: 20px; right: 20px; z-index: 150; text-align: right; padding: 10px 18px; background: rgba(20,17,14,0.55); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+        .top-meta div:first-child { font-size: 10px; color: var(--muted); }
+        .top-meta div:last-child { font-family: 'Raleway', sans-serif; font-size: 10px; color: var(--accent); margin-top: 2px; }
+        @media (max-width: 640px) { .top-brand, .top-meta { padding: 8px 14px; } .top-brand span { font-size: 11px; } }
+
+        /* HERO */
+        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden; padding: 140px 24px 80px; border-bottom: 1px solid var(--border); }
+        .hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(200,169,110,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,110,0.03) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%); }
+        .hero-gradient { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.15; }
+        .hero-line { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.3; }
+        .hero-scroll { margin-top: 56px; }
+        .hero-scroll a { color: var(--muted); text-decoration: none; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+        /* OBJECTIVE CARDS */
+        .obj-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s; }
+        .obj-card:hover { border-color: rgba(200,169,110,0.3); transform: translateY(-4px); background: var(--card-hover); }
+
+        /* PACKAGE */
+        .pkg-card { background: var(--card); border: 1px solid var(--accent); border-radius: 20px; padding: 40px 32px; background: linear-gradient(180deg, rgba(200,169,110,0.08) 0%, var(--card) 40%); }
+        .pkg-deliverable { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .pkg-deliverable:last-child { border-bottom: none; }
+        .pkg-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(200,169,110,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+        .pkg-check svg { width: 12px; height: 12px; stroke: var(--accent); }
+
+        /* CICLO MENSUAL — línea de tiempo vertical en cascada */
+        .ciclo-wrap { position: relative; max-width: 640px; margin: 0 auto; padding-left: 56px; }
+        .ciclo-wrap::before { content: ''; position: absolute; top: 22px; bottom: 22px; left: 21px; width: 2px; background: var(--border); }
+        .ciclo-step { position: relative; margin-bottom: 28px; }
+        .ciclo-step:last-child { margin-bottom: 0; }
+        .ciclo-step-num { position: absolute; top: 0; left: -56px; width: 44px; height: 44px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; z-index: 1; }
+        .ciclo-step-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; }
+        .ciclo-step-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+        .ciclo-step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+        .ciclo-loop { position: relative; }
+        .ciclo-loop .ciclo-step-num { background: var(--accent); color: var(--dark); }
+        .ciclo-loop .ciclo-step-num svg { width: 18px; height: 18px; }
+        .ciclo-loop .ciclo-step-card { border-style: dashed; border-color: var(--accent); background: transparent; }
+        .ciclo-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
+        @media (max-width: 640px) {
+            .ciclo-wrap { padding-left: 44px; }
+            .ciclo-wrap::before { left: 15px; }
+            .ciclo-step-num { width: 32px; height: 32px; left: -44px; font-size: 13px; }
+        }
+
+        /* PAGO */
+        .pago-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; flex: 1; min-width: 240px; }
+        .pago-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; font-weight: 600; }
+        .pago-value { font-size: 32px; font-weight: 700; }
+
+        /* REQUISITOS */
+        .req-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .req-item:last-child { border-bottom: none; }
+        .req-bullet { width: 8px; height: 8px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+
+        .footer { padding: 80px 24px; text-align: center; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<div class="top-brand"><span>CNTXT</span></div>
+<div class="top-meta">
+    <div>Propuesta Partners</div>
+    <div>{{ propuesta.fecha_presentacion|date:"d · M · Y" }}</div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-gradient" style="background: var(--accent); top: 20%; left: 30%;"></div>
+    <div class="hero-gradient" style="background: var(--accent); bottom: 10%; right: 20%; opacity: 0.08;"></div>
+    <div class="hero-line" style="top: 30%; width: 100%;"></div>
+    <div class="hero-line" style="top: 70%; width: 100%;"></div>
+    <div style="position: relative; z-index: 2;">
+        <div class="section-label" style="margin-bottom: 24px;">Propuesta Partners</div>
+        <h1 class="font-display" style="font-size: clamp(40px, 7vw, 80px); font-weight: 900; line-height: 1; letter-spacing: -2px;">
+            {{ propuesta.nombre_proyecto }}
+        </h1>
+        {% if propuesta.nombre_proyecto_subtitulo %}
+        <p class="font-display" style="font-size: clamp(18px, 2.6vw, 30px); font-weight: 500; color: var(--accent); margin-top: 16px;">
+            {{ propuesta.nombre_proyecto_subtitulo }}
+        </p>
+        {% endif %}
+        <p style="color: var(--muted); font-size: 15px; max-width: 560px; margin: 24px auto 0; line-height: 1.7;">
+            Un acceso donde estamos 100% comprometidos con los resultados del proyecto: acompañamiento continuo, no un entregable puntual.
+        </p>
+        <div style="margin-top: 48px; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
+            <div>
+                <span style="display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">Dirigido a</span>
+                <span style="font-size: 16px; font-weight: 500;">{{ propuesta.dirigido_a }}{% if propuesta.empresa_cliente %} | {{ propuesta.empresa_cliente }}{% endif %}</span>
+            </div>
+            <div>
+                <span style="display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">De</span>
+                <span style="font-size: 16px; font-weight: 500;">{{ propuesta.de }}</span>
+            </div>
+            <div>
+                <span style="display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">Fecha</span>
+                <span style="font-size: 16px; font-weight: 500;">{{ propuesta.fecha_presentacion|date:"d \d\e F \d\e Y" }}</span>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#objetivo">
+                Explorar Propuesta
+                <svg width="20" height="20" fill="none" stroke="currentColor" style="animation: bounce 2s infinite;"><path d="M5 8l5 5 5-5" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ OBJETIVO ============ -->
+<section class="section" id="objetivo">
+    <div class="section-label">A. Objetivo de la Propuesta</div>
+    <h2 class="section-title">¿Por qué<br><span class="text-accent">este acompañamiento?</span></h2>
+    <div class="section-divider"></div>
+
+    <p style="font-size: 18px; line-height: 1.8; color: var(--text); max-width: 800px; margin-bottom: 60px;">
+        {{ propuesta.objetivo_texto|safe }}
+    </p>
+
+    {% if propuesta.objetivos.count %}
+    <div class="section-label" style="margin-bottom: 24px;">Objetivos Alineados</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        {% for obj in propuesta.objetivos.all %}
+        <div class="obj-card">
+            <div style="margin-bottom: 16px; color: var(--accent);">
+                {% if obj.icono == 'target' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+                {% elif obj.icono == 'chart' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                {% elif obj.icono == 'heart' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {% elif obj.icono == 'shield' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {% elif obj.icono == 'rocket' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                {% elif obj.icono == 'gem' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+                {% elif obj.icono == 'eye' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                {% else %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                {% endif %}
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">{{ obj.titulo }}</h3>
+            <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">{{ obj.descripcion }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>
+
+<!-- ============ ALCANCE PARTNERS ============ -->
+{% if paquete %}
+<section class="section" id="alcance">
+    <div class="section-label">B. Alcance Partners</div>
+    <h2 class="section-title">Tu acceso de<br><span class="text-accent">acompañamiento</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="pkg-card">
+        <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;">
+            <h3 class="font-display" style="font-size: 28px; font-weight: 700;">{{ paquete.nombre }}</h3>
+            {% if paquete.nombre_en %}
+            <span style="color: var(--accent); font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">| {{ paquete.nombre_en }}</span>
+            {% endif %}
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;" class="pkg-detail-grid">
+            {% if paquete.que_es %}
+            <div>
+                <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Qué es?</h4>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.que_es|safe }}</p>
+            </div>
+            {% endif %}
+            {% if paquete.para_que %}
+            <div>
+                <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Para qué es?</h4>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.para_que|safe }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if paquete.incluye_texto %}
+        <div style="margin-top: 24px;">
+            <h4 style="color: var(--accent); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">¿Qué incluye?</h4>
+            <p style="color: var(--muted); font-size: 15px; line-height: 1.7;">{{ paquete.incluye_texto|safe }}</p>
+        </div>
+        {% endif %}
+
+        {% if paquete.entregables.count %}
+        <div style="margin-top: 32px; background: var(--dark); border: 1px solid var(--border); border-radius: 16px; padding: 32px;">
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 20px;">Entregables</h4>
+            {% regroup paquete.entregables.all by categoria as cats %}
+            {% for cat in cats %}
+            <div style="margin-bottom: 16px;">
+                <span style="color: var(--accent); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600;">{{ cat.grouper }}</span>
+                {% for ent in cat.list %}
+                <div class="pkg-deliverable">
+                    <div class="pkg-check">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span style="font-size: 14px; color: var(--text);">{{ ent.descripcion }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endif %}
+
+<!-- ============ SEGUIMIENTO MENSUAL ============ -->
+{% if pasos %}
+<section class="section" id="seguimiento">
+    <div class="section-label">D. Seguimiento del Acompañamiento</div>
+    <h2 class="section-title">Un ciclo que se<br><span class="text-accent">repite cada mes</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="ciclo-wrap">
+        {% for paso in pasos %}
+        <div class="ciclo-step">
+            <div class="ciclo-step-num">{{ forloop.counter }}</div>
+            <div class="ciclo-step-card">
+                <div class="ciclo-step-title">{{ paso.titulo }}</div>
+                {% if paso.descripcion %}<div class="ciclo-step-desc">{{ paso.descripcion }}</div>{% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="ciclo-step ciclo-loop">
+            <div class="ciclo-step-num">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </div>
+            <div class="ciclo-step-card">
+                <div class="ciclo-step-title text-accent">Se repite cada mes</div>
+                <div class="ciclo-step-desc">Vuelve al paso 1 y continúa durante todo el acompañamiento.</div>
+            </div>
+        </div>
+    </div>
+    <p class="ciclo-caption">Este ciclo se repite mes a mes, con reunión entre la dirección del proyecto y la dirección de CNTXT, durante todo el acompañamiento.</p>
+</section>
+{% endif %}
+
+<!-- ============ REQUISITOS ============ -->
+<section class="section" id="requisitos">
+    <div class="section-label">C. Requisitos Previos</div>
+    <h2 class="section-title">Lo que<br><span class="text-accent">necesitamos</span></h2>
+    <div class="section-divider"></div>
+
+    {% if propuesta.requisitos_texto %}
+    <p style="font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; max-width: 700px;">
+        {{ propuesta.requisitos_texto|safe }}
+    </p>
+    {% endif %}
+
+    <div style="max-width: 700px;">
+        {% for req in propuesta.requisitos.all %}
+        <div class="req-item">
+            <div class="req-bullet"></div>
+            <span style="font-size: 15px;">{{ req.texto }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if propuesta.consideraciones_texto %}
+    <div style="margin-top: 40px; background: var(--card); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 24px 32px;">
+        <h4 style="font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Consideraciones</h4>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">{{ propuesta.consideraciones_texto|safe }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<!-- ============ FORMA DE PAGO ============ -->
+{% if propuesta.partners_porcentaje_ventas or propuesta.partners_fee_mensual or propuesta.partners_duracion_numero %}
+<section class="section" id="pago">
+    <div class="section-label">F. Forma de Pago</div>
+    <h2 class="section-title">Cómo se<br><span class="text-accent">estructura</span></h2>
+    <div class="section-divider"></div>
+
+    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+        {% if propuesta.partners_porcentaje_ventas %}
+        <div class="pago-card">
+            <div class="pago-label">% sobre ventas del proyecto</div>
+            <div class="pago-value text-accent">{{ propuesta.partners_porcentaje_ventas|floatformat:"-2" }}%</div>
+        </div>
+        {% endif %}
+        {% if propuesta.partners_fee_mensual %}
+        <div class="pago-card">
+            <div class="pago-label">Fee mensual</div>
+            <div class="pago-value text-accent">$ {{ propuesta.partners_fee_mensual|floatformat:0 }} {{ propuesta.partners_fee_moneda }}</div>
+        </div>
+        {% endif %}
+        {% if propuesta.partners_duracion_numero %}
+        <div class="pago-card">
+            <div class="pago-label">Duración del servicio</div>
+            <div class="pago-value text-accent">{{ propuesta.partners_duracion_numero }} {{ propuesta.get_partners_duracion_unidad_display }}</div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- ============ ACEPTACIÓN ============ -->
+<section class="section" id="aceptar" style="text-align: center;">
+    {% if aceptacion %}
+    <div id="ctaAceptada">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4); margin-bottom: 24px;">
+            <svg width="28" height="28" fill="none" stroke="#22c55e" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="section-title" style="color: #22c55e; font-size: clamp(24px, 4vw, 40px);">Propuesta Aceptada</h2>
+        <p style="color: var(--muted); font-size: 16px; margin-top: 8px;">
+            Aceptada por <strong style="color: var(--text);">{{ aceptacion.nombre }}</strong>
+            {% if aceptacion.email %} ({{ aceptacion.email }}){% endif %}
+        </p>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 8px;">{{ aceptacion.fecha|date:"d \d\e F \d\e Y, H:i" }}</p>
+    </div>
+    {% else %}
+    <div id="ctaAceptar">
+        <div class="section-label" style="margin-bottom: 16px;">¿Todo claro?</div>
+        <h2 class="section-title" style="font-size: clamp(28px, 5vw, 52px);">¿Listo para<br><span class="text-accent">comenzar?</span></h2>
+        <p style="color: var(--muted); font-size: 16px; max-width: 480px; margin: 0 auto 40px; line-height: 1.7;">
+            Al aceptar esta propuesta confirmas tu interés en iniciar el acompañamiento bajo los términos presentados.
+        </p>
+        <button id="btnAceptar"
+            style="background: var(--accent); color: #050505; font-family: 'Raleway', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 18px 48px; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 0 40px rgba(200,169,110,0.3);">
+            Aceptar Propuesta
+        </button>
+    </div>
+    {% endif %}
+</section>
+
+<!-- MODAL ACEPTACIÓN -->
+<div id="modalOverlay" style="position: fixed; inset: 0; z-index: 9000; display: none; align-items: center; justify-content: center; padding: 20px;">
+    <div id="modalBg" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);"></div>
+    <div id="modalBox" style="position: relative; z-index: 1; background: #0e0e0e; border: 1px solid #2a2a2a; border-radius: 24px; padding: 48px 40px; width: 100%; max-width: 480px; transform: scale(0.9); opacity: 0; transition: opacity 0.25s, transform 0.25s;">
+        <div id="modalForm">
+            <h3 style="font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 8px;">Confirmar Aceptación</h3>
+            <p style="color: #6b6b6b; font-size: 14px; margin-bottom: 32px;">{{ propuesta.nombre_proyecto }} — Partners</p>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #6b6b6b; margin-bottom: 8px;">Tu nombre *</label>
+                <input id="inputNombre" type="text" placeholder="Nombre completo"
+                    style="width: 100%; background: #050505; border: 1px solid #2a2a2a; border-radius: 10px; padding: 14px 16px; font-family: 'Raleway', sans-serif; font-size: 15px; color: #e8e8e8; outline: none; transition: border-color 0.2s; box-sizing: border-box;">
+            </div>
+            <div style="margin-bottom: 28px;">
+                <label style="display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #6b6b6b; margin-bottom: 8px;">Tu email</label>
+                <input id="inputEmail" type="email" placeholder="email@empresa.com"
+                    style="width: 100%; background: #050505; border: 1px solid #2a2a2a; border-radius: 10px; padding: 14px 16px; font-family: 'Raleway', sans-serif; font-size: 15px; color: #e8e8e8; outline: none; transition: border-color 0.2s; box-sizing: border-box;">
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 32px;">
+                <input type="checkbox" id="inputCheck" style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0;">
+                <label for="inputCheck" style="font-size: 13px; color: #6b6b6b; cursor: pointer; line-height: 1.5;">
+                    He revisado esta propuesta y confirmo mi interés en iniciar el acompañamiento bajo los términos presentados.
+                </label>
+            </div>
+            <div id="modalError" style="color: #f87171; font-size: 13px; margin-bottom: 16px; display: none;"></div>
+            <div style="display: flex; gap: 12px;">
+                <button id="btnCancelar"
+                    style="flex: 1; background: transparent; border: 1px solid #2a2a2a; color: #6b6b6b; font-family: 'Raleway', sans-serif; font-size: 14px; font-weight: 600; padding: 14px; border-radius: 10px; cursor: pointer;">
+                    Cancelar
+                </button>
+                <button id="btnConfirmar"
+                    style="flex: 2; background: var(--accent); border: none; color: #050505; font-family: 'Raleway', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 14px; border-radius: 10px; cursor: pointer;">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+
+        <div id="modalSuccess" style="display: none; text-align: center;">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4); margin-bottom: 24px;">
+                <svg width="32" height="32" fill="none" stroke="#22c55e" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 style="font-family: 'Raleway', sans-serif; font-size: 24px; font-weight: 800; color: #22c55e; margin-bottom: 12px;">¡Propuesta Aceptada!</h3>
+            <p id="successMsg" style="color: #6b6b6b; font-size: 15px; line-height: 1.6; margin-bottom: 8px;"></p>
+            <p style="color: #444; font-size: 13px;">Nos pondremos en contacto contigo pronto.</p>
+        </div>
+
+        <button id="btnCerrarModal"
+            style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #6b6b6b; cursor: pointer; padding: 4px;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+    </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px;">Diseñado con ❤️ por</div>
+        <div class="font-display" style="font-size: 32px; font-weight: 700; color: var(--accent); margin-bottom: 8px;">CNTXT</div>
+        <div style="font-size: 14px; color: var(--muted);">Casa de Diseño en Medellín — Colombia</div>
+        <div style="margin-top: 32px; font-size: 12px; color: var(--muted);">
+            Propuesta #{{ propuesta.numero }} · {{ propuesta.fecha_presentacion|date:"Y" }}
+        </div>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const btnAceptar   = document.getElementById('btnAceptar');
+    const overlay      = document.getElementById('modalOverlay');
+    const modalBox     = document.getElementById('modalBox');
+    const btnCancelar  = document.getElementById('btnCancelar');
+    const btnCerrar    = document.getElementById('btnCerrarModal');
+    const btnConfirmar = document.getElementById('btnConfirmar');
+    const inputNombre  = document.getElementById('inputNombre');
+    const inputEmail   = document.getElementById('inputEmail');
+    const inputCheck   = document.getElementById('inputCheck');
+    const modalError   = document.getElementById('modalError');
+    const modalForm    = document.getElementById('modalForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+    const successMsg   = document.getElementById('successMsg');
+
+    if (!btnAceptar) return;
+
+    function openModal() {
+        overlay.style.display = 'flex';
+        requestAnimationFrame(() => { modalBox.style.opacity = 1; modalBox.style.transform = 'scale(1)'; });
+        setTimeout(() => inputNombre && inputNombre.focus(), 300);
+    }
+
+    function closeModal() {
+        modalBox.style.opacity = 0;
+        modalBox.style.transform = 'scale(0.9)';
+        setTimeout(() => { overlay.style.display = 'none'; }, 250);
+    }
+
+    btnAceptar.addEventListener('click', openModal);
+    btnCancelar && btnCancelar.addEventListener('click', closeModal);
+    btnCerrar   && btnCerrar.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay || e.target === document.getElementById('modalBg')) closeModal(); });
+
+    [inputNombre, inputEmail].forEach(inp => {
+        if (!inp) return;
+        inp.addEventListener('focus', () => inp.style.borderColor = 'var(--accent)');
+        inp.addEventListener('blur',  () => inp.style.borderColor = '#2a2a2a');
+    });
+
+    btnConfirmar && btnConfirmar.addEventListener('click', async () => {
+        modalError.style.display = 'none';
+        const nombre = inputNombre.value.trim();
+        if (!nombre) {
+            modalError.textContent = 'Por favor ingresa tu nombre.';
+            modalError.style.display = 'block';
+            inputNombre.style.borderColor = '#f87171';
+            return;
+        }
+        if (!inputCheck.checked) {
+            modalError.textContent = 'Debes confirmar que has revisado la propuesta.';
+            modalError.style.display = 'block';
+            return;
+        }
+        btnConfirmar.textContent = 'Enviando...';
+        btnConfirmar.disabled = true;
+
+        const form = new FormData();
+        form.append('nombre', nombre);
+        form.append('email', inputEmail.value.trim());
+        form.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+        try {
+            const res = await fetch("{% url 'propuestas:aceptar_partners' slug=propuesta.slug %}", { method: 'POST', body: form });
+            const data = await res.json();
+            if (data.ok) {
+                modalForm.style.display = 'none';
+                modalSuccess.style.display = 'block';
+                successMsg.textContent = `Gracias, ${data.nombre}. Tu aceptación ha sido registrada el ${data.fecha}.`;
+                setTimeout(() => {
+                    closeModal();
+                    const cta = document.getElementById('ctaAceptar');
+                    if (cta) {
+                        cta.innerHTML = `
+                            <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.1);border:2px solid rgba(34,197,94,0.4);margin-bottom:24px;">
+                                <svg width="28" height="28" fill="none" stroke="#22c55e" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <h2 class="section-title" style="color:#22c55e;font-size:clamp(24px,4vw,40px);">Propuesta Aceptada</h2>
+                            <p style="color:var(--muted);font-size:16px;margin-top:8px;">Aceptada por <strong style="color:var(--text);">${data.nombre}</strong></p>
+                            <p style="color:var(--muted);font-size:14px;margin-top:8px;">${data.fecha}</p>
+                        `;
+                    }
+                }, 1600);
+            } else {
+                modalError.textContent = data.error === 'ya_aceptada' ? 'Esta propuesta ya fue aceptada.' : 'Ocurrió un error, intenta de nuevo.';
+                modalError.style.display = 'block';
+                btnConfirmar.textContent = 'Confirmar';
+                btnConfirmar.disabled = false;
+            }
+        } catch (err) {
+            modalError.textContent = 'Ocurrió un error de conexión.';
+            modalError.style.display = 'block';
+            btnConfirmar.textContent = 'Confirmar';
+            btnConfirmar.disabled = false;
+        }
+    });
+})();
+</script>
+</body>
+</html>

@@ -2,10 +2,13 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.views.decorators.http import require_POST
 from django.db import transaction
-from .models import Propuesta, ObjetivoAlineado, Paquete, Entregable, Requisito, FormaPago, Aceptacion
+from .models import (
+    Propuesta, ObjetivoAlineado, Paquete, Entregable, Requisito, FormaPago,
+    Aceptacion, PartnersSeguimientoPaso,
+)
 
 
 def admin_login(request):
@@ -37,13 +40,13 @@ def admin_dashboard(request):
     if estado_filtro in ('borrador', 'publicada', 'archivada'):
         propuestas = propuestas.filter(estado=estado_filtro)
     elif estado_filtro == 'aceptada':
-        propuestas = propuestas.filter(aceptacion__isnull=False)
+        propuestas = propuestas.filter(aceptaciones__isnull=False).distinct()
     conteos = {
         'todas':    Propuesta.objects.count(),
         'borrador': Propuesta.objects.filter(estado='borrador').count(),
         'publicada': Propuesta.objects.filter(estado='publicada').count(),
         'archivada': Propuesta.objects.filter(estado='archivada').count(),
-        'aceptada': Propuesta.objects.filter(aceptacion__isnull=False).count(),
+        'aceptada': Propuesta.objects.filter(aceptaciones__isnull=False).distinct().count(),
     }
     return render(request, 'admin_panel/dashboard.html', {
         'propuestas': propuestas,
@@ -72,6 +75,13 @@ def _guardar_propuesta(request, propuesta=None):
         propuesta.consideraciones_texto = data.get('consideraciones_texto', '')
         propuesta.color_acento = data.get('color_acento', '#C8A96E')
         propuesta.estado = data.get('estado', 'borrador')
+        propuesta.incluye_casa_diseno = 'incluye_casa_diseno' in data
+        propuesta.incluye_partners = 'incluye_partners' in data
+        propuesta.partners_porcentaje_ventas = data.get('partners_porcentaje_ventas') or None
+        propuesta.partners_fee_mensual = data.get('partners_fee_mensual') or None
+        propuesta.partners_fee_moneda = data.get('partners_fee_moneda', 'USD')
+        propuesta.partners_duracion_numero = data.get('partners_duracion_numero') or None
+        propuesta.partners_duracion_unidad = data.get('partners_duracion_unidad', '')
         propuesta.save()
 
         propuesta.objetivos.all().delete()
@@ -95,6 +105,7 @@ def _guardar_propuesta(request, propuesta=None):
             if nombre:
                 paquete = Paquete.objects.create(
                     propuesta=propuesta,
+                    tipo='casa_diseno',
                     nombre=nombre,
                     nombre_en=data.get(f'pkg_nombre_en_{pkg_idx}', ''),
                     que_es=data.get(f'pkg_que_es_{pkg_idx}', ''),
@@ -120,6 +131,45 @@ def _guardar_propuesta(request, propuesta=None):
                         )
                     ent_idx += 1
             pkg_idx += 1
+
+        if propuesta.incluye_partners:
+            partners_nombre = data.get('partners_pkg_nombre', '').strip()
+            if partners_nombre:
+                partners_pkg = Paquete.objects.create(
+                    propuesta=propuesta,
+                    tipo='partners',
+                    nombre=partners_nombre,
+                    nombre_en=data.get('partners_pkg_nombre_en', ''),
+                    que_es=data.get('partners_pkg_que_es', ''),
+                    para_que=data.get('partners_pkg_para_que', ''),
+                    incluye_texto=data.get('partners_pkg_incluye', ''),
+                    precio_regular=0,
+                    orden=0,
+                )
+                ent_idx = 0
+                while f'partners_ent_cat_{ent_idx}' in data:
+                    cat = data.get(f'partners_ent_cat_{ent_idx}', '').strip()
+                    if cat:
+                        Entregable.objects.create(
+                            paquete=partners_pkg,
+                            categoria=cat,
+                            descripcion=data.get(f'partners_ent_desc_{ent_idx}', ''),
+                            orden=ent_idx,
+                        )
+                    ent_idx += 1
+
+        propuesta.partners_pasos.all().delete()
+        paso_idx = 0
+        while f'partners_paso_titulo_{paso_idx}' in data:
+            titulo = data.get(f'partners_paso_titulo_{paso_idx}', '').strip()
+            if titulo:
+                PartnersSeguimientoPaso.objects.create(
+                    propuesta=propuesta,
+                    titulo=titulo,
+                    descripcion=data.get(f'partners_paso_desc_{paso_idx}', ''),
+                    orden=paso_idx,
+                )
+            paso_idx += 1
 
         propuesta.requisitos.all().delete()
         req_idx = 0
@@ -192,6 +242,13 @@ def admin_duplicar(request, pk):
         nueva.consideraciones_texto = original.consideraciones_texto
         nueva.color_acento = original.color_acento
         nueva.estado = 'borrador'
+        nueva.incluye_casa_diseno = original.incluye_casa_diseno
+        nueva.incluye_partners = original.incluye_partners
+        nueva.partners_porcentaje_ventas = original.partners_porcentaje_ventas
+        nueva.partners_fee_mensual = original.partners_fee_mensual
+        nueva.partners_fee_moneda = original.partners_fee_moneda
+        nueva.partners_duracion_numero = original.partners_duracion_numero
+        nueva.partners_duracion_unidad = original.partners_duracion_unidad
         nueva.save()
 
         for obj in original.objetivos.all():
@@ -201,7 +258,7 @@ def admin_duplicar(request, pk):
             )
         for pkg in original.paquetes.all():
             nuevo_pkg = Paquete.objects.create(
-                propuesta=nueva, nombre=pkg.nombre, nombre_en=pkg.nombre_en,
+                propuesta=nueva, tipo=pkg.tipo, nombre=pkg.nombre, nombre_en=pkg.nombre_en,
                 que_es=pkg.que_es, para_que=pkg.para_que,
                 incluye_texto=pkg.incluye_texto, dias_entrega=pkg.dias_entrega,
                 precio_regular=pkg.precio_regular,
@@ -221,6 +278,11 @@ def admin_duplicar(request, pk):
             FormaPago.objects.create(
                 propuesta=nueva, concepto=fp.concepto,
                 porcentaje=fp.porcentaje, fecha_pago=fp.fecha_pago, orden=fp.orden,
+            )
+        for paso in original.partners_pasos.all():
+            PartnersSeguimientoPaso.objects.create(
+                propuesta=nueva, titulo=paso.titulo,
+                descripcion=paso.descripcion, orden=paso.orden,
             )
     return redirect('propuestas:admin_editar', pk=nueva.pk)
 
@@ -280,10 +342,24 @@ def api_propuesta_json(request, pk):
 
 
 def propuesta_publica(request, slug):
+    """Punto de entrada público. Si la propuesta tiene ambos tipos, muestra
+    el selector; si solo tiene uno, redirige directo a esa vista."""
     propuesta = get_object_or_404(Propuesta, slug=slug, estado='publicada')
-    aceptacion = getattr(propuesta, 'aceptacion', None)
+    if propuesta.incluye_casa_diseno and propuesta.incluye_partners:
+        return render(request, 'public/elegir_tipo.html', {'propuesta': propuesta})
+    elif propuesta.incluye_partners:
+        return redirect('propuestas:propuesta_partners', slug=slug)
+    else:
+        return redirect('propuestas:propuesta_casa_diseno', slug=slug)
+
+
+def propuesta_casa_diseno(request, slug):
+    propuesta = get_object_or_404(Propuesta, slug=slug, estado='publicada')
+    if not propuesta.incluye_casa_diseno:
+        raise Http404
+    aceptacion = propuesta.aceptaciones.filter(tipo='casa_diseno').first()
     paquetes_data = []
-    for pkg in propuesta.paquetes.all():
+    for pkg in propuesta.paquetes_casa_diseno:
         paquetes_data.append({
             'nombre': pkg.nombre,
             'nombre_en': pkg.nombre_en,
@@ -299,6 +375,7 @@ def propuesta_publica(request, slug):
         })
     context = {
         'propuesta': propuesta,
+        'paquetes': propuesta.paquetes_casa_diseno,
         'aceptacion': aceptacion,
         'paquetes_json': json.dumps(paquetes_data),
         'formas_pago_json': json.dumps(list(propuesta.formas_pago.values('concepto', 'porcentaje', 'fecha_pago'))),
@@ -306,10 +383,26 @@ def propuesta_publica(request, slug):
     return render(request, 'public/propuesta.html', context)
 
 
-@require_POST
-def aceptar_propuesta(request, slug):
+def propuesta_partners(request, slug):
     propuesta = get_object_or_404(Propuesta, slug=slug, estado='publicada')
-    if hasattr(propuesta, 'aceptacion'):
+    if not propuesta.incluye_partners:
+        raise Http404
+    aceptacion = propuesta.aceptaciones.filter(tipo='partners').first()
+    paquete = propuesta.paquete_partners
+
+    context = {
+        'propuesta': propuesta,
+        'aceptacion': aceptacion,
+        'paquete': paquete,
+        'pasos': propuesta.partners_pasos.all(),
+    }
+    return render(request, 'public/propuesta_partners.html', context)
+
+
+@require_POST
+def aceptar_propuesta(request, slug, tipo):
+    propuesta = get_object_or_404(Propuesta, slug=slug, estado='publicada')
+    if propuesta.aceptaciones.filter(tipo=tipo).exists():
         return JsonResponse({'ok': False, 'error': 'ya_aceptada'}, status=400)
     nombre = request.POST.get('nombre', '').strip()
     email = request.POST.get('email', '').strip()
@@ -318,5 +411,5 @@ def aceptar_propuesta(request, slug):
     ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
     if ip and ',' in ip:
         ip = ip.split(',')[0].strip()
-    Aceptacion.objects.create(propuesta=propuesta, nombre=nombre, email=email, ip=ip)
-    return JsonResponse({'ok': True, 'nombre': nombre, 'fecha': propuesta.aceptacion.fecha.strftime('%d de %B de %Y, %H:%M')})
+    aceptacion = Aceptacion.objects.create(propuesta=propuesta, tipo=tipo, nombre=nombre, email=email, ip=ip)
+    return JsonResponse({'ok': True, 'nombre': nombre, 'fecha': aceptacion.fecha.strftime('%d de %B de %Y, %H:%M')})

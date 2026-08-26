@@ -762,8 +762,24 @@
     <div class="obj-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
         {% for obj in propuesta.objetivos.all %}
         <div class="obj-card reveal" style="transition-delay: {{ forloop.counter0 }}00ms;">
-            <div style="font-size: 28px; margin-bottom: 16px;">
-                {% if obj.icono == 'target' %}🎯{% elif obj.icono == 'chart' %}📊{% elif obj.icono == 'heart' %}❤️{% elif obj.icono == 'shield' %}🛡️{% elif obj.icono == 'rocket' %}🚀{% elif obj.icono == 'gem' %}💎{% elif obj.icono == 'eye' %}👁️{% else %}⭐{% endif %}
+            <div style="margin-bottom: 16px; color: var(--accent);">
+                {% if obj.icono == 'target' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+                {% elif obj.icono == 'chart' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                {% elif obj.icono == 'heart' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {% elif obj.icono == 'shield' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {% elif obj.icono == 'rocket' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                {% elif obj.icono == 'gem' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+                {% elif obj.icono == 'eye' %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                {% else %}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                {% endif %}
             </div>
             <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">{{ obj.titulo }}</h3>
             <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">{{ obj.descripcion }}</p>
@@ -781,7 +797,7 @@
         <div class="section-divider"></div>
     </div>
 
-    {% for paquete in propuesta.paquetes.all %}
+    {% for paquete in paquetes %}
     <div class="reveal" style="margin-bottom: 80px;">
         <!-- Package Header -->
         <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;">
@@ -882,7 +898,7 @@
 
     <div class="gantt reveal" id="ganttTimeline">
         <div class="gantt-scale" id="ganttScale"></div>
-        {% for paquete in propuesta.paquetes.all %}
+        {% for paquete in paquetes %}
         <div class="gantt-row {% if paquete.es_destacado %}featured{% endif %}" data-days="{{ paquete.dias_entrega }}">
             <div class="gantt-label">
                 <div class="gantt-label-name">{{ paquete.nombre }}</div>
@@ -915,7 +931,7 @@
     </div>
 
     <div class="pkg-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px;">
-        {% for paquete in propuesta.paquetes.all %}
+        {% for paquete in paquetes %}
         <div class="pkg-card reveal-scale {% if paquete.es_destacado %}featured{% endif %}">
             <div style="margin-bottom: 24px;">
                 <h3 style="font-size: 20px; font-weight: 700;">{{ paquete.nombre }}</h3>
@@ -1479,7 +1495,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
         try {
-            const res = await fetch("{% url 'propuestas:aceptar_propuesta' slug=propuesta.slug %}", { method: 'POST', body: form });
+            const res = await fetch("{% url 'propuestas:aceptar_casa_diseno' slug=propuesta.slug %}", { method: 'POST', body: form });
             const data = await res.json();
             if (data.ok) {
                 modalForm.style.display = 'none';
