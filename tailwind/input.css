@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@source "../templates/admin_panel/**/*.html";
+
+@theme {
+  --font-sans: "Raleway", sans-serif;
+
+  --color-cntxt-dark: #0a0a0a;
+  --color-cntxt-card: #141414;
+  --color-cntxt-border: #2a2a2a;
+  --color-cntxt-gold: #C8A96E;
+  --color-cntxt-gold-light: #e0c98f;
+  --color-cntxt-text: #e5e5e5;
+  --color-cntxt-muted: #737373;
+}

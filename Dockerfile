@@ -1,3 +1,14 @@
+FROM node:22-slim AS assets
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+COPY tailwind ./tailwind
+COPY templates/admin_panel ./templates/admin_panel
+RUN npm run build:css
+
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -14,6 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
 COPY . .
+COPY --from=assets /app/static/css/app.css ./static/css/app.css
 
 # Make entrypoint executable
 RUN chmod +x docker-entrypoint.sh

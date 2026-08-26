@@ -20,6 +20,10 @@ staticfiles/
 media/
 *.log
 
+# Tailwind build output (se genera en el build; el fuente vive en tailwind/)
+node_modules/
+static/css/
+
 # Entornos virtuales
 venv/
 env/
