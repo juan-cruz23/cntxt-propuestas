@@ -227,6 +227,13 @@ def _adjuntar_insumos_gemini(client, solicitud: SolicitudPropuestaIA) -> list:
         try:
             # Usar Files API de Gemini para soportar audio, video e imágenes grandes limpiamente
             f_ref = client.files.upload(file=ruta, config={'mime_type': mime})
+            # Esperar si es video/audio grande en estado PROCESSING antes de enviar a generate_content
+            for _ in range(30):
+                state = getattr(getattr(f_ref, 'state', None), 'name', str(getattr(f_ref, 'state', '')))
+                if 'PROCESSING' not in state.upper():
+                    break
+                time.sleep(2)
+                f_ref = client.files.get(name=f_ref.name)
             uploaded_refs.append(f_ref)
             partes.append(f_ref)
         except Exception as exc:
