@@ -1,0 +1,4718 @@
+{
+  "version": "2026.1-depurado",
+  "fuente_original": "01. Servicios CNTXT Actuales.xlsx",
+  "total_registros_originales": 267,
+  "total_servicios_canonicos": 140,
+  "servicios": [
+    {
+      "codigo": "D4.1",
+      "fase": "Fase 1",
+      "categoria": "Comercial",
+      "subcategoria": "Complementario",
+      "nombre": "Propuesta Conceptual y de Layout Funcional Tridimensional",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Cabida Preliminar",
+        "Presentación de concepto espacial, determinantes y cabida",
+        "Modelo Tridimensional del Estado Preliminar",
+        "Paquete de planos Arquitectónicos del estado preliminar",
+        "Presentación de conceptualización e ideación general"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Definición del proyecto",
+        "Conceptualización",
+        "Montaje de modelo 3D Básico",
+        "Montaje de Layout 2D",
+        "Cuadro de áreas",
+        "Montaje de presentación"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 56.4,
+      "dias_estimados": 7.1,
+      "valor_total_cop": 5288997,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D4.2",
+      "fase": "Fase 3",
+      "categoria": "Comercial",
+      "subcategoria": "Complementario",
+      "nombre": "Modelo y Planimetría Arquitectónica Técnica para Montaje de Stand",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Paquete de planimetría técnica de stand + Viewer 360"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Materiales",
+        "Mobiliario a la medida",
+        "Señaletica y comunicación visual",
+        "Detalle de señaletica",
+        "Detalle de Iluminación",
+        "Vitrinismo, Merchandising y exhibición de productos",
+        "Logística de experiencia",
+        "Cantidades de Obra"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 57.2,
+      "dias_estimados": 7.1,
+      "valor_total_cop": 5364018,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D4.3",
+      "fase": "Fase 3",
+      "categoria": "Comercial",
+      "subcategoria": "Complementario",
+      "nombre": "Presupuesto, cantidades Para Producción de Stand",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Presupuesto",
+        "Extracción de cantidades de obra"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Construcción de archivo general",
+        "Cotizaciones con proveedores",
+        "Archivos de soporte y guías para la construcción",
+        "Análisis de precios unitarios",
+        "Cronograma",
+        "Extraer cantidades de obra (base para presupuesto)"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 57.2,
+      "dias_estimados": 7.2,
+      "valor_total_cop": 5364018,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V4.1",
+      "fase": "Fases 1-3",
+      "categoria": "Comercial",
+      "subcategoria": "Urbanismo",
+      "nombre": "Pack ilimitado Imágenes de Urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 12.4,
+      "dias_estimados": 1.6,
+      "valor_total_cop": 1089534,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V4.1",
+        "V4.1-1",
+        "V4.1-2",
+        "V4.1-3"
+      ]
+    },
+    {
+      "codigo": "V4.2",
+      "fase": "Fases 1-3",
+      "categoria": "Comercial",
+      "subcategoria": "Edificación",
+      "nombre": "Pack ilimitado Imagen de edificios exteriores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 10.5,
+      "dias_estimados": 1.3,
+      "valor_total_cop": 912974,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V4.2",
+        "V4.2-1",
+        "V4.2-2",
+        "V4.2-3"
+      ]
+    },
+    {
+      "codigo": "V4.3",
+      "fase": "Fases 1-3",
+      "categoria": "Comercial",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Pack ilimitado de Imagen de interiores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 14.5,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1270811,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V4.3",
+        "V4.3-1",
+        "V4.3-2",
+        "V4.3-3"
+      ]
+    },
+    {
+      "codigo": "V4.4",
+      "fase": "Fases 1-3",
+      "categoria": "Comercial",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría comercial/ambientada para edificios",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (edificios)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Modelo 3d",
+        "Ambientaciòn modelo 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 9.5,
+      "dias_estimados": 1.2,
+      "valor_total_cop": 849864,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V4.4",
+        "V4.4-1",
+        "V4.4-2",
+        "V4.4-3"
+      ]
+    },
+    {
+      "codigo": "D6.7",
+      "fase": null,
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Renueva tu Interior (Fase 1)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Presentación de concepto espacial, determinantes y cabida",
+        "Cabida Preliminar",
+        "Modelo Tridimensional del Estado Preliminar",
+        "Planimetría",
+        "Paquete de planos Arquitectónicos del estado preliminar",
+        "Viewer 360",
+        "3 Renders Interiores"
+      ],
+      "unidades": [
+        "PDF"
+      ],
+      "actividades_clave": [
+        "Visita inicial al espacio",
+        "Registro de Mobiliario",
+        "Propuesta de cabida y programa",
+        "Conceptualización",
+        "Definición del proyecto",
+        "Montaje de modelo 3D Básico",
+        "Insumo de planimetría",
+        "Montaje de paquete de planos básicos",
+        "Cuadro de áreas",
+        "Experiencia de presentación de propuesta",
+        "Modelo Tridimensional",
+        "Renders"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 69.0,
+      "dias_estimados": 8.6,
+      "valor_total_cop": 5546213,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D6.1",
+      "fase": "Fase 1",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Conceptualización de propuesta y cabida 3D preliminar",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Cabida Preliminar",
+        "Presentación de concepto espacial, determinantes y cabida",
+        "Modelo Tridimensional del Estado Preliminar",
+        "Paquete de planos Arquitectónicos del estado preliminar"
+      ],
+      "unidades": [
+        "100m2",
+        "10m2",
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Definición del proyecto",
+        "Conceptualización",
+        "Propuesta de cabida y programa",
+        "Montaje de modelo 3D Básico de propuesta",
+        "Visita inicial al espacio",
+        "Montaje de modelo 3D Básico",
+        "Montaje de paquete de planos básicos",
+        "Cuadro de áreas",
+        "Experiencia de presentación de propuesta",
+        "Cuadro de áreas o especificaciones generales"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 40.5,
+      "dias_estimados": 5.1,
+      "valor_total_cop": 3797950,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D6.2",
+      "fase": "Fase 1",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Proyecto",
+      "nombre": "Look & Feel",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Presentación de conceptualización e ideación general"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Taller de diseño",
+        "Montaje del Look and Feel",
+        "Materialización del Look & feel en imágenes",
+        "Reunión de presentación"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 20.8,
+      "dias_estimados": 2.6,
+      "valor_total_cop": 1950552,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D6.3",
+      "fase": "Fase 2",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Modelo tridimensional fase 2 del Espacio Interior",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Preparativos del modelo",
+        "Detallar el modelo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 30.0,
+      "dias_estimados": 3.8,
+      "valor_total_cop": 2813296,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D6.4",
+      "fase": "Fase 3",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Planimetría Arquitectónica de Diseño Interior",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica de Detalle (Pisos)",
+        "Planimetría Arquitectónica de Detalle (Cubiertas y pérgolas)",
+        "Planimetría Arquitectónica de Detalle (Acabados en muros)",
+        "Planimetría Arquitectónica de Detalle (Iluminación)",
+        "Planimetría Arquitectónica de Detalle (Cielos)",
+        "Planimetría Arquitectónica de Detalle (Puertas y Ventanas)",
+        "Planimetría Arquitectónica de Detalle (Carpintería)"
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Detalle de modulación y tipos de piso",
+        "Detalle de elementos característicos de la propuesta",
+        "Detalle de Tipos de acabados en muros",
+        "Detalle de iluminación",
+        "Detalle de modulación y tipos de cielo",
+        "Detalle de Funcionamiento y composición de puertas y ventanas",
+        "Detalle de Funcionamiento y composición de carpintería"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 92.5,
+      "dias_estimados": 11.6,
+      "valor_total_cop": 8674330,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D6.5",
+      "fase": "Fase 3",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Especificaciones, experiencia de compra y cantidades de obra",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones, experiencia de compra y cantidades de obra"
+      ],
+      "unidades": [
+        "Und"
+      ],
+      "actividades_clave": [
+        "Experiencia de compras",
+        "Especificación general de los materiales a implementar",
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 28.0,
+      "dias_estimados": 3.5,
+      "valor_total_cop": 2625743,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D6.6",
+      "fase": "Fase 1",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Diseño de Carpintería para vivienda",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo tridimensional de mueble",
+        "Documentación técnica de mueble"
+      ],
+      "unidades": [
+        "PDF",
+        "Viewer"
+      ],
+      "actividades_clave": [
+        "Modelado de cocina",
+        "Modelado de muebles de baño",
+        "Modelado de muebles de vestiers y closets",
+        "Modelado de muebles de ropa, despensa o cuarto útil",
+        "Planimetría Cocina",
+        "Planimetría muebles de baño",
+        "Planimetría muebles de vestiers y closets",
+        "Planimetría muebles de ropa, despensa o cuarto útil"
+      ],
+      "roles": [
+        "SUPP"
+      ],
+      "horas_totales": 36.2,
+      "dias_estimados": 4.5,
+      "valor_total_cop": 2775796,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V6.1",
+      "fase": "Fases 1-3",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Pack ilimitado de Imagen de interiores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 14.5,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1270811,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V6.1",
+        "V6.1-1",
+        "V6.1-2",
+        "V6.1-3"
+      ]
+    },
+    {
+      "codigo": "V6.2",
+      "fase": "Fases 1-3",
+      "categoria": "Diseño Interior",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Planimetría comercial/ambientada para edificios",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (edificios)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Modelo 3d",
+        "Ambientaciòn modelo 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 9.5,
+      "dias_estimados": 1.2,
+      "valor_total_cop": 849864,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V6.2",
+        "V6.2-1",
+        "V6.2-2",
+        "V6.2-3"
+      ]
+    },
+    {
+      "codigo": "D2.1",
+      "fase": "Fase 1",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Edificación en Altura hasta 10 pisos (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de edificación en altura (planta)",
+        "Diseño y modelado de edificación en altura (fachada)",
+        "Diseño de obras complementarias edificación en altura",
+        "Integración a Topografía edificación en altura",
+        "Exportar Modelo edificación en altura",
+        "Socialización"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 96.6,
+      "dias_estimados": 12.1,
+      "valor_total_cop": 9058814,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.10",
+      "fase": "Fase 1",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Edificación en Altura hasta 5 pisos (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "5pisos"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (Edificación en Altura)",
+        "Planta Arquitectónica 1 (Edificación en Altura)",
+        "Planta de cubierta (Edificación en Altura)",
+        "Secciones generales (Edificación en Altura)",
+        "Fachadas (Edificación en Altura)",
+        "Isométricos (Edificación en Altura)",
+        "Cuadro de áreas (Edificación en Altura)",
+        "General"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 28.7,
+      "dias_estimados": 3.6,
+      "valor_total_cop": 2691387,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.2",
+      "fase": "Fase 1",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Edificación en Altura hasta 10 (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (Edificación en Altura)",
+        "Planta Arquitectónica 1 (Edificación en Altura)",
+        "Planta de cubierta (Edificación en Altura)",
+        "Secciones generales (Edificación en Altura)",
+        "Fachadas (Edificación en Altura)",
+        "Isométricos (Edificación en Altura)",
+        "Cuadro de áreas (Edificación en Altura)",
+        "General"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 57.4,
+      "dias_estimados": 7.2,
+      "valor_total_cop": 5382774,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.3",
+      "fase": "Fase 2",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360, Edificación en Altura hasta 10 pisos (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de Edificación en altura (planta)",
+        "Diseño y modelado de Edificación en altura (fachada)",
+        "Diseño y modelado de Edificación en altura(cubierta)",
+        "Diseño de obras complementarias de Edificación en Altura",
+        "Integración a Topografía de Edificación en altura",
+        "Exportar Modelo de Edificación en Altura"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 42.7,
+      "dias_estimados": 5.3,
+      "valor_total_cop": 4004258,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.4",
+      "fase": "Fase 2",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Edificación en Altura hasta 10 pisos (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica de Edificación en Altura"
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Planta de Localización de Edificación en Altura",
+        "Planta Arquitectónica de Edificación en Altura",
+        "Planta de cubierta de Edificación en Altura",
+        "Secciones generales de Edificación en Altura",
+        "Fachadas de Edificación en altura",
+        "Isométricos (Edificación en Altura)",
+        "Cuadro de áreas (Edificación en altura)"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 17.61,
+      "dias_estimados": 2.2,
+      "valor_total_cop": 1651405,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.5",
+      "fase": "Fase 2",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Especificaciones de Edificación en Altura hasta 10 pisos (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones de Edificación en Altura"
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Especificación general de los materiales a implementar",
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 29.4,
+      "dias_estimados": 3.7,
+      "valor_total_cop": 2757030,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.6",
+      "fase": "Fase 3",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360, Edificación en Altura hasta 10 pisos (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Preparativos del modelo",
+        "Detallar el modelo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 74.8,
+      "dias_estimados": 9.3,
+      "valor_total_cop": 7014486,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.7",
+      "fase": "Fase 3",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Edificación en Altura hasta 10 pisos (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica de Detalle (Borde de losa)",
+        "Planimetría Arquitectónica de Detalle (Pisos)",
+        "Planimetría Arquitectónica de Detalle (Cubiertas y pérgolas)",
+        "Planimetría Arquitectónica de Detalle (Acabados en muros)",
+        "Planimetría Arquitectónica de Detalle (Iluminación)",
+        "Planimetría Arquitectónica de Detalle (Cielos)",
+        "Planimetría Arquitectónica de Detalle (Puertas y Ventanas)",
+        "Planimetría Arquitectónica de Detalle (Carpintería)"
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Detalle de borde de losa",
+        "Detalle de modulación y tipos de piso",
+        "Detalle de elementos especiales",
+        "Detalle de Tipos de acabados en muros",
+        "Detalle de iluminación",
+        "Detalle de modulación y tipos de cielo",
+        "Detalle de Funcionamiento y composición de puertas y ventanas",
+        "Detalle de Funcionamiento y composición de carpintería"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 80.3,
+      "dias_estimados": 10.0,
+      "valor_total_cop": 7530257,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.8",
+      "fase": "Fase 3",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Especificaciones de Edificación en Altura Volumen 2 hasta 10 pisos (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones de Edificación"
+      ],
+      "unidades": [
+        "10 pisos"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 34.7,
+      "dias_estimados": 4.3,
+      "valor_total_cop": 3254046,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D2.9",
+      "fase": "Fase 1",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Edificación en Altura hasta 5 pisos (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "5pisos"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de edificación en altura (planta)",
+        "Diseño y modelado de edificación en altura (fachada)",
+        "Diseño de obras complementarias edificación en altura",
+        "Integración a Topografía edificación en altura",
+        "Exportar Modelo edificación en altura",
+        "Socialización"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 48.55,
+      "dias_estimados": 6.1,
+      "valor_total_cop": 4552851,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V2.1",
+      "fase": "Fases 1-3",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Urbanismo",
+      "nombre": "Pack ilimitado Imágenes de Urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 12.4,
+      "dias_estimados": 1.6,
+      "valor_total_cop": 1089534,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V2.1",
+        "V2.1-1",
+        "V2.1-2",
+        "V2.1-3"
+      ]
+    },
+    {
+      "codigo": "V2.2",
+      "fase": "Fases 1-3",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Pack ilimitado Imagen de edificios exteriores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 10.5,
+      "dias_estimados": 1.3,
+      "valor_total_cop": 912974,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V2.2",
+        "V2.2-1",
+        "V2.2-2",
+        "V2.2-3"
+      ]
+    },
+    {
+      "codigo": "V2.3",
+      "fase": "Fases 1-3",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Pack ilimitado de Imagen de interiores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 14.5,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1270811,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V2.3",
+        "V2.3-1",
+        "V2.3-2",
+        "V2.3-3"
+      ]
+    },
+    {
+      "codigo": "V2.4",
+      "fase": "Fases 1-3",
+      "categoria": "Edificación en Altura",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría comercial/ambientada para edificios",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (edificios)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Modelo 3d",
+        "Ambientaciòn modelo 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 9.5,
+      "dias_estimados": 1.2,
+      "valor_total_cop": 849864,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V2.4",
+        "V2.4-1",
+        "V2.4-2",
+        "V2.4-3"
+      ]
+    },
+    {
+      "codigo": "V7.1",
+      "fase": "Fases 1-3",
+      "categoria": "Hotelería",
+      "subcategoria": "Urbanismo",
+      "nombre": "Pack ilimitado Imágenes de Urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 12.4,
+      "dias_estimados": 1.6,
+      "valor_total_cop": 1089534,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V7.1",
+        "V7.1-1",
+        "V7.1-2",
+        "V7.1-3"
+      ]
+    },
+    {
+      "codigo": "V7.2",
+      "fase": "Fases 1-3",
+      "categoria": "Hotelería",
+      "subcategoria": "Edificación",
+      "nombre": "Pack ilimitado Imagen de edificios exteriores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 10.5,
+      "dias_estimados": 1.3,
+      "valor_total_cop": 912974,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V7.2",
+        "V7.2-1",
+        "V7.2-2",
+        "V7.2-3"
+      ]
+    },
+    {
+      "codigo": "V7.3",
+      "fase": "Fases 1-3",
+      "categoria": "Hotelería",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Pack ilimitado de Imagen de interiores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 14.5,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1270811,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V7.3",
+        "V7.3-1",
+        "V7.3-2",
+        "V7.3-3"
+      ]
+    },
+    {
+      "codigo": "V7.4",
+      "fase": "Fases 1-3",
+      "categoria": "Hotelería",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría comercial para Urbanismos de Edificaciones",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (urbanismos)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Capa ortofoto",
+        "Ambientaciòn veg 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VM"
+      ],
+      "horas_totales": 11.0,
+      "dias_estimados": 1.4,
+      "valor_total_cop": 1079031,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V7.4",
+        "V7.4-1",
+        "V7.4-2",
+        "V7.4-3"
+      ]
+    },
+    {
+      "codigo": "V7.5",
+      "fase": "Fases 1-3",
+      "categoria": "Hotelería",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Planimetría comercial/ambientada para edificios",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (edificios)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Modelo 3d",
+        "Ambientaciòn modelo 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 9.5,
+      "dias_estimados": 1.2,
+      "valor_total_cop": 849864,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V7.5",
+        "V7.5-1",
+        "V7.5-2",
+        "V7.5-3"
+      ]
+    },
+    {
+      "codigo": "D1.1",
+      "fase": "Fase 1",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Modelo Tridimensional Viewer 360, Escala De Urbanismo (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional, Viewer 360 Escala Urbana"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Creación de topografía",
+        "Planteamiento Vial",
+        "Lotificación"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 43.2,
+      "dias_estimados": 5.4,
+      "valor_total_cop": 4051147,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.10",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Planimetría Arquitectónica del Urbanismo (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica del Urbanismo"
+      ],
+      "unidades": [
+        "15 ha"
+      ],
+      "actividades_clave": [
+        "Planta de urbanismo general",
+        "Planta de etapas de desarrollo",
+        "Secciones generales",
+        "Tabla de movimientos de tierra"
+      ],
+      "roles": [
+        "COO",
+        "LA"
+      ],
+      "horas_totales": 47.2,
+      "dias_estimados": 5.9,
+      "valor_total_cop": 4430570,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.11",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Complementario",
+      "nombre": "Planimetría Arquitectónica, Elemento Complementario (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica Elementos Complementarios"
+      ],
+      "unidades": [
+        "Und"
+      ],
+      "actividades_clave": [
+        "Planta de Localización Elemento Complementario",
+        "Planta Arquitectónica Elemento Complementario",
+        "Planta de cubierta Elemento Complementario",
+        "Secciones generales Elemento Complementario",
+        "Fachadas Elemento Complementario",
+        "Isométricos (Elemento complementario)",
+        "Cuadro de áreas (Elemento complementario)"
+      ],
+      "roles": [
+        "SUPP"
+      ],
+      "horas_totales": 7.33,
+      "dias_estimados": 0.9,
+      "valor_total_cop": 655737,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.12",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica, Edificación (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica Edificación"
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización Edificación",
+        "Planta Arquitectónica Edificación",
+        "Planta de cubierta Edificación",
+        "Secciones generales Edificación",
+        "Fachadas Edificación",
+        "Isométricos (Edificación)",
+        "Cuadro de áreas (Edificación)"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 17.86,
+      "dias_estimados": 2.2,
+      "valor_total_cop": 1674849,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.13",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Especificaciones del Urbanismo (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones del Urbanismo"
+      ],
+      "unidades": [
+        "15 ha"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones",
+        "Relacionar formato con la planimetría generada"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 44.2,
+      "dias_estimados": 5.5,
+      "valor_total_cop": 4144923,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.14",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Complementario",
+      "nombre": "Especificaciones de Elemento Complementario (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones de Elemento Complementario"
+      ],
+      "unidades": [
+        "Und"
+      ],
+      "actividades_clave": [
+        "Especificación general de los materiales a implementar",
+        "Montaje de formato de especificaciones",
+        "Asignar materiales en 3D",
+        "Asignar materiales en planimetría",
+        "Presentar información"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 33.4,
+      "dias_estimados": 4.2,
+      "valor_total_cop": 3132137,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.15",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Especificaciones de Edificaciones (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones"
+      ],
+      "unidades": [
+        "Und"
+      ],
+      "actividades_clave": [
+        "Especificación general de los materiales a implementar",
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 31.4,
+      "dias_estimados": 3.9,
+      "valor_total_cop": 2944584,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.16",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Modelo a detalle constructivo de urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "500 m² - 1000 m²"
+      ],
+      "actividades_clave": [
+        "Preparativos del modelo",
+        "Detallar el modelo",
+        "Coordinación interdisciplinaria"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 67.8,
+      "dias_estimados": 8.5,
+      "valor_total_cop": 6358050,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.17",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo a detalle constructivo de edificación",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Preparativos del modelo",
+        "Detallar el modelo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 88.8,
+      "dias_estimados": 11.1,
+      "valor_total_cop": 8327357,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.18",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Planimetría Arquitectónica de Detalle para ejecución de obra de Urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica de Detalle (Borde de losa)",
+        "Planimetría Arquitectónica de Detalle (Pisos)",
+        "Planimetría Arquitectónica de Detalle (Cubiertas y pérgolas)",
+        "Planimetría Arquitectónica de Detalle (Acabados en muros)",
+        "Planimetría Arquitectónica de Detalle (Iluminación)",
+        "Planimetría Arquitectónica de Detalle (Cielos)",
+        "Planimetría Arquitectónica de Detalle (Puertas y Ventanas)"
+      ],
+      "unidades": [
+        "500 m² - 1000 m²"
+      ],
+      "actividades_clave": [
+        "Detalle de cotas de implantación y fichas de lotes",
+        "Detalle de sección vial",
+        "Detalle de sección de senderos y superficies (pisos)",
+        "Detalle de mobiliario urbano",
+        "Detalle de iluminación",
+        "Detalle de totéms y portones",
+        "Detalle de coordinación con otras disciplinas"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 170.9,
+      "dias_estimados": 21.4,
+      "valor_total_cop": 16026411,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.19",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Detalle para ejecución de obra de Edificación",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica de Detalle (Carpintería)",
+        "Planimetría Arquitectónica de Detalle (Borde de losa)",
+        "Planimetría Arquitectónica de Detalle (Pisos)",
+        "Planimetría Arquitectónica de Detalle (Cubiertas y pérgolas)",
+        "Planimetría Arquitectónica de Detalle (Acabados en muros)",
+        "Planimetría Arquitectónica de Detalle (Iluminación)",
+        "Planimetría Arquitectónica de Detalle (Cielos)",
+        "Planimetría Arquitectónica de Detalle (Puertas y Ventanas)"
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Detalle de Funcionamiento y composición de carpintería",
+        "Detalle de borde de losa",
+        "Detalle de modulación y tipos de piso",
+        "Detalle de elementos especiales",
+        "Detalle de Tipos de acabados en muros",
+        "Detalle de iluminación",
+        "Detalle de modulación y tipos de cielo",
+        "Detalle de Funcionamiento y composición de puertas y ventanas"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 67.9,
+      "dias_estimados": 8.5,
+      "valor_total_cop": 6367427,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.2",
+      "fase": "Fase 1",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Complementario",
+      "nombre": "Modelado Tridimensional Viewer 360, Elemento Complementario (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelado Tridimensional Viewer 360, zona complementaria"
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de zona complementaria (planta)",
+        "Diseño y modelado de zona complementaria (fachada)",
+        "Integración a Topografía zona complementaria",
+        "Exportar Modelo zona complementaria"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 18.55,
+      "dias_estimados": 2.3,
+      "valor_total_cop": 1739555,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.20",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Especificaciones del Urbanismo del proyecto",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones de proyecto"
+      ],
+      "unidades": [
+        "500 m² - 1000 m²"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 45.5,
+      "dias_estimados": 5.7,
+      "valor_total_cop": 4266833,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.21",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Especificaciones de Edificación",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones de Edificación"
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Experiencia tu espacio presente vs futuro",
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 39.1,
+      "dias_estimados": 4.9,
+      "valor_total_cop": 3666663,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.22",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Plano de Punteo para RPH",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Plano"
+      ],
+      "unidades": [
+        "10ha"
+      ],
+      "actividades_clave": [
+        "Preparación y ajustes del archivo",
+        "Planta de urbanismo general con punteo",
+        "Cuadro de áreas"
+      ],
+      "roles": [
+        "COO",
+        "LA"
+      ],
+      "horas_totales": 16.2,
+      "dias_estimados": 2.0,
+      "valor_total_cop": 1522634,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.23",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Manual Anexo para RPH",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Manual"
+      ],
+      "unidades": [
+        "1"
+      ],
+      "actividades_clave": [
+        "Anexo descriptivo y contractual",
+        "Planimetría",
+        "Presentación Indesing"
+      ],
+      "roles": [
+        "COO"
+      ],
+      "horas_totales": 30.5,
+      "dias_estimados": 3.8,
+      "valor_total_cop": 2412504,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.24",
+      "fase": "Fase 1",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Subdivisión Predial y Cabida de un proyecto",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Base + Topografía",
+        "Planimetría Arquitectónica del Urbanismo"
+      ],
+      "unidades": [
+        "1 Proyecto",
+        "15 ha"
+      ],
+      "actividades_clave": [
+        "Modelo Topográfico base",
+        "Planta de Urbanismo General",
+        "Planta de Etapa de Desarrollo",
+        "Cuadro de área de Urbanismo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 42.8,
+      "dias_estimados": 5.3,
+      "valor_total_cop": 4013636,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.25",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Complementario",
+      "nombre": "Modelo a detalle constructivo de elemento complementario (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelado Tridimensional Viewer 360 Zona complementaria"
+      ],
+      "unidades": [
+        "Und"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de Zona complementaria (planta)",
+        "Diseño y modelado de Zona complementaria (fachada)",
+        "Diseño y modelado de Zona complementaria (cubierta)"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 14.95,
+      "dias_estimados": 1.9,
+      "valor_total_cop": 1401959,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.26",
+      "fase": "Fase 3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Complementario",
+      "nombre": "Planimetría Arquitectónica, Elemento Complementario (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica Elementos Complementarios"
+      ],
+      "unidades": [
+        "Und"
+      ],
+      "actividades_clave": [
+        "Planta Arquitectónica Elemento Complementario",
+        "Planta de cubierta Elemento Complementario",
+        "Secciones generales Elemento Complementario",
+        "Fachadas Elemento Complementario",
+        "Isométricos (Elemento complementario)",
+        "Cuadro de áreas (Elemento complementario)"
+      ],
+      "roles": [
+        "SUPP"
+      ],
+      "horas_totales": 6.23,
+      "dias_estimados": 0.8,
+      "valor_total_cop": 557332,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.3",
+      "fase": "Fase 1",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Edificación (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de edificación colectiva (planta)",
+        "Diseño y modelado de edificación colectiva (fachada)",
+        "Diseño de obras complementarias edificación colectiva",
+        "Integración a Topografía edificación colectiva",
+        "Exportar Modelo edificación colectiva"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 39.3,
+      "dias_estimados": 4.9,
+      "valor_total_cop": 3685418,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.4",
+      "fase": "Fase 1",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Planimetría Arquitectónica del Urbanismo (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica del Urbanismo"
+      ],
+      "unidades": [
+        "15 ha"
+      ],
+      "actividades_clave": [
+        "Planta de Urbanismo General",
+        "Planta de Etapa de Desarrollo",
+        "Cuadro de área de Urbanismo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 36.9,
+      "dias_estimados": 4.6,
+      "valor_total_cop": 3460354,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.5",
+      "fase": "Fase 1",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Complementario",
+      "nombre": "Planimetría Arquitectónica, Elemento complementario (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica, Zona complementaria"
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización zona complementaria",
+        "Planta Arquitectónica zona complementaria",
+        "Secciones generales zona complementaria",
+        "Fachadas generales zona complementaria",
+        "Isométricos zona complementaria",
+        "Cuadro de áreas zona complementaria",
+        "General"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 14.55,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1364449,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.6",
+      "fase": "Fase 1",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica, Edificación (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (edificación colectiva)",
+        "Planta Arquitectónica 1 (edificación colectiva)",
+        "Planta de cubierta (edificación colectiva)",
+        "Secciones generales (edificación colectiva)",
+        "Fachadas (edificación colectiva)",
+        "Isométricos (edificación colectiva)",
+        "Cuadro de áreas (edificación colectiva)",
+        "General"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 32.35,
+      "dias_estimados": 4.0,
+      "valor_total_cop": 3033671,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.7",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Modelo Tridimensional, Viewer 360, Escala de Urbanismo (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional, detalle Escala Urbana",
+        "Modelo Tridimensional, Viewer 360 Escala Urbana"
+      ],
+      "unidades": [
+        "1 ha"
+      ],
+      "actividades_clave": [
+        "Planteamiento Vial",
+        "Ambientación",
+        "Integración a Topografía Edificación colectiva o terraza",
+        "Preparativos del modelo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 54.2,
+      "dias_estimados": 6.8,
+      "valor_total_cop": 5082689,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.8",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Complementario",
+      "nombre": "Modelo Tridimensional, Viewer 360, Elemento Complementario (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelado Tridimensional Viewer 360 Zona complementaria"
+      ],
+      "unidades": [
+        "Und"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de Zona complementaria (planta)",
+        "Diseño y modelado de Zona complementaria (fachada)",
+        "Diseño y modelado de Zona complementaria (cubierta)",
+        "Integración a Topografía zona complementaria"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 28.2,
+      "dias_estimados": 3.5,
+      "valor_total_cop": 2644499,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1.9",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360, Edificación (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de Edificación Colectiva (planta)",
+        "Diseño y modelado de Edificación Colectiva (fachada)",
+        "Diseño y modelado de Edificación Colectiva (cubierta)",
+        "Diseño de obras complementarias Edificación Colectiva",
+        "Integración a Topografía Edificación colectiva",
+        "Exportar Modelo Edificación colectiva"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 41.9,
+      "dias_estimados": 5.2,
+      "valor_total_cop": 3929237,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V1.1",
+      "fase": "Fases 1-3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Pack ilimitado Imágenes de Urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 12.4,
+      "dias_estimados": 1.6,
+      "valor_total_cop": 1089534,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V1.1-1",
+        "V1.1-2",
+        "V1.1-3"
+      ]
+    },
+    {
+      "codigo": "V1.2",
+      "fase": "Fases 1-3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Pack ilimitado Imagen de edificios exteriores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 10.5,
+      "dias_estimados": 1.3,
+      "valor_total_cop": 912974,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V1.2-1",
+        "V1.2-2",
+        "V1.2-3"
+      ]
+    },
+    {
+      "codigo": "V1.3",
+      "fase": "Fases 1-3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Pack ilimitado de Imagen de interiores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 14.5,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1270811,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V1.3-1",
+        "V1.3-2",
+        "V1.3-3"
+      ]
+    },
+    {
+      "codigo": "V1.4",
+      "fase": "Fases 1-3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Planimetría comercial para Urbanismos y parcelaciones",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (urbanismos)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Capa ortofoto",
+        "Ambientaciòn veg 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VM"
+      ],
+      "horas_totales": 11.0,
+      "dias_estimados": 1.4,
+      "valor_total_cop": 1079031,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V1.4",
+        "V1.4-1",
+        "V1.4-2",
+        "V1.4-3"
+      ]
+    },
+    {
+      "codigo": "V1.5",
+      "fase": "Fases 1-3",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría comercial/ambientada para edificios",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (edificios)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Modelo 3d",
+        "Ambientaciòn modelo 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 9.5,
+      "dias_estimados": 1.2,
+      "valor_total_cop": 849864,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V1.5",
+        "V1.5-1",
+        "V1.5-2",
+        "V1.5-3"
+      ]
+    },
+    {
+      "codigo": "V5.6",
+      "fase": "Fase 2",
+      "categoria": "Parcelaciones y Condominios",
+      "subcategoria": "Urbanismo",
+      "nombre": "Planta Interactiva",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta Interactiva"
+      ],
+      "unidades": [
+        "LINK"
+      ],
+      "actividades_clave": [
+        "Montaje de planta"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 14.0,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1373312,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "P0.1",
+      "fase": null,
+      "categoria": "Partner",
+      "subcategoria": "Proyecto",
+      "nombre": "Paquete de contenido de proyecto (24 créditos)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Contenido"
+      ],
+      "unidades": [
+        "Variable"
+      ],
+      "actividades_clave": [
+        "Planeación",
+        "Creación"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 14.6,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1119520,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "00",
+      "fase": "Fase 2",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Clash Con otra disciplinas",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Ajustes en modelo",
+        "Viewer 360"
+      ],
+      "unidades": [
+        "PDF"
+      ],
+      "actividades_clave": [
+        "Realizar ajustes correspondientes al modelo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 8.4,
+      "dias_estimados": 1.1,
+      "valor_total_cop": 753474,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "00-2"
+      ]
+    },
+    {
+      "codigo": "D0.1",
+      "fase": "Fase 1",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Diagnóstico del proyecto y preliminares",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Canales de comunicación y almacenamiento",
+        "Programación",
+        "Diagnóstico Inicial del proyecto"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Gestión documental y creación de canales",
+        "Recolección de insumos preliminares",
+        "Visita inicial al lote o análisis de modelo preexistente"
+      ],
+      "roles": [
+        "COO",
+        "LA"
+      ],
+      "horas_totales": 11.7,
+      "dias_estimados": 1.5,
+      "valor_total_cop": 1103230,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D0.2",
+      "fase": "Fase 1",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Análisis de determinantes y conceptualización",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Construcción de Concepto",
+        "Estudio contextual",
+        "Diagnóstico Inicial del proyecto"
+      ],
+      "unidades": [
+        "Análisis",
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Conceptualización / Referentes",
+        "Análisis Normativo",
+        "Análisis Bioclimático",
+        "Resultado del análisis bioclimático",
+        "Taller de diseño",
+        "Preliminares"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 31.2,
+      "dias_estimados": 3.9,
+      "valor_total_cop": 2925828,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D0.3",
+      "fase": "Fase 1",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Presentación de desarrollo arquitectónico",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Presentación de desarrollo arquitectónico",
+        "Entrega"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Antecedentes",
+        "Conceptualización",
+        "Renders e Imágenes",
+        "Planeación de experiencia de entrega"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 9.0,
+      "dias_estimados": 1.1,
+      "valor_total_cop": 843989,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D0.4",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Tiempo de ejecución de cambios y comentarios de cliente",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Entregables Actualizados"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Ejecutar cambios"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 8.4,
+      "dias_estimados": 1.1,
+      "valor_total_cop": 667852,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "D0.4",
+        "D0.4-1",
+        "D0.4-2",
+        "D0.4-3"
+      ]
+    },
+    {
+      "codigo": "D0.5",
+      "fase": "Fase 1",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Producto de diagnóstico y prefactibilidad  inmobiliaria",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Estudio de pre-factibilidad"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Recolección de información",
+        "Análisis normativo",
+        "Análisis territorial",
+        "Análisis de potencial inmobiliario",
+        "Evaluación de escenarios",
+        "Consolidación de resultados"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 50.4,
+      "dias_estimados": 6.3,
+      "valor_total_cop": 4315352,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D0.6",
+      "fase": "Fase 1",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Modelo Financiero Preliminar Propuesto (Escenarios de Sensibilización)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Resumen ejecutivo con conclusiones y recomendaciones."
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Recopilación de información",
+        "Estructuración del proyecto",
+        "Estimación de costos",
+        "Proyección de ingresos",
+        "Construcción del modelo financiero",
+        "Sensibilización de escenarios",
+        "Evaluación de resultados",
+        "Presentación ejecutiva"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 67.2,
+      "dias_estimados": 8.4,
+      "valor_total_cop": 5753803,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V0.1",
+      "fase": null,
+      "categoria": "Proyecto",
+      "subcategoria": "Edificación",
+      "nombre": "Modelado arquitectónico sobre planos para visualización arquitectónica",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "MODELO 3D"
+      ],
+      "unidades": [
+        "SKP RVT"
+      ],
+      "actividades_clave": [
+        "Verificación y revisión",
+        "Preparación",
+        "Modelación"
+      ],
+      "roles": [
+        "VL",
+        "VS"
+      ],
+      "horas_totales": 30.0,
+      "dias_estimados": 3.8,
+      "valor_total_cop": 2558632,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V0.10",
+      "fase": "Fase 1",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Escalado de videos hasta 8K",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Video MP4 de recorrido vista en móviles y pantallas HD"
+      ],
+      "unidades": [
+        "MP5"
+      ],
+      "actividades_clave": [
+        "Creación de clips"
+      ],
+      "roles": [
+        "VS"
+      ],
+      "horas_totales": 1.0,
+      "dias_estimados": 0.1,
+      "valor_total_cop": 85144,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V0.11",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Recorridos 360 4 imágenes",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "RECORRIDO 360"
+      ],
+      "unidades": [
+        "LINK 360 + PNG JPG"
+      ],
+      "actividades_clave": [
+        "Suscripción kuula",
+        "Renderizado x4",
+        "Configuración de iluminación y efectos de renderizado",
+        "Configuracion de punto (x4)",
+        "Edicion y post produccionx4",
+        "Creacion y publicación de recorrido online (x4)"
+      ],
+      "roles": [
+        "PC",
+        "VM"
+      ],
+      "horas_totales": 7.0,
+      "dias_estimados": 0.9,
+      "valor_total_cop": 643038,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.11",
+        "V0.11-1",
+        "V0.11-2",
+        "V0.11-3"
+      ]
+    },
+    {
+      "codigo": "V0.12",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Recorrido en tiempo real para eventos o lanzamientos",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "máximo 2 horas de servicio de recorrido en lanzamiento"
+      ],
+      "unidades": [
+        "."
+      ],
+      "actividades_clave": [
+        "Recorrido en vivo"
+      ],
+      "roles": [
+        "VM"
+      ],
+      "horas_totales": 2.0,
+      "dias_estimados": 0.2,
+      "valor_total_cop": 196187,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.12",
+        "V0.12-1",
+        "V0.12-2",
+        "V0.12-3"
+      ]
+    },
+    {
+      "codigo": "V0.13",
+      "fase": null,
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Experiencia web inmobiliaria",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Experiencia web inmobiliaria basic"
+      ],
+      "unidades": [
+        "LINK + Diseño PDF"
+      ],
+      "actividades_clave": [
+        "Diseño web",
+        "Ajuste web",
+        "Montaje web",
+        "Revisiòn 2",
+        "Dominio",
+        "Preliminar base",
+        "Revisiòn 1"
+      ],
+      "roles": [
+        "VL",
+        "VM"
+      ],
+      "horas_totales": 113.0,
+      "dias_estimados": 14.1,
+      "valor_total_cop": 10126177,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V0.14",
+      "fase": null,
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Brochure con material comercial virtual y para impresión",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Pdf Brochure"
+      ],
+      "unidades": [
+        "Pdf"
+      ],
+      "actividades_clave": [
+        "Diagramación"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 2.0,
+      "dias_estimados": 0.2,
+      "valor_total_cop": 178919,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V0.15",
+      "fase": null,
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Experiencia web Lite alianza con web3D hasta 100 UND",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Plataforma web interactiva"
+      ],
+      "unidades": [
+        "Landing"
+      ],
+      "actividades_clave": [
+        "Interacción con web3D"
+      ],
+      "roles": [],
+      "horas_totales": 0.0,
+      "dias_estimados": 0,
+      "valor_total_cop": 0,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": true
+    },
+    {
+      "codigo": "V0.16",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Experiencia Web Landing Lanzamiento",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Plataforma web para lanzamiento comercial con dominio personalizado"
+      ],
+      "unidades": [
+        "Landing"
+      ],
+      "actividades_clave": [
+        "Plan basic WIX",
+        "Pre diseño web",
+        "Revisión 1",
+        "Revisión 2"
+      ],
+      "roles": [
+        "CCO",
+        "VM"
+      ],
+      "horas_totales": 50.0,
+      "dias_estimados": 6.2,
+      "valor_total_cop": 4930589,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.16-1",
+        "V0.16-2",
+        "V0.16-3"
+      ]
+    },
+    {
+      "codigo": "V0.17",
+      "fase": "Fase 3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Fichas de lote onWeb",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Linkde interfaz"
+      ],
+      "unidades": [
+        "LINK"
+      ],
+      "actividades_clave": [
+        "VISITA A LOTE",
+        "CREACIÓN DE KIRI",
+        "ACTUALIZACIÓN",
+        "WIX"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 7.5,
+      "dias_estimados": 0.9,
+      "valor_total_cop": 670945,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V0.2",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Urbanismo",
+      "nombre": "Modelo tridimensional para visualización de urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "MODELO 3D"
+      ],
+      "unidades": [
+        "SKP RVT"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Dirección creativa",
+        "Ambientación de urbanismos",
+        "Mapeo de materiales para urbanismo",
+        "AJUSTES",
+        "Experiencia de visualización en tiempo real con cliente"
+      ],
+      "roles": [
+        "VL",
+        "VS"
+      ],
+      "horas_totales": 36.2,
+      "dias_estimados": 4.5,
+      "valor_total_cop": 3099471,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.2",
+        "V0.2-1",
+        "V0.2-2",
+        "V0.2-3"
+      ]
+    },
+    {
+      "codigo": "V0.3",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo tridimensional para visualización de edificios exteriores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "MODELO 3D"
+      ],
+      "unidades": [
+        "SKP RVT"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Mapeo de materiales para edificio",
+        "Revisión",
+        "Ambientacion y modelado complementario de edificio",
+        "Experiencia de visualización en tiempo real (lumion model"
+      ],
+      "roles": [
+        "VL",
+        "VS"
+      ],
+      "horas_totales": 20.5,
+      "dias_estimados": 2.6,
+      "valor_total_cop": 1769185,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.3-1",
+        "V0.3-2",
+        "V0.3-3"
+      ]
+    },
+    {
+      "codigo": "V0.4",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo de ambientación interior",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "MODELO 3D"
+      ],
+      "unidades": [
+        "SKP RVT"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Experiencia de visualización en tiempo real (lumion model",
+        "Mapeo de materiales para interior",
+        "Ambientacion y modelado de mobiliario interior"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 18.0,
+      "dias_estimados": 2.2,
+      "valor_total_cop": 1610269,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.4-1",
+        "V0.4-2",
+        "V0.4-3"
+      ]
+    },
+    {
+      "codigo": "V0.5",
+      "fase": null,
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Modelo implantado Gaussian Splatting para plataformas",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "MODELO 3D"
+      ],
+      "unidades": [
+        "PLY GS3D"
+      ],
+      "actividades_clave": [
+        "Información base",
+        "GS de entorno",
+        "GS de edifcio",
+        "Implantación"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 10.0,
+      "dias_estimados": 1.2,
+      "valor_total_cop": 894594,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V0.6",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "2k Video comercial cinematrográfico 2:30 MIN",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Video MP4 de recorrido vista en móviles y pantallas HD"
+      ],
+      "unidades": [
+        "MP4"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Guion",
+        "Escenas y clips",
+        "Edición",
+        "Direccion creativa"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 29.5,
+      "dias_estimados": 3.7,
+      "valor_total_cop": 2639051,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.6",
+        "V0.6-1",
+        "V0.6-2",
+        "V0.6-3"
+      ]
+    },
+    {
+      "codigo": "V0.7",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "Video Recorrido de entendimiento espacial",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Video MP4 de recorrido vista en móviles y pantallas HD"
+      ],
+      "unidades": [
+        "MP4"
+      ],
+      "actividades_clave": [
+        "Adaptación de recorrido",
+        "Video recorrido"
+      ],
+      "roles": [
+        "VM"
+      ],
+      "horas_totales": 4.5,
+      "dias_estimados": 0.6,
+      "valor_total_cop": 441422,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.7",
+        "V0.7-1",
+        "V0.7-2",
+        "V0.7-3"
+      ]
+    },
+    {
+      "codigo": "V0.8",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "720 P Clip video comercial 40 seg cinematrográfico Versión Trailer",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Video MP4 de recorrido vista en móviles y pantallas HD"
+      ],
+      "unidades": [
+        "MP4"
+      ],
+      "actividades_clave": [
+        "Renders Base",
+        "Creación de prompts",
+        "Creación de clips"
+      ],
+      "roles": [
+        "VS"
+      ],
+      "horas_totales": 2.2,
+      "dias_estimados": 0.3,
+      "valor_total_cop": 187317,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.8",
+        "V0.8-1",
+        "V0.8-2",
+        "V0.8-3"
+      ]
+    },
+    {
+      "codigo": "V0.9",
+      "fase": "Fases 1-3",
+      "categoria": "Proyecto",
+      "subcategoria": "Proyecto",
+      "nombre": "720P Clip video emocional comercial 1.20 min cinematrográfico Versión Trailer",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Video MP4 de recorrido vista en móviles y pantallas HD",
+        "Video MP4 de recorrido vista en móviles y pantallas HD 720P"
+      ],
+      "unidades": [
+        "MP4"
+      ],
+      "actividades_clave": [
+        "Renders Base",
+        "Creación de prompts",
+        "Creación de clips"
+      ],
+      "roles": [
+        "VS"
+      ],
+      "horas_totales": 9.0,
+      "dias_estimados": 1.1,
+      "valor_total_cop": 766295,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V0.9",
+        "V0.9-1",
+        "V0.9-2",
+        "V0.9-3"
+      ]
+    },
+    {
+      "codigo": "SD3.1",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda (FASE 1)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Viewer 360"
+      ],
+      "unidades": [
+        "Autodesk Viewer"
+      ],
+      "actividades_clave": [
+        "Modelación"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 20.0,
+      "dias_estimados": 2.5,
+      "valor_total_cop": 1875531,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "SV3.1",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Vizualización arquitectónica personalizada",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Vizualización arquitectónica"
+      ],
+      "unidades": [
+        "PDF"
+      ],
+      "actividades_clave": [
+        "Vizualización arquitectónica"
+      ],
+      "roles": [
+        "VS"
+      ],
+      "horas_totales": 24.0,
+      "dias_estimados": 3.0,
+      "valor_total_cop": 2043453,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.1",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda (FASE 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de edificación colectiva (planta)",
+        "Diseño y modelado de edificación colectiva (fachada)",
+        "Diseño de obras complementarias edificación colectiva",
+        "Integración a Topografía edificación colectiva",
+        "Exportar Modelo edificación colectiva",
+        "Socialización"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 38.3,
+      "dias_estimados": 4.8,
+      "valor_total_cop": 3591642,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.10",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Personal Shopper de lote lite (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Ficha de lote"
+      ],
+      "unidades": [
+        "Documento PDF"
+      ],
+      "actividades_clave": [
+        "Gestión documental y creación de canales",
+        "Recolección de insumos preliminares",
+        "Análisis normativo",
+        "Análisis Bioblimático",
+        "Visita inicial al lote o análisis de modelo preexistente",
+        "Estudio de aprovechamiento",
+        "Ficha Resumen"
+      ],
+      "roles": [
+        "COO",
+        "SUPP"
+      ],
+      "horas_totales": 12.9,
+      "dias_estimados": 1.6,
+      "valor_total_cop": 1161797,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.11",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Personal Shopper de lote Advanced (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Ficha de lote"
+      ],
+      "unidades": [
+        "Documento PDF"
+      ],
+      "actividades_clave": [
+        "Gestión documental y creación de canales",
+        "Recolección de insumos preliminares",
+        "Análisis normativo",
+        "Análisis Bioblimático",
+        "Montaje de Ficha Resumen",
+        "Socialización"
+      ],
+      "roles": [
+        "COO",
+        "SUPP"
+      ],
+      "horas_totales": 13.9,
+      "dias_estimados": 1.7,
+      "valor_total_cop": 1251256,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.2",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Vivienda Campestre (Fase 1)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (Vivienda Campestre)",
+        "Planta Arquitectónica 1 (Vivienda Campestre)",
+        "Planta de cubierta (Vivienda Campestre)",
+        "Secciones generales (Vivienda Campestre)",
+        "Fachadas (Vivienda Campestre)",
+        "Isométricos (Vivienda Campestre)",
+        "Cuadro de áreas (Vivienda Campestre)",
+        "General"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 32.4,
+      "dias_estimados": 4.1,
+      "valor_total_cop": 3038360,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.3",
+      "fase": "Fase 2",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Especificaciones de Vivienda Campestre (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones de Vivienda Campestre"
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones",
+        "Especificación general de los materiales a implementar"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 1.3,
+      "dias_estimados": 0.2,
+      "valor_total_cop": 121910,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.4",
+      "fase": "Fase 2",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda Campestre (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de Vivienda Campestre (planta)",
+        "Diseño y modelado de Vivienda Campestre (fachada)",
+        "Diseño y modelado de Vivienda Campestre (cubierta)",
+        "Diseño de obras complementarias de Vivienda Campestre",
+        "Integración a Topografía de Vivienda Campestre",
+        "Exportar Modelo de Vivienda Campestre"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 34.6,
+      "dias_estimados": 4.3,
+      "valor_total_cop": 3244668,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.5",
+      "fase": "Fase 2",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Vivienda Campestre (Fase 2)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica de Vivienda Campestre"
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización de Vivienda Campestre",
+        "Planta Arquitectónica de Vivienda Campestre",
+        "Planta de cubierta de Vivienda Campestre",
+        "Secciones generales de Vivienda Campestre",
+        "Fachadas de Vivienda Campestre",
+        "Isométricos (Vivienda Campestre)",
+        "Cuadro de áreas (Vivienda Campestre)"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 17.86,
+      "dias_estimados": 2.2,
+      "valor_total_cop": 1674849,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.6",
+      "fase": "Fase 3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Replanteo de la vivienda en campo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Experiencia de replanteo de espacios de la vivienda 1:1 en lote"
+      ],
+      "unidades": [
+        "1"
+      ],
+      "actividades_clave": [
+        "Preparativos de actividades",
+        "Replanteo en campo",
+        "Generar y participar de experiencia en campo",
+        "Modificaciones en Modelo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 16.0,
+      "dias_estimados": 2.0,
+      "valor_total_cop": 1500425,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.7",
+      "fase": "Fase 3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda Campestre (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Preparativos del modelo",
+        "Detallar el modelo"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 56.8,
+      "dias_estimados": 7.1,
+      "valor_total_cop": 5326508,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.8",
+      "fase": "Fase 3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Vivienda Campestre (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planimetría Arquitectónica de Detalle (Borde de losa)",
+        "Planimetría Arquitectónica de Detalle (Pisos)",
+        "Planimetría Arquitectónica de Detalle (Cubiertas y pérgolas)",
+        "Planimetría Arquitectónica de Detalle (Acabados en muros)",
+        "Planimetría Arquitectónica de Detalle (Iluminación)",
+        "Planimetría Arquitectónica de Detalle (Cielos)",
+        "Planimetría Arquitectónica de Detalle (Puertas y Ventanas)",
+        "Planimetría Arquitectónica de Detalle (Carpintería)"
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Detalle de borde de losa",
+        "Detalle de modulación y tipos de piso",
+        "Detalle de elementos especiales",
+        "Detalle de Tipos de acabados en muros",
+        "Detalle de iluminación",
+        "Detalle de modulación y tipos de cielo",
+        "Detalle de Funcionamiento y composición de puertas y ventanas",
+        "Detalle de Funcionamiento y composición de carpintería"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 49.4,
+      "dias_estimados": 6.2,
+      "valor_total_cop": 4632561,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D3.9",
+      "fase": "Fase 3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Especificaciones de Vivienda Campestre (Fase 3)",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Especificaciones de Edificación"
+      ],
+      "unidades": [
+        "1 m² - 200 m²"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 30.1,
+      "dias_estimados": 3.8,
+      "valor_total_cop": 2822674,
+      "fases_aplicables": [
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V3.1",
+      "fase": "Fases 1-3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Urbanismo",
+      "nombre": "Pack ilimitado Imágenes de Urbanismo",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 12.4,
+      "dias_estimados": 1.6,
+      "valor_total_cop": 1089534,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V3.1",
+        "V3.1-1",
+        "V3.1-2"
+      ]
+    },
+    {
+      "codigo": "V3.2",
+      "fase": "Fases 1-3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Pack ilimitado Imagen de edificios exteriores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 10.5,
+      "dias_estimados": 1.3,
+      "valor_total_cop": 912974,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V3.2",
+        "V3.2-1",
+        "V3.2-2",
+        "V3.2-3"
+      ]
+    },
+    {
+      "codigo": "V3.3",
+      "fase": "Fases 1-3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Espacio Interior",
+      "nombre": "Pack ilimitado de Imagen de interiores",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 14.5,
+      "dias_estimados": 1.8,
+      "valor_total_cop": 1270811,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V3.3",
+        "V3.3-1",
+        "V3.3-2",
+        "V3.3-3"
+      ]
+    },
+    {
+      "codigo": "V3.4",
+      "fase": "Fases 1-3",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría comercial/ambientada para edificios",
+      "modelo_negocio": "MADE",
+      "entregables": [
+        "Planta comercial ambientada (edificios)"
+      ],
+      "unidades": [
+        "PDF PNG JPG"
+      ],
+      "actividades_clave": [
+        "Direcciòn creativa",
+        "Importaciòn de capas planimètricas psd",
+        "Modelo 3d",
+        "Ambientaciòn modelo 3d",
+        "Renderizaciòn",
+        "Montaje planta",
+        "Convenciones y ediciòn final",
+        "Exportar"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 9.5,
+      "dias_estimados": 1.2,
+      "valor_total_cop": 849864,
+      "fases_aplicables": [
+        "Fase 1",
+        "Fase 2",
+        "Fase 3"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "V3.4",
+        "V3.4-1",
+        "V3.4-2",
+        "V3.4-3"
+      ]
+    },
+    {
+      "codigo": "SD01",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": null,
+      "nombre": "Taller de ajustes espaciales y acabados arquitectónicos",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "Acta de solicitudes"
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Taller de Co-creación"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 2.0,
+      "dias_estimados": 0.2,
+      "valor_total_cop": 187553,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "SD3.2",
+      "fase": "Fase 2",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Planimetría Arquitectónica de Vivienda Campestre (Fase 1)",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (Vivienda Campestre)",
+        "Planta Arquitectónica 1 (Vivienda Campestre)",
+        "Planta de cubierta (Vivienda Campestre)",
+        "Secciones generales (Vivienda Campestre)",
+        "Fachadas (Vivienda Campestre)",
+        "Isométricos (Vivienda Campestre)",
+        "Cuadro de áreas (Vivienda Campestre)",
+        "General"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 32.4,
+      "dias_estimados": 4.1,
+      "valor_total_cop": 3038360,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "SD3.3",
+      "fase": "Fase 2",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Especificaciones de Vivienda Campestre (Fase 2)",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "Especificaciones de Vivienda Campestre"
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 7.6,
+      "dias_estimados": 0.9,
+      "valor_total_cop": 712702,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "SD3.4",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": "Edificación",
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda Campestre (Fase 2)",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "100m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de Vivienda Campestre (planta)",
+        "Diseño y modelado de Vivienda Campestre (fachada)",
+        "Diseño y modelado de Vivienda Campestre (cubierta)",
+        "Diseño de obras complementarias de Vivienda Campestre",
+        "Integración a Topografía de Vivienda Campestre",
+        "Exportar Modelo de Vivienda Campestre"
+      ],
+      "roles": [
+        "LA"
+      ],
+      "horas_totales": 32.0,
+      "dias_estimados": 4.0,
+      "valor_total_cop": 3000849,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "SV0.3",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": null,
+      "nombre": "Modelo tridimensional para visualización de edificios exteriores",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "MODELO 3D"
+      ],
+      "unidades": [
+        "SKP RVT"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Mapeo de materiales para edificio",
+        "Revisión",
+        "Ambientacion y modelado complementario de edificio",
+        "Experiencia de visualización en tiempo real (lumion model"
+      ],
+      "roles": [
+        "VL",
+        "VS"
+      ],
+      "horas_totales": 16.0,
+      "dias_estimados": 2.0,
+      "valor_total_cop": 1386037,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "SV0.3-2"
+      ]
+    },
+    {
+      "codigo": "SV0.4",
+      "fase": "Fase 1",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": null,
+      "nombre": "Modelo de ambientación interior",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "MODELO 3D"
+      ],
+      "unidades": [
+        "SKP RVT"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Experiencia de visualización en tiempo real (lumion model",
+        "Mapeo de materiales para interior",
+        "Ambientacion y modelado de mobiliario interior"
+      ],
+      "roles": [
+        "VL"
+      ],
+      "horas_totales": 11.5,
+      "dias_estimados": 1.4,
+      "valor_total_cop": 1028783,
+      "fases_aplicables": [
+        "Fase 1"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "SV0.4-2"
+      ]
+    },
+    {
+      "codigo": "SV1.2",
+      "fase": "Fase 2",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": null,
+      "nombre": "Pack ilimitado Imagen de edificios exteriores",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 7.5,
+      "dias_estimados": 0.9,
+      "valor_total_cop": 657770,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "SV1.2-2"
+      ]
+    },
+    {
+      "codigo": "SV1.3",
+      "fase": "Fase 2",
+      "categoria": "Vivienda Campestre",
+      "subcategoria": null,
+      "nombre": "Pack ilimitado de Imagen de interiores",
+      "modelo_negocio": "SELECT",
+      "entregables": [
+        "IMÁGENES X10"
+      ],
+      "unidades": [
+        "PNG JG"
+      ],
+      "actividades_clave": [
+        "Renderizado",
+        "Configuración de iluminación y efectos de renderizado",
+        "Encuadres y escenas"
+      ],
+      "roles": [
+        "PC",
+        "VL"
+      ],
+      "horas_totales": 13.0,
+      "dias_estimados": 1.6,
+      "valor_total_cop": 1136622,
+      "fases_aplicables": [
+        "Fase 2"
+      ],
+      "requiere_cotizacion_manual": false,
+      "codigos_originales": [
+        "SV1.3-2"
+      ]
+    },
+    {
+      "codigo": "D1000.0",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Taller de Experiencia de Emplazamiento",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Canales de comunicación y almacenamiento",
+        "Programación",
+        "Diagnóstico Inicial del proyecto",
+        "Construcción de Concepto",
+        "Estudio contextual"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Gestión documental y creación de canales",
+        "Preliminares",
+        "Análisis Normativo",
+        "Análisis Bioclimático",
+        "Taller con clientes select"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 8.2,
+      "dias_estimados": 1.0,
+      "valor_total_cop": 385214,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.1",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda (ESSENTIAL)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de edificación colectiva (planta)",
+        "Revisión de dirección creativa y líder"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 24.9,
+      "dias_estimados": 3.1,
+      "valor_total_cop": 1170319,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.10",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda (PREMIUM)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "100m2",
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de edificación colectiva (planta)",
+        "Revisión de dirección creativa y líder",
+        "Resolución de feedback posterior a tiempo establecido",
+        "Diseño y modelado de edificación colectiva (fachada)",
+        "Diseño de obras complementarias edificación colectiva",
+        "Diseño y modelado de Vivienda Campestre (planta)",
+        "Diseño y modelado de Vivienda Campestre (fachada)"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 90.5,
+      "dias_estimados": 11.3,
+      "valor_total_cop": 4253571,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.11",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Pack Integral de Documentación, Vivienda Select (PREMIUM)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (Vivienda Campestre)",
+        "Planta Arquitectónica 1 (Vivienda Campestre)",
+        "Planta de cubierta (Vivienda Campestre)",
+        "Secciones generales (Vivienda Campestre)",
+        "Fachadas (Vivienda Campestre)",
+        "Isométricos (Vivienda Campestre)",
+        "Cuadro de áreas (Vivienda Campestre)",
+        "Planimetría Integral",
+        "Paquete integral digital",
+        "Paquete integral Físico"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 29.4,
+      "dias_estimados": 3.7,
+      "valor_total_cop": 1381823,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.12",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Especificaciones de Vivienda Select de la Orden PREMIUM",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Especificaciones de Vivienda Campestre"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones",
+        "Especificación general de los materiales a implementar"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 33.2,
+      "dias_estimados": 4.2,
+      "valor_total_cop": 1560426,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.13",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Presentación de desarrollo arquitectónico de la Orden PREMIUM",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Entrega"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Planeación de experiencia de entrega",
+        "Entrega"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 13.9,
+      "dias_estimados": 1.7,
+      "valor_total_cop": 653311,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.2",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Pack Integral de Documentación, Vivienda Select (ESSENTIAL)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (Vivienda Campestre)",
+        "Planta Arquitectónica 1 (Vivienda Campestre)",
+        "Planta de cubierta (Vivienda Campestre)",
+        "Secciones generales (Vivienda Campestre)",
+        "Fachadas (Vivienda Campestre)",
+        "Isométricos (Vivienda Campestre)",
+        "Cuadro de áreas (Vivienda Campestre)",
+        "Planimetría Integral",
+        "Paquete integral digital",
+        "Paquete integral Físico"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 8.2,
+      "dias_estimados": 1.0,
+      "valor_total_cop": 385406,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.3",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Especificaciones de Vivienda Select de la Orden",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Especificaciones de Vivienda Campestre"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones",
+        "Especificación general de los materiales a implementar"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 18.7,
+      "dias_estimados": 2.3,
+      "valor_total_cop": 878915,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.4",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Taller de Experiencia de Emplazamiento y moodboard",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Canales de comunicación y almacenamiento",
+        "Programación",
+        "Diagnóstico Inicial del proyecto",
+        "Construcción de Concepto",
+        "Estudio contextual",
+        "Experiencia de Entrega",
+        "Look & Feel"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Gestión documental y creación de canales",
+        "Preliminares",
+        "Análisis Normativo",
+        "Análisis Bioclimático",
+        "Taller con clientes select",
+        "Montaje del Look and Feel"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 7.9,
+      "dias_estimados": 1.0,
+      "valor_total_cop": 365224,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.5",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Modelo Tridimensional, Viewer 360 150, Vivienda (ADVANCED)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Modelo Tridimensional a través de LINK en nube."
+      ],
+      "unidades": [
+        "100m2",
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Diseño y modelado de edificación colectiva (planta)",
+        "Revisión de dirección creativa y líder",
+        "Resolución de feedback posterior a tiempo establecido",
+        "Diseño y modelado de Vivienda Campestre (planta)",
+        "Diseño y modelado de Vivienda Campestre (fachada)"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 60.7,
+      "dias_estimados": 7.6,
+      "valor_total_cop": 2852947,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.6",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Pack Integral de Documentación, Vivienda Select (ADVANCED)",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Planimetría arquitectónica escala variable según requerimiento."
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Planta de Localización (Vivienda Campestre)",
+        "Planta Arquitectónica 1 (Vivienda Campestre)",
+        "Planta de cubierta (Vivienda Campestre)",
+        "Secciones generales (Vivienda Campestre)",
+        "Fachadas (Vivienda Campestre)",
+        "Isométricos (Vivienda Campestre)",
+        "Cuadro de áreas (Vivienda Campestre)",
+        "Planimetría Integral",
+        "Paquete integral digital",
+        "Paquete integral Físico"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 21.15,
+      "dias_estimados": 2.6,
+      "valor_total_cop": 994066,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.7",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Especificaciones de Vivienda Select de la Orden ADVANCED",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Especificaciones de Vivienda Campestre"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Montaje de formato de especificaciones",
+        "Especificación general de los materiales a implementar"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 22.0,
+      "dias_estimados": 2.8,
+      "valor_total_cop": 1034017,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.8",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Presentación de desarrollo arquitectónico",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Entrega"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Planeación de experiencia de entrega",
+        "Entrega"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 10.5,
+      "dias_estimados": 1.3,
+      "valor_total_cop": 493508,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "D1000.9",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Taller de Experiencia de Emplazamiento y moodboard",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Canales de comunicación y almacenamiento",
+        "Programación",
+        "Diagnóstico Inicial del proyecto",
+        "Construcción de Concepto",
+        "Estudio contextual",
+        "Experiencia de Entrega",
+        "Look & Feel",
+        "Crecimiento Interior"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Gestión documental y creación de canales",
+        "Preliminares",
+        "Análisis Normativo",
+        "Análisis Bioclimático",
+        "Taller con clientes select",
+        "Montaje del Look and Feel",
+        "Propuesta de crecimiento de la vivienda Select"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 8.4,
+      "dias_estimados": 1.0,
+      "valor_total_cop": 388713,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "DA.1000",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Dirección SELECT",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Dirección C.O.R. + N.E.O."
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Dirección Creativa y Operativa de Calidad"
+      ],
+      "roles": [],
+      "horas_totales": 3.0,
+      "dias_estimados": 0.4,
+      "valor_total_cop": 105604,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "DE,1000",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Dirección SELECT",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Dirección C.O.R. + N.E.O."
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Dirección Creativa y Operativa de Calidad"
+      ],
+      "roles": [],
+      "horas_totales": 1.5,
+      "dias_estimados": 0.2,
+      "valor_total_cop": 52802,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "DP.1000",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Dirección SELECT",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Dirección C.O.R. + N.E.O."
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Dirección Creativa y Operativa de Calidad"
+      ],
+      "roles": [],
+      "horas_totales": 1.0,
+      "dias_estimados": 0.1,
+      "valor_total_cop": 35201,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "E1000,1",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Cálculo Estructural",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Memorias de Cálculo y planimetría Estructural"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Cálculo, Diseño y entrega"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 0.0,
+      "dias_estimados": 0,
+      "valor_total_cop": 0,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": true
+    },
+    {
+      "codigo": "E1000,2",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Cálculo Estructural",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Memorias de Cálculo y planimetría Estructural"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Cálculo, Diseño y entrega"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 0.0,
+      "dias_estimados": 0,
+      "valor_total_cop": 0,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": true
+    },
+    {
+      "codigo": "E1000,3",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Cálculo Estructural",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "Memorias de Cálculo y planimetría Estructural"
+      ],
+      "unidades": [
+        "Proyecto"
+      ],
+      "actividades_clave": [
+        "Cálculo, Diseño y entrega"
+      ],
+      "roles": [
+        "JUN"
+      ],
+      "horas_totales": 22.5,
+      "dias_estimados": 2.8,
+      "valor_total_cop": 1057518,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V1000.0",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Modelo tridimensional para visualización de edificios exteriores",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "MODELO 3D",
+        "IMÁGENES X10",
+        "Video MP4 de recorrido vista en móviles y pantallas HD",
+        "RECORRIDO 360",
+        "Ritual de entrega participar de recorrido en tiempo real con cliente"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Mapeo de materiales para edificio",
+        "Revisión",
+        "Ambientacion y modelado complementario de edificio",
+        "Renderizado",
+        "Encuadres y escenas",
+        "Integración con el diseño Interior",
+        "Renders Exteriores Base",
+        "Creación de prompts",
+        "Creación de clips",
+        "Suscripción kuula",
+        "Renderizado x4",
+        "Configuración de iluminación y efectos de renderizado",
+        "Configuracion de punto (x4)",
+        "Edicion y post produccionx4",
+        "Creacion y publicación de recorrido online (x4)",
+        "Adaptación de recorrido",
+        "Recorrido en vivo"
+      ],
+      "roles": [
+        "VS"
+      ],
+      "horas_totales": 42.7,
+      "dias_estimados": 5.3,
+      "valor_total_cop": 2160321,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V1000.1",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Modelo tridimensional para visualización de edificios exteriores",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "MODELO 3D",
+        "IMÁGENES X10",
+        "Video MP4 de recorrido vista en móviles y pantallas HD",
+        "RECORRIDO 360",
+        "Ritual de entrega participar de recorrido en tiempo real con cliente",
+        "Actualización"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Mapeo de materiales para edificio",
+        "Revisión",
+        "Ambientacion y modelado complementario de edificio",
+        "Mapeo de materiales para interior",
+        "Ambientacion y modelado de mobiliario interior",
+        "Renderizado",
+        "Encuadres y escenas",
+        "Configuración de iluminación y efectos de renderizado",
+        "Renders Exteriores Base",
+        "Creación de prompts",
+        "Creación de clips",
+        "Suscripción kuula",
+        "Renderizado x4",
+        "Configuracion de punto (x4)",
+        "Edicion y post produccionx4",
+        "Creacion y publicación de recorrido online (x4)",
+        "Integración con el diseño Interior",
+        "Adaptación de recorrido",
+        "Recorrido en vivo",
+        "Actualizar pack visual"
+      ],
+      "roles": [
+        "VS"
+      ],
+      "horas_totales": 76.7,
+      "dias_estimados": 9.6,
+      "valor_total_cop": 3880483,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    },
+    {
+      "codigo": "V1000.2",
+      "fase": null,
+      "categoria": "Vivienda Campestre Select",
+      "subcategoria": null,
+      "nombre": "Modelo tridimensional para visualización de edificios exteriores",
+      "modelo_negocio": "AMBOS",
+      "entregables": [
+        "MODELO 3D",
+        "IMÁGENES X10",
+        "Video MP4 de recorrido vista en móviles y pantallas HD",
+        "RECORRIDO 360",
+        "RITUAL DE ENTREGA",
+        "Actualización"
+      ],
+      "unidades": [
+        "150m2"
+      ],
+      "actividades_clave": [
+        "Preparación",
+        "Pre modelado",
+        "Mapeo de materiales para edificio",
+        "Revisión",
+        "Ambientacion y modelado complementario de edificio",
+        "Mapeo de materiales para interior",
+        "Ambientacion y modelado de mobiliario interior",
+        "Renderizado",
+        "Encuadres y escenas",
+        "Configuración de iluminación y efectos de renderizado",
+        "Renders Exteriores Base",
+        "Creación de prompts",
+        "Creación de clips",
+        "Suscripción kuula",
+        "Renderizado x4",
+        "Configuracion de punto (x4)",
+        "Edicion y post produccionx4",
+        "Creacion y publicación de recorrido online (x4)",
+        "Adaptación de recorrido",
+        "Recorrido en vivo",
+        "Actualizar pack visual"
+      ],
+      "roles": [
+        "VS"
+      ],
+      "horas_totales": 132.5,
+      "dias_estimados": 16.6,
+      "valor_total_cop": 6703572,
+      "fases_aplicables": [
+        "Transversal"
+      ],
+      "requiere_cotizacion_manual": false
+    }
+  ]
+}

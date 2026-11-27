@@ -1,0 +1,206 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Diagnóstico IA | {{ solicitud.nombre_proyecto_referencia|default:solicitud.cliente_nombre }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- HEADER -->
+    <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+            <a href="{% url 'propuestas:admin_dashboard' %}" class="text-xs text-cntxt-muted hover:text-cntxt-gold">&larr; Volver al Dashboard</a>
+            <div class="flex items-center gap-3 mt-1">
+                <h1 class="text-2xl font-bold text-white">
+                    {% if propuesta %}#{{ propuesta.numero }} · {{ propuesta.nombre_proyecto }}{% else %}{{ solicitud.nombre_proyecto_referencia|default:solicitud.cliente_nombre }}{% endif %}
+                </h1>
+                <span class="text-xs px-2.5 py-1 rounded-full bg-cntxt-gold/20 text-cntxt-gold font-semibold">
+                    {{ solicitud.get_estado_ia_display }}
+                </span>
+            </div>
+            <p class="text-cntxt-muted text-sm mt-1">
+                Cliente: {{ solicitud.cliente_nombre }}{% if solicitud.empresa_cliente %} | {{ solicitud.empresa_cliente }}{% endif %}
+            </p>
+        </div>
+
+        {% if propuesta %}
+        <div class="flex flex-wrap items-center gap-2">
+            <a href="{% url 'propuestas:admin_editar' pk=propuesta.pk %}"
+               class="px-4 py-2 rounded-lg border border-cntxt-border bg-cntxt-card text-sm text-white hover:border-cntxt-gold transition">
+                ✏️ Editar Propuesta Manual
+            </a>
+            <a href="{% url 'propuestas:admin_ia_print' pk=solicitud.pk %}" target="_blank"
+               class="px-4 py-2 rounded-lg border border-cntxt-border bg-cntxt-card text-sm text-white hover:border-cntxt-gold transition">
+                🖨️ Vista PDF / Imprimir
+            </a>
+            {% if slack_configurado %}
+            <form method="post" action="{% url 'propuestas:admin_ia_enviar_slack' pk=solicitud.pk %}" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="px-4 py-2 rounded-lg border border-cntxt-gold/40 bg-cntxt-gold/10 text-sm text-cntxt-gold hover:bg-cntxt-gold/20 transition">
+                    💬 Notificar a Slack R.E.D.
+                </button>
+            </form>
+            {% endif %}
+            <form method="post" action="{% url 'propuestas:admin_ia_aprobar_archivar' pk=solicitud.pk %}" class="inline"
+                  onsubmit="return confirm('¿Publicar la propuesta y archivar carpeta + PDF en Google Drive?')">
+                {% csrf_token %}
+                <button type="submit" class="px-5 py-2 rounded-lg bg-cntxt-gold text-cntxt-dark font-bold text-sm hover:bg-cntxt-gold/90 transition">
+                    ✅ Aprobar y Archivar en Drive
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if solicitud.error_mensaje %}
+    <div class="bg-red-950/50 border border-red-700/60 rounded-xl p-4 text-sm text-red-200">
+        <strong>Error del motor IA:</strong> {{ solicitud.error_mensaje }}
+    </div>
+    {% endif %}
+
+    {% if solicitud.drive_folder_url %}
+    <div class="bg-emerald-950/40 border border-emerald-700/50 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-sm">
+        <div class="text-emerald-200">
+            <strong>Archivada en Google Drive:</strong>
+            <a href="{{ solicitud.drive_folder_url }}" target="_blank" class="underline text-emerald-300 ml-1">Abrir Carpeta Drive</a>
+            {% if solicitud.drive_pdf_url %} · <a href="{{ solicitud.drive_pdf_url }}" target="_blank" class="underline text-emerald-300">Ver PDF</a>{% endif %}
+        </div>
+        {% if propuesta and propuesta.estado == 'publicada' %}
+        <div class="text-xs text-cntxt-gold">
+            Link para WhatsApp: <a href="{% url 'propuestas:propuesta_publica' slug=propuesta.slug %}" target="_blank" class="underline">{{ request.scheme }}://{{ request.get_host }}{% url 'propuestas:propuesta_publica' slug=propuesta.slug %}</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- BLOQUE 1: DIAGNÓSTICO + AUDITORÍA BRIEF -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Diagnóstico Comercial (Playbook R.E.D.) -->
+        <div class="bg-cntxt-card border border-cntxt-border rounded-2xl p-6 space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-cntxt-gold">1. Diagnóstico Estratégico (Playbook R.E.D.)</h2>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+                <div class="bg-cntxt-dark rounded-lg p-3 border border-cntxt-border">
+                    <span class="text-xs text-cntxt-muted block">Tipo de Proyecto</span>
+                    <span class="text-white font-semibold">{{ diagnostico.tipo_proyecto|default:"—" }}</span>
+                </div>
+                <div class="bg-cntxt-dark rounded-lg p-3 border border-cntxt-border">
+                    <span class="text-xs text-cntxt-muted block">Modelo / Segmento</span>
+                    <span class="text-white font-semibold">{{ diagnostico.modelo_negocio|default:"MADE" }} · {{ diagnostico.segmento|default:"—" }}</span>
+                </div>
+                <div class="col-span-2 bg-cntxt-dark rounded-lg p-3 border border-cntxt-border">
+                    <span class="text-xs text-cntxt-muted block">Perfil de Cliente (ICP / Avatar)</span>
+                    <span class="text-white font-semibold">{{ diagnostico.perfil_cliente|default:"—" }}</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-semibold uppercase text-cntxt-muted mb-1">Dolores Identificados</h3>
+                <ul class="list-disc list-inside text-sm text-cntxt-text space-y-1">
+                    {% for d in diagnostico.dolores %}<li>{{ d }}</li>{% empty %}<li class="text-cntxt-muted">—</li>{% endfor %}
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-semibold uppercase text-cntxt-muted mb-1">Deseos y Motivaciones</h3>
+                <ul class="list-disc list-inside text-sm text-cntxt-text space-y-1">
+                    {% for d in diagnostico.deseos %}<li>{{ d }}</li>{% empty %}<li class="text-cntxt-muted">—</li>{% endfor %}
+                </ul>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+                {% for cm in diagnostico.conceptos_maestros %}
+                <span class="text-xs px-2.5 py-1 rounded-full bg-cntxt-gold/15 text-cntxt-gold border border-cntxt-gold/30">{{ cm }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Auditoría CNTXT Briefs -->
+        <div class="bg-cntxt-card border border-cntxt-border rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-cntxt-gold">2. Auditoría CNTXT Briefs (14 campos)</h2>
+                <span class="text-sm font-bold px-3 py-1 rounded-full {% if brief.completitud_pct >= 80 %}bg-emerald-900/40 text-emerald-400{% else %}bg-yellow-900/40 text-yellow-400{% endif %}">
+                    {{ brief.completitud_pct|default:0 }}% completo
+                </span>
+            </div>
+
+            {% if brief.campos_faltantes %}
+            <div class="bg-yellow-950/30 border border-yellow-700/40 rounded-xl p-4 space-y-2">
+                <p class="text-xs font-bold uppercase text-yellow-400">Información faltante detectada:</p>
+                {% for f in brief.campos_faltantes %}
+                <div class="text-sm text-yellow-100">
+                    <strong>{{ f.campo }}</strong> <span class="text-xs text-yellow-400">({{ f.criticidad }})</span>: {{ f.pregunta_para_red }}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="bg-emerald-950/30 border border-emerald-700/40 rounded-xl p-3 text-sm text-emerald-300">
+                ✅ No faltan campos críticos del Project Brief.
+            </div>
+            {% endif %}
+
+            <div class="grid grid-cols-2 gap-2 text-xs text-cntxt-muted">
+                <div><strong>Categoría:</strong> {{ brief.project_category|default:"—" }}</div>
+                <div><strong>m² estimados:</strong> {{ brief.estimated_area|default:"No indicado" }}</div>
+                <div><strong>Línea operativa:</strong> {{ brief.operative_line|default:"—" }}</div>
+                <div><strong>Fase alcance:</strong> {{ brief.scope_phase|default:"—" }}</div>
+            </div>
+
+            {% if solicitud.notas_ajuste_manual_json %}
+            <div class="border-t border-cntxt-border pt-3">
+                <p class="text-xs font-bold uppercase text-cntxt-gold mb-1">Alertas de ajuste manual (precios/escala):</p>
+                <ul class="list-disc list-inside text-xs text-cntxt-muted space-y-1">
+                    {% for n in solicitud.notas_ajuste_manual_json %}<li>{{ n }}</li>{% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- BLOQUE 2: 3 NIVELES DE ACCESO (DE MÁS A MENOS) -->
+    {% if paquetes %}
+    <div class="bg-cntxt-card border border-cntxt-border rounded-2xl p-6">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-cntxt-gold mb-4">3. Niveles de Acceso Propuestos (De Más a Menos)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {% for pkg in paquetes %}
+            <div class="bg-cntxt-dark border {% if pkg.es_destacado %}border-cntxt-gold{% else %}border-cntxt-border{% endif %} rounded-xl p-5 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono text-cntxt-muted">NIVEL {{ forloop.counter }}</span>
+                        {% if pkg.es_destacado %}<span class="text-[11px] bg-cntxt-gold/20 text-cntxt-gold px-2 py-0.5 rounded-full">Destacado</span>{% endif %}
+                    </div>
+                    <h3 class="text-lg font-bold text-white">{{ pkg.nombre }}</h3>
+                    <div class="text-sm text-cntxt-muted mt-2 prose prose-invert max-w-none">{{ pkg.que_es|safe }}</div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-cntxt-border">
+                    <div class="text-xl font-bold text-cntxt-gold">${{ pkg.precio_regular|floatformat:0 }} {{ pkg.moneda }}</div>
+                    <div class="text-xs text-cntxt-muted mt-0.5">{% if pkg.aplica_iva %}No incluye IVA (19%) · {% endif %}{{ pkg.dias_entrega }} días calendario</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- BLOQUE 3: AJUSTE CONVERSACIONAL (MISMO MOTOR QUE EL HILO DE SLACK) -->
+    {% if propuesta %}
+    <div class="bg-cntxt-card border border-cntxt-border rounded-2xl p-6">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-cntxt-gold mb-2">4. Pedir Ajuste a la IA (igual que desde Slack)</h2>
+        <p class="text-xs text-cntxt-muted mb-3">
+            Escribe qué quieres modificar (ej: "Agrega recorrido 360 al Nivel 2", "Ajusta el precio del Nivel 1 a 48 millones", "El área confirmada es 320 m², completa el Brief").
+        </p>
+        <form method="post" action="{% url 'propuestas:admin_ia_ajustar' pk=solicitud.pk %}" class="flex flex-col sm:flex-row gap-3">
+            {% csrf_token %}
+            <input type="text" name="instruccion" required placeholder="Describe el cambio que quieres aplicar a la propuesta..."
+                   class="flex-1 bg-cntxt-dark border border-cntxt-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cntxt-gold">
+            <button type="submit" class="px-6 py-2.5 rounded-xl bg-cntxt-gold text-cntxt-dark font-semibold text-sm hover:bg-cntxt-gold/90 transition">
+                Aplicar Ajuste IA
+            </button>
+        </form>
+
+        {% if solicitud.historial_cambios_json %}
+        <div class="mt-4 pt-3 border-t border-cntxt-border space-y-1">
+            <p class="text-xs uppercase font-semibold text-cntxt-muted">Historial de iteraciones:</p>
+            {% for h in solicitud.historial_cambios_json %}
+            <div class="text-xs text-cntxt-text">• <span class="text-cntxt-muted">{{ h.fecha|slice:":16" }}</span> — {{ h.resumen }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

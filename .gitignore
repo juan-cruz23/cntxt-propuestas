@@ -4,6 +4,7 @@
 
 # Base de datos (datos locales, no van al repo)
 db.sqlite3
+data/
 
 # Python
 __pycache__/

@@ -192,6 +192,7 @@
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <a href="{% url 'propuestas:admin_catalogo' %}" class="text-sm text-cntxt-muted hover:text-cntxt-gold transition">Catálogo</a>
                     <span class="text-cntxt-muted text-sm">{{ request.user.username }}</span>
                     <a href="{% url 'propuestas:admin_logout' %}" class="text-sm text-red-400 hover:text-red-300">Salir</a>
                 </div>
@@ -199,6 +200,15 @@
         </div>
     </nav>
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% if messages %}
+        <div class="mb-6 space-y-2">
+            {% for msg in messages %}
+            <div class="rounded-xl px-4 py-3 text-sm border {% if msg.tags == 'error' %}bg-red-950/50 border-red-700/60 text-red-200{% elif msg.tags == 'warning' %}bg-yellow-950/40 border-yellow-700/50 text-yellow-200{% else %}bg-emerald-950/40 border-emerald-700/50 text-emerald-200{% endif %}">
+                {{ msg }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
 </body>

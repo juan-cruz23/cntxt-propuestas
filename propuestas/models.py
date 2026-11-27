@@ -189,3 +189,113 @@ class Aceptacion(models.Model):
 
     def __str__(self):
         return f"{self.propuesta.nombre_proyecto} ({self.get_tipo_display()}) — aceptada por {self.nombre}"
+
+
+class ServicioCatalogo(models.Model):
+    """Catálogo maestro de servicios de CNTXT importado desde Portafolio 2026."""
+    MODELO_CHOICES = [
+        ('MADE', 'MADE'),
+        ('SELECT', 'SELECT'),
+        ('AMBOS', 'AMBOS'),
+    ]
+
+    codigo = models.CharField(max_length=40, db_index=True)
+    categoria = models.CharField(max_length=120, db_index=True)
+    subcategoria = models.CharField(max_length=120, blank=True, default='')
+    nombre = models.CharField(max_length=300)
+    modelo_negocio = models.CharField(max_length=20, choices=MODELO_CHOICES, default='MADE')
+    fase = models.CharField(max_length=40, blank=True, default='')
+    fases_aplicables = models.JSONField(default=list, blank=True)
+    entregables = models.JSONField(default=list, blank=True)
+    actividades_clave = models.JSONField(default=list, blank=True)
+    roles = models.JSONField(default=list, blank=True)
+    horas_totales = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    dias_estimados = models.DecimalField(max_digits=6, decimal_places=1, default=0)
+    valor_total_cop = models.BigIntegerField(default=0)
+    requiere_cotizacion_manual = models.BooleanField(default=False)
+    activo = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['categoria', 'modelo_negocio', 'codigo']
+        unique_together = [('codigo', 'categoria')]
+        verbose_name = 'Servicio de Catálogo'
+        verbose_name_plural = 'Catálogo de Servicios'
+
+    def __str__(self):
+        return f"[{self.codigo}] {self.nombre} ({self.categoria})"
+
+
+class SolicitudPropuestaIA(models.Model):
+    """Sesión de generación multimodal con IA ligada a una Propuesta."""
+    ESTADO_IA_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('procesando', 'Procesando'),
+        ('borrador_generado', 'Borrador Generado'),
+        ('en_revision_slack', 'En Revisión (Slack)'),
+        ('aprobada_archivada', 'Aprobada y Archivada'),
+        ('error', 'Error'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    propuesta = models.OneToOneField(
+        Propuesta, on_delete=models.SET_NULL, null=True, blank=True, related_name='solicitud_ia'
+    )
+    creado_por = models.CharField(max_length=150, blank=True, default='')
+    cliente_nombre = models.CharField(max_length=300)
+    empresa_cliente = models.CharField(max_length=300, blank=True, default='')
+    nombre_proyecto_referencia = models.CharField(max_length=300, blank=True, default='')
+    ubicacion = models.CharField(max_length=300, blank=True, default='')
+    transcript_o_notas = models.TextField(blank=True, default='')
+
+    # Resultados estructurados del Skill Multimodal
+    brief_json = models.JSONField(default=dict, blank=True)
+    diagnostico_json = models.JSONField(default=dict, blank=True)
+    notas_ajuste_manual_json = models.JSONField(default=list, blank=True)
+    raw_response_json = models.JSONField(default=dict, blank=True)
+    historial_cambios_json = models.JSONField(default=list, blank=True)
+
+    # Integraciones: Slack, Google Drive y CNTXT Briefs
+    estado_ia = models.CharField(max_length=30, choices=ESTADO_IA_CHOICES, default='pendiente')
+    error_mensaje = models.TextField(blank=True, default='')
+    slack_channel_id = models.CharField(max_length=64, blank=True, default='')
+    slack_thread_ts = models.CharField(max_length=64, blank=True, default='', db_index=True)
+    drive_folder_id = models.CharField(max_length=128, blank=True, default='')
+    drive_folder_url = models.URLField(max_length=500, blank=True, default='')
+    drive_pdf_url = models.URLField(max_length=500, blank=True, default='')
+    brief_externo_id = models.IntegerField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Solicitud Propuesta IA'
+        verbose_name_plural = 'Solicitudes Propuesta IA'
+
+    def __str__(self):
+        return f"IA: {self.nombre_proyecto_referencia or self.cliente_nombre} ({self.estado_ia})"
+
+
+class InsumoPropuestaIA(models.Model):
+    """Archivo multimedia (audio, foto, video, documento) subido como insumo."""
+    TIPO_CHOICES = [
+        ('audio', 'Audio'),
+        ('imagen', 'Imagen'),
+        ('video', 'Video'),
+        ('documento', 'Documento'),
+    ]
+
+    solicitud = models.ForeignKey(SolicitudPropuestaIA, on_delete=models.CASCADE, related_name='insumos')
+    archivo = models.FileField(upload_to='ia_insumos/%Y/%m/')
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='imagen')
+    nombre_original = models.CharField(max_length=300, blank=True, default='')
+    mime_type = models.CharField(max_length=120, blank=True, default='')
+    tamano_bytes = models.BigIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"{self.tipo}: {self.nombre_original}"

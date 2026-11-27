@@ -1,0 +1,72 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Catálogo de Servicios CNTXT{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-white">Catálogo Maestro de Servicios CNTXT</h1>
+            <p class="text-cntxt-muted text-sm mt-1">{{ total_catalogo }} servicios canónicos activos (Portafolio 2026)</p>
+        </div>
+        <a href="{% url 'propuestas:admin_nueva_ia' %}"
+           class="bg-cntxt-gold text-cntxt-dark font-semibold px-5 py-2.5 rounded-lg hover:bg-cntxt-gold/90 transition text-sm">
+            ✨ Nueva Propuesta con IA
+        </a>
+    </div>
+
+    <form method="get" class="bg-cntxt-card border border-cntxt-border rounded-xl p-4 grid grid-cols-1 md:grid-cols-4 gap-3">
+        <input type="text" name="q" value="{{ q }}" placeholder="Buscar por código o nombre..."
+               class="bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cntxt-gold">
+        <select name="categoria" class="bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-white">
+            <option value="">Todas las categorías</option>
+            {% for cat in categorias %}
+            <option value="{{ cat }}" {% if categoria_filtro == cat %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+        </select>
+        <select name="modelo" class="bg-cntxt-dark border border-cntxt-border rounded-lg px-3 py-2 text-sm text-white">
+            <option value="">Todos los modelos</option>
+            <option value="MADE" {% if modelo_filtro == 'MADE' %}selected{% endif %}>MADE</option>
+            <option value="SELECT" {% if modelo_filtro == 'SELECT' %}selected{% endif %}>SELECT</option>
+            <option value="AMBOS" {% if modelo_filtro == 'AMBOS' %}selected{% endif %}>AMBOS</option>
+        </select>
+        <button type="submit" class="bg-cntxt-gold/20 border border-cntxt-gold/40 text-cntxt-gold font-semibold rounded-lg px-4 py-2 text-sm hover:bg-cntxt-gold/30 transition">
+            Filtrar
+        </button>
+    </form>
+
+    <div class="bg-cntxt-card border border-cntxt-border rounded-xl overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead class="bg-cntxt-dark text-xs uppercase text-cntxt-muted border-b border-cntxt-border">
+                <tr>
+                    <th class="px-4 py-3">Código</th>
+                    <th class="px-4 py-3">Categoría</th>
+                    <th class="px-4 py-3">Servicio</th>
+                    <th class="px-4 py-3">Modelo</th>
+                    <th class="px-4 py-3">Horas / Días</th>
+                    <th class="px-4 py-3 text-right">Valor Base (COP)</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-cntxt-border">
+                {% for s in servicios %}
+                <tr class="hover:bg-cntxt-dark/50">
+                    <td class="px-4 py-3 font-mono text-xs text-cntxt-gold">{{ s.codigo }}</td>
+                    <td class="px-4 py-3 text-xs text-cntxt-muted">{{ s.categoria }}{% if s.subcategoria %} / {{ s.subcategoria }}{% endif %}</td>
+                    <td class="px-4 py-3 text-white font-medium">{{ s.nombre }}</td>
+                    <td class="px-4 py-3"><span class="text-xs px-2 py-0.5 rounded bg-cntxt-dark border border-cntxt-border">{{ s.modelo_negocio }}</span></td>
+                    <td class="px-4 py-3 text-xs text-cntxt-muted">{{ s.horas_totales }} h ({{ s.dias_estimados }} d)</td>
+                    <td class="px-4 py-3 text-right font-semibold {% if s.requiere_cotizacion_manual %}text-yellow-400{% else %}text-white{% endif %}">
+                        {% if s.requiere_cotizacion_manual %}Cotización manual{% else %}${{ s.valor_total_cop }}{% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="px-4 py-10 text-center text-cntxt-muted">
+                        No hay servicios cargados. Ejecuta <code>python manage.py cargar_catalogo_cntxt</code>.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

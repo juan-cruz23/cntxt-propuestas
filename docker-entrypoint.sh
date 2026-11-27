@@ -7,6 +7,9 @@ mkdir -p /app/data
 echo ">>> Running migrations..."
 python manage.py migrate --noinput
 
+echo ">>> Loading CNTXT services catalog..."
+python manage.py cargar_catalogo_cntxt || true
+
 echo ">>> Collecting static files..."
 python manage.py collectstatic --noinput --clear
 

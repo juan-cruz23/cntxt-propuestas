@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.generic import RedirectView
-from . import views
+from . import views, views_ia
 
 app_name = 'propuestas'
 
@@ -10,6 +10,15 @@ urlpatterns = [
     path('admin-panel/logout/', views.admin_logout, name='admin_logout'),
     path('admin-panel/', views.admin_dashboard, name='admin_dashboard'),
     path('admin-panel/nueva/', views.admin_crear, name='admin_crear'),
+    path('admin-panel/nueva-ia/', views_ia.admin_nueva_ia, name='admin_nueva_ia'),
+    path('admin-panel/ia/<uuid:pk>/', views_ia.admin_ia_detalle, name='admin_ia_detalle'),
+    path('admin-panel/ia/<uuid:pk>/ajustar/', views_ia.admin_ia_ajustar, name='admin_ia_ajustar'),
+    path('admin-panel/ia/<uuid:pk>/slack/', views_ia.admin_ia_enviar_slack, name='admin_ia_enviar_slack'),
+    path('admin-panel/ia/<uuid:pk>/aprobar/', views_ia.admin_ia_aprobar_archivar, name='admin_ia_aprobar_archivar'),
+    path('admin-panel/ia/<uuid:pk>/print/', views_ia.admin_ia_print, name='admin_ia_print'),
+    path('admin-panel/catalogo/', views_ia.admin_catalogo, name='admin_catalogo'),
+    path('api/slack/events/', views_ia.slack_events_webhook, name='slack_events'),
+    path('api/slack/interactions/', views_ia.slack_interactions_webhook, name='slack_interactions'),
     path('admin-panel/editar/<uuid:pk>/', views.admin_editar, name='admin_editar'),
     path('admin-panel/eliminar/<uuid:pk>/', views.admin_eliminar, name='admin_eliminar'),
     path('admin-panel/duplicar/<uuid:pk>/', views.admin_duplicar, name='admin_duplicar'),

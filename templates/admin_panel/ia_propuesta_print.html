@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Propuesta #{{ propuesta.numero }} — {{ propuesta.nombre_proyecto }} | CNTXT</title>
+    <style>
+        @page { size: A4; margin: 18mm 16mm; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            margin: 0;
+            padding: 24px;
+            line-height: 1.55;
+        }
+        .gold { color: #C8A96E; }
+        .header { border-bottom: 1px solid #2a2a2a; padding-bottom: 16px; margin-bottom: 24px; }
+        .tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #C8A96E; }
+        h1 { font-size: 28px; margin: 6px 0 4px; color: #ffffff; }
+        h2 { font-size: 18px; color: #C8A96E; border-bottom: 1px solid #242424; padding-bottom: 6px; margin-top: 28px; }
+        h3 { font-size: 15px; color: #ffffff; margin: 14px 0 6px; }
+        .meta { font-size: 13px; color: #a3a3a3; margin-top: 10px; }
+        .card { background: #141414; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; margin-bottom: 14px; page-break-inside: avoid; }
+        .price { font-size: 20px; font-weight: 700; color: #C8A96E; margin-top: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border-bottom: 1px solid #262626; padding: 8px 6px; text-align: left; font-size: 13px; }
+        th { color: #C8A96E; text-transform: uppercase; font-size: 11px; }
+        .print-btn { background: #C8A96E; color: #0a0a0a; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; margin-bottom: 16px; }
+        @media print { .no-print { display: none !important; } body { padding: 0; } }
+    </style>
+</head>
+<body>
+    <div class="no-print">
+        <button class="print-btn" onclick="window.print()">🖨️ Guardar como PDF / Imprimir</button>
+    </div>
+
+    <div class="header">
+        <div class="tag">PROPUESTA COMERCIAL · CNTXT · #{{ propuesta.numero }}</div>
+        <h1>{{ propuesta.nombre_proyecto }}</h1>
+        {% if propuesta.nombre_proyecto_subtitulo %}<div class="gold">{{ propuesta.nombre_proyecto_subtitulo }}</div>{% endif %}
+        <div class="meta">
+            <strong>Dirigido a:</strong> {{ propuesta.dirigido_a }}{% if propuesta.empresa_cliente %} | {{ propuesta.empresa_cliente }}{% endif %}
+            &nbsp;·&nbsp; <strong>De:</strong> {{ propuesta.de }}
+            &nbsp;·&nbsp; <strong>Fecha:</strong> {{ propuesta.fecha_presentacion }}
+        </div>
+    </div>
+
+    <h2>A. Objetivo de la Propuesta</h2>
+    <div>{{ propuesta.objetivo_texto|safe }}</div>
+
+    {% if propuesta.objetivos.all %}
+    <h3>Objetivos Alineados</h3>
+    {% for obj in propuesta.objetivos.all %}
+    <div class="card">
+        <strong>{{ obj.titulo }}</strong>
+        <p style="margin:6px 0 0; color:#cccccc;">{{ obj.descripcion }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <h2>B. Alcances Propuestos (3 Niveles de Acceso)</h2>
+    {% for pkg in paquetes %}
+    <div class="card">
+        <div class="tag">NIVEL {{ forloop.counter }}</div>
+        <h3>{{ pkg.nombre }}</h3>
+        <div><strong>¿Qué es?</strong> {{ pkg.que_es|safe }}</div>
+        <div><strong>¿Para qué es?</strong> {{ pkg.para_que|safe }}</div>
+        <div>{{ pkg.incluye_texto|safe }}</div>
+        <div class="price">${{ pkg.precio_regular|floatformat:0 }} {{ pkg.moneda }} {% if pkg.aplica_iva %}<span style="font-size:12px; color:#a3a3a3;">(No incluye IVA 19%)</span>{% endif %}</div>
+        <div class="meta">Tiempo de entrega estimado: {{ pkg.dias_entrega }} días calendario</div>
+    </div>
+    {% endfor %}
+
+    {% if propuesta.requisitos_texto %}
+    <h2>C. Requisitos Previos y Consideraciones</h2>
+    <div>{{ propuesta.requisitos_texto|safe }}</div>
+    {% if propuesta.consideraciones_texto %}
+    <h3>Consideraciones</h3>
+    <div>{{ propuesta.consideraciones_texto|safe }}</div>
+    {% endif %}
+    {% endif %}
+
+    {% if propuesta.formas_pago.all %}
+    <h2>D. Forma de Pago</h2>
+    <table>
+        <thead><tr><th>Concepto</th><th>Condición</th><th>Porcentaje</th></tr></thead>
+        <tbody>
+            {% for fp in propuesta.formas_pago.all %}
+            <tr><td>{{ fp.concepto }}</td><td>{{ fp.fecha_pago }}</td><td><strong>{{ fp.porcentaje }}%</strong></td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="meta" style="margin-top:32px; border-top:1px solid #242424; padding-top:12px;">
+        CNTXT · Casa de Diseño en Medellín — Colombia · Versión web interactiva: {{ public_url }}
+    </div>
+</body>
+</html>

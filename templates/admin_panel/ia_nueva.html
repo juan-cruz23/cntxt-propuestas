@@ -1,0 +1,86 @@
+{% extends "admin_panel/base.html" %}
+{% block title %}Nueva Propuesta con IA{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto" x-data="{ procesando: false }">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <a href="{% url 'propuestas:admin_dashboard' %}" class="text-xs text-cntxt-muted hover:text-cntxt-gold transition">&larr; Volver al Dashboard</a>
+            <h1 class="text-2xl font-bold text-white mt-1">Nueva Propuesta con IA (R.E.D.)</h1>
+            <p class="text-cntxt-muted text-sm mt-1">
+                Carga audios, fotos, videos o notas de la reunión. El motor auditará el Brief (14 campos), diagnosticará según el Playbook R.E.D. y armará 3 niveles de acceso con el catálogo CNTXT ({{ total_servicios }} servicios activos).
+            </p>
+        </div>
+    </div>
+
+    {% if not gemini_configurado %}
+    <div class="mb-6 bg-yellow-950/40 border border-yellow-700/50 rounded-xl p-4 text-sm text-yellow-200">
+        <strong>Atención:</strong> Falta configurar <code>GEMINI_API_KEY</code> en las variables de entorno para ejecutar el análisis multimodal.
+    </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" @submit="procesando = true"
+          class="bg-cntxt-card border border-cntxt-border rounded-2xl p-6 sm:p-8 space-y-6">
+        {% csrf_token %}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Nombre del Cliente *</label>
+                <input type="text" name="cliente_nombre" required placeholder="Ej: Arq. Santiago Gómez Morales"
+                       class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cntxt-gold">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Empresa / Constructora</label>
+                <input type="text" name="empresa_cliente" placeholder="Ej: Airplan S.A.S / Promotora..."
+                       class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cntxt-gold">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Nombre del Proyecto (opcional)</label>
+                <input type="text" name="nombre_proyecto_referencia" placeholder="Si lo dejas vacío, la IA lo propone desde el audio"
+                       class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cntxt-gold">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Ubicación (opcional)</label>
+                <input type="text" name="ubicacion" placeholder="Ej: Llanogrande, Rionegro / Punta Cana"
+                       class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cntxt-gold">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2 border-t border-cntxt-border">
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Audios de la reunión / explicación</label>
+                <input type="file" name="audios" multiple accept="audio/*,.mp3,.wav,.m4a,.ogg,.opus"
+                       class="w-full bg-cntxt-dark border border-dashed border-cntxt-border rounded-xl p-4 text-sm text-cntxt-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-cntxt-gold/20 file:text-cntxt-gold file:font-semibold hover:border-cntxt-gold/50 transition">
+                <p class="text-xs text-cntxt-muted mt-1.5">Notas de voz de WhatsApp, grabaciones de visita o explicación en audio (MP3, M4A, OGG, WAV).</p>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Fotos y Videos del proyecto / referentes</label>
+                <input type="file" name="multimedia" multiple accept="image/*,video/*,.pdf"
+                       class="w-full bg-cntxt-dark border border-dashed border-cntxt-border rounded-xl p-4 text-sm text-cntxt-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-cntxt-gold/20 file:text-cntxt-gold file:font-semibold hover:border-cntxt-gold/50 transition">
+                <p class="text-xs text-cntxt-muted mt-1.5">Fotos del lote/espacio, videos de recorrido, planos o referentes visuales.</p>
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Transcript o Notas adicionales (opcional)</label>
+            <textarea name="transcript_o_notas" rows="6"
+                      placeholder="Pega aquí el transcript de la reunión, detalles de m², programa arquitectónico, presupuesto esperado o plazos clave..."
+                      class="w-full bg-cntxt-dark border border-cntxt-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cntxt-gold"></textarea>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-cntxt-border">
+            <label class="flex items-center space-x-3 text-sm text-cntxt-text cursor-pointer">
+                <input type="checkbox" name="notificar_slack" {% if slack_configurado %}checked{% endif %}
+                       class="w-4 h-4 rounded border-cntxt-border bg-cntxt-dark text-cntxt-gold focus:ring-cntxt-gold">
+                <span>Notificar automáticamente al canal de <strong>R.E.D. en Slack</strong> al terminar</span>
+            </label>
+
+            <button type="submit" :disabled="procesando"
+                    class="bg-cntxt-gold text-cntxt-dark font-bold px-8 py-3 rounded-xl hover:bg-cntxt-gold/90 transition disabled:opacity-50 flex items-center justify-center space-x-2">
+                <span x-show="!procesando">✨ Analizar y Construir Propuesta</span>
+                <span x-show="procesando" x-cloak>⏳ Analizando insumos y armando 3 niveles...</span>
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -8,3 +8,7 @@ gunicorn>=21.0
 dj-database-url>=2.3
 psycopg2-binary>=2.9
 whitenoise>=6.9
+google-genai>=1.0.0
+requests>=2.32.0
+google-api-python-client>=2.140.0
+google-auth>=2.34.0
