@@ -78,6 +78,7 @@ def notificar_propuesta_lista(solicitud: SolicitudPropuestaIA, base_url: str) ->
 
     url_editar = f"{base_url.rstrip('/')}/admin-panel/editar/{propuesta.pk}/"
     url_ia = f"{base_url.rstrip('/')}/admin-panel/ia/{solicitud.pk}/"
+    url_excel = f"{base_url.rstrip('/')}/admin-panel/ia/{solicitud.pk}/excel/"
     url_publica = f"{base_url.rstrip('/')}/p/{propuesta.slug}/"
 
     niveles_lines = []
@@ -99,8 +100,17 @@ def notificar_propuesta_lista(solicitud: SolicitudPropuestaIA, base_url: str) ->
             'type': 'header',
             'text': {
                 'type': 'plain_text',
-                'text': f'✨ Nueva Propuesta IA lista: #{propuesta.numero} {propuesta.nombre_proyecto}'[:150],
+                'text': f'Properto · Propuesta #{propuesta.numero}: {propuesta.nombre_proyecto}'[:150],
             },
+        },
+        {
+            'type': 'context',
+            'elements': [
+                {
+                    'type': 'mrkdwn',
+                    'text': '👔 *Hola equipo R.E.D., soy Properto.* Ya analicé los insumos del proyecto y dejé estructurado el borrador comercial listo para su revisión.',
+                }
+            ],
         },
         {
             'type': 'section',
@@ -128,7 +138,7 @@ def notificar_propuesta_lista(solicitud: SolicitudPropuestaIA, base_url: str) ->
             'elements': [
                 {
                     'type': 'mrkdwn',
-                    'text': '💬 *Responde en este hilo* para pedir cualquier cambio (alcances, servicios, precios, tono o completar datos faltantes) y el agente lo actualizará automáticamente.',
+                    'text': '💬 *Respóndeme en este hilo* si deseas ajustar alcances, servicios, tiempos, precios o completar los datos faltantes del Brief. Yo me encargo de actualizar la propuesta al instante. — *Properto*',
                 }
             ],
         },
@@ -137,8 +147,13 @@ def notificar_propuesta_lista(solicitud: SolicitudPropuestaIA, base_url: str) ->
             'elements': [
                 {
                     'type': 'button',
-                    'text': {'type': 'plain_text', 'text': '🔍 Revisar Diagnóstico IA'},
+                    'text': {'type': 'plain_text', 'text': '🔍 Revisar con Properto'},
                     'url': url_ia,
+                },
+                {
+                    'type': 'button',
+                    'text': {'type': 'plain_text', 'text': '📊 Excel Accesos'},
+                    'url': url_excel,
                 },
                 {
                     'type': 'button',
@@ -160,7 +175,7 @@ def notificar_propuesta_lista(solicitud: SolicitudPropuestaIA, base_url: str) ->
         'chat.postMessage',
         {
             'channel': channel,
-            'text': f'Nueva propuesta IA lista: #{propuesta.numero} {propuesta.nombre_proyecto} ({url_publica})',
+            'text': f'Hola equipo R.E.D., soy Properto. Dejé lista la propuesta #{propuesta.numero} ({propuesta.nombre_proyecto}): {url_publica}',
             'blocks': blocks,
         },
     )

@@ -101,6 +101,19 @@
             letter-spacing: 1px;
             margin-bottom: 10px;
         }
+
+        /* FEEDBACK TÁCTIL EN BOTONES */
+        button, a[class*="rounded-"] {
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.18s ease, filter 0.15s ease, background-color 0.18s ease, border-color 0.18s ease;
+        }
+        button:active:not(:disabled), a[class*="rounded-"]:active {
+            transform: scale(0.96);
+            filter: brightness(0.92);
+        }
+        button:hover:not(:disabled), a[class*="bg-cntxt-gold"]:hover {
+            box-shadow: 0 0 0 1px rgba(200, 169, 110, 0.35), 0 4px 16px rgba(200, 169, 110, 0.15);
+        }
     </style>
 
     <script>
@@ -211,5 +224,91 @@
         {% endif %}
         {% block content %}{% endblock %}
     </main>
+
+    <!-- OVERLAY DE PROGRESO PROPERTO -->
+    <div id="propertoLoader" style="display:none;"
+         class="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-cntxt-card border border-cntxt-gold/40 rounded-2xl p-8 max-w-lg w-full text-center shadow-2xl space-y-5">
+            <div class="flex flex-col items-center">
+                <img src="{% static 'img/properto.jpg' %}" alt="Properto"
+                     class="w-20 h-20 rounded-full object-cover border-2 border-cntxt-gold shadow-lg mb-3">
+                <span class="text-xs uppercase tracking-widest text-cntxt-gold font-bold">Properto trabajando</span>
+                <h3 id="propertoLoaderTitle" class="text-xl font-bold text-white mt-1">Estructurando tu propuesta...</h3>
+            </div>
+
+            <div class="space-y-2">
+                <div class="flex justify-between items-baseline text-xs">
+                    <span id="propertoLoaderStage" class="text-cntxt-muted">Analizando insumos multimodales...</span>
+                    <span id="propertoLoaderPct" class="text-2xl font-extrabold text-cntxt-gold font-mono">0%</span>
+                </div>
+                <div class="w-full h-2.5 bg-cntxt-dark rounded-full overflow-hidden border border-cntxt-border">
+                    <div id="propertoLoaderBar" class="h-full bg-cntxt-gold transition-all duration-500 rounded-full" style="width: 4%;"></div>
+                </div>
+            </div>
+
+            <p id="propertoLoaderQuote" class="text-sm italic text-cntxt-text/90 min-h-[44px] flex items-center justify-center px-2">
+                “Primero el oxígeno, luego la magia. Estructurando una propuesta diseñada para cerrar.”
+            </p>
+        </div>
+    </div>
+
+    <script>
+    window.showPropertoLoader = function(titulo) {
+        const overlay = document.getElementById('propertoLoader');
+        if (!overlay) return;
+        const titleEl = document.getElementById('propertoLoaderTitle');
+        const stageEl = document.getElementById('propertoLoaderStage');
+        const pctEl = document.getElementById('propertoLoaderPct');
+        const barEl = document.getElementById('propertoLoaderBar');
+        const quoteEl = document.getElementById('propertoLoaderQuote');
+
+        if (titulo) titleEl.textContent = titulo;
+        overlay.style.display = 'flex';
+
+        const stages = [
+            { pct: 12, text: 'Ingestando audios, fotos, videos y notas...' },
+            { pct: 28, text: 'Auditando los 14 campos de CNTXT Briefs...' },
+            { pct: 46, text: 'Identificando perfil, dolores y Conceptos Maestros...' },
+            { pct: 64, text: 'Correlacionando con los 140 servicios del catálogo...' },
+            { pct: 80, text: 'Construyendo 3 niveles de acceso (de más a menos)...' },
+            { pct: 91, text: 'Afinando narrativa, tiempos y entregables...' },
+            { pct: 96, text: 'Guardando propuesta y preparando mesa de revisión...' },
+        ];
+        const quotes = [
+            '“Primero el oxígeno, luego la magia. Estructurando una propuesta diseñada para cerrar.”',
+            '“La venta es un sistema, no una casualidad. Cada alcance responde a un dolor real.”',
+            '“No vendemos planos fríos; diseñamos experiencias extraordinarias que enamoran antes de construir.”',
+            '“Anclaje de valor: 3 niveles de acceso de más a menos para facilitar la decisión del cliente.”',
+            '“Las relaciones no son importantes, lo son todo. Cuidando cada palabra del storytelling.”',
+            '“El mejor comercial es el más disciplinado: cero vacíos en el Brief, máxima claridad en la oferta.”',
+        ];
+
+        let pct = 5;
+        let qIdx = 0;
+        pctEl.textContent = pct + '%';
+        barEl.style.width = pct + '%';
+
+        const pctTimer = setInterval(() => {
+            if (pct < 96) {
+                pct += pct < 60 ? 3 : (pct < 85 ? 2 : 1);
+                if (pct > 96) pct = 96;
+                pctEl.textContent = pct + '%';
+                barEl.style.width = pct + '%';
+                const currentStage = [...stages].reverse().find(s => pct >= s.pct);
+                if (currentStage) stageEl.textContent = currentStage.text;
+            }
+        }, 700);
+
+        const quoteTimer = setInterval(() => {
+            qIdx = (qIdx + 1) % quotes.length;
+            quoteEl.textContent = quotes[qIdx];
+        }, 3800);
+
+        window.addEventListener('pagehide', () => {
+            clearInterval(pctTimer);
+            clearInterval(quoteTimer);
+        }, { once: true });
+    };
+    </script>
 </body>
 </html>

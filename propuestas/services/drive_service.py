@@ -8,6 +8,7 @@ import re
 from django.template.loader import render_to_string
 
 from propuestas.models import SolicitudPropuestaIA
+from propuestas.services.excel_service import generar_excel_composicion
 
 logger = logging.getLogger(__name__)
 
@@ -156,6 +157,18 @@ def aprobar_y_archivar_en_drive(solicitud: SolicitudPropuestaIA, base_url: str) 
     doc_file = _subir_bytes(service, doc_name, doc_bytes, doc_mime, carpeta_id)
     doc_url = doc_file.get('webViewLink', '')
 
+    # Generar y subir Excel de composición por cada Access con el mismo consecutivo
+    xlsx_bytes, _ = generar_excel_composicion(solicitud)
+    xlsx_name = f'ALCANCE_{consec_str}_{nombre_proy}.xlsx'
+    xlsx_file = _subir_bytes(
+        service,
+        xlsx_name,
+        xlsx_bytes,
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        carpeta_id,
+    )
+    xlsx_url = xlsx_file.get('webViewLink', '')
+
     solicitud.drive_folder_id = carpeta_id
     solicitud.drive_folder_url = carpeta_url
     solicitud.drive_pdf_url = doc_url
@@ -166,5 +179,7 @@ def aprobar_y_archivar_en_drive(solicitud: SolicitudPropuestaIA, base_url: str) 
         'folder_name': carpeta_nombre,
         'folder_url': carpeta_url,
         'pdf_url': doc_url,
+        'excel_url': xlsx_url,
+        'excel_name': xlsx_name,
         'public_url': f"{base_url.rstrip('/')}/p/{propuesta.slug}/",
     }

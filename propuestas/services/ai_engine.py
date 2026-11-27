@@ -2,6 +2,7 @@ import json
 import logging
 import mimetypes
 import os
+import time
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
@@ -98,7 +99,7 @@ def _limpiar_json_texto(texto: str) -> dict:
 
 def _formatear_incluye_html(bloques: list[dict], dias_calendario: int) -> str:
     """Genera HTML limpio compatible con la vista pública de propuestas CNTXT."""
-    partes = ['<h2>¿Qué incluye?</h2>']
+    partes = []
     for b in bloques or []:
         num = b.get('numero', '')
         tit = b.get('titulo', '')
@@ -114,9 +115,11 @@ def _formatear_incluye_html(bloques: list[dict], dias_calendario: int) -> str:
 
 
 def _build_system_prompt(catalogo: list[dict], playbook: str) -> str:
-    return f"""Eres el Director Estratégico Comercial y Arquitectónico de CNTXT (Contexto Arquitectura).
+    return f"""Eres **Properto**, el Director Comercial Senior y Estratega de Propuestas de CNTXT (Contexto Arquitectura).
+Cuentas con décadas de experiencia en ventas consultivas de arquitectura, desarrollo inmobiliario y diseño de alto valor. Te comunicas con seriedad, criterio ejecutivo, calidez profesional y rigor metodológico, acompañando a cualquier integrante del equipo R.E.D. para que cada propuesta salga completa, convincente y sin vacíos.
+
 Tu misión es analizar insumos multimodales reales de una reunión/visita comercial (audios, fotos, videos y notas/transcript) y generar:
-1. La auditoría completa del Project Brief con los 14 campos exactos de `cntxt-briefs` (marcando explícitamente cualquier campo crítico que falte en los insumos, sin inventar datos duros).
+1. La auditoría completa del Project Brief con los 14 campos exactos de `cntxt-briefs` (marcando explícitamente cualquier campo crítico que falte en los insumos, sin inventar datos duros, formulando cada pregunta con tu voz ejecutiva de Properto).
 2. Un diagnóstico comercial profundo alineado al Playbook R.E.D.
 3. Una propuesta comercial estructurada para `cntxt-propuestas` con **SIEMPRE 3 NIVELES DE ACCESO ORDENADOS DE MÁS A MENOS** (Nivel 1 = Integral/Full mayor alcance e inversión, Nivel 2 = Estratégico/Intermedio, Nivel 3 = Esencial/Entrada), correlacionados con servicios REALES del catálogo CNTXT.
 
@@ -231,6 +234,46 @@ def _adjuntar_insumos_gemini(client, solicitud: SolicitudPropuestaIA) -> list:
     return partes, uploaded_refs
 
 
+def _llamar_gemini_con_reintento(client, contents, system_prompt: str, temperature: float = 0.35):
+    """Llama a Gemini con reintentos y fallback automático de modelos ante picos 503/429."""
+    primary = os.getenv('GEMINI_MODEL', 'gemini-3.8-flash').strip() or 'gemini-3.8-flash'
+    candidatos = [primary]
+    for fb in ('gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash'):
+        if fb not in candidatos:
+            candidatos.append(fb)
+
+    last_exc = None
+    for model_name in candidatos:
+        for intento in range(2):
+            try:
+                return client.models.generate_content(
+                    model=model_name,
+                    contents=contents,
+                    config={
+                        'system_instruction': system_prompt,
+                        'response_mime_type': 'application/json',
+                        'temperature': temperature,
+                    },
+                )
+            except Exception as exc:
+                last_exc = exc
+                msg = str(exc)
+                es_temporal = ('503' in msg or 'UNAVAILABLE' in msg or '429' in msg or 'RESOURCE_EXHAUSTED' in msg)
+                es_no_disponible = ('404' in msg or 'NOT_FOUND' in msg)
+                if es_no_disponible:
+                    logger.warning('Modelo %s no disponible (404), probando fallback...', model_name)
+                    break
+                if es_temporal and intento == 0:
+                    logger.warning('Modelo %s con pico temporal, reintentando en 2s...', model_name)
+                    time.sleep(2)
+                    continue
+                if es_temporal:
+                    logger.warning('Modelo %s saturado, probando siguiente fallback...', model_name)
+                    break
+                raise
+    raise last_exc
+
+
 def generar_propuesta_ia(solicitud: SolicitudPropuestaIA) -> Propuesta:
     """Ejecuta el Skill Multimodal de CNTXT y crea/actualiza la Propuesta real en BD."""
     solicitud.estado_ia = 'procesando'
@@ -238,7 +281,6 @@ def generar_propuesta_ia(solicitud: SolicitudPropuestaIA) -> Propuesta:
     solicitud.save(update_fields=['estado_ia', 'error_mensaje', 'updated_at'])
 
     client = _get_gemini_client()
-    model_name = os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')
     catalogo = _obtener_catalogo_compacto()
     playbook = _cargar_contexto_playbook()
 
@@ -258,15 +300,7 @@ def generar_propuesta_ia(solicitud: SolicitudPropuestaIA) -> Propuesta:
     contents = [*media_parts, user_context]
 
     try:
-        response = client.models.generate_content(
-            model=model_name,
-            contents=contents,
-            config={
-                'system_instruction': system_prompt,
-                'response_mime_type': 'application/json',
-                'temperature': 0.35,
-            },
-        )
+        response = _llamar_gemini_con_reintento(client, contents, system_prompt, temperature=0.35)
         data = _limpiar_json_texto(response.text)
     except Exception as exc:
         solicitud.estado_ia = 'error'
@@ -322,7 +356,10 @@ def sincronizar_propuesta_desde_json(
 
     reqs_list = p_data.get('requisitos_previos') or []
     if reqs_list:
-        propuesta.requisitos_texto = '<ul>' + ''.join(f'<li>{r}</li>' for r in reqs_list) + '</ul>'
+        propuesta.requisitos_texto = (
+            '<p>Para iniciar el desarrollo con precisión y cumplir los tiempos proyectados, '
+            'requerimos contar con los siguientes insumos e información base:</p>'
+        )
     propuesta.save()
 
     # Objetivos alineados
@@ -482,20 +519,20 @@ def _sincronizar_brief_compartido(solicitud: SolicitudPropuestaIA, brief_data: d
 def aplicar_ajuste_conversacional(solicitud: SolicitudPropuestaIA, instruccion: str, autor: str = 'R.E.D.') -> str:
     """Aplica cambios pedidos desde Slack (en hilo) o desde el panel sobre la propuesta actual."""
     client = _get_gemini_client()
-    model_name = os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')
+    model_name = os.getenv('GEMINI_MODEL', 'gemini-3.8-flash')
     catalogo = _obtener_catalogo_compacto()
     playbook = _cargar_contexto_playbook()
 
     estado_actual = solicitud.raw_response_json or {}
 
-    prompt_edicion = f"""Eres el motor de propuestas IA de CNTXT.
+    prompt_edicion = f"""Eres **Properto**, Director Comercial Senior de CNTXT con décadas de experiencia.
 A continuación tienes el JSON ACTUAL de una propuesta y su Brief, junto con una instrucción de cambio solicitada por {autor}.
 Aplica ÚNICAMENTE los cambios pedidos respetando el catálogo real de servicios y manteniendo SIEMPRE los 3 niveles de acceso ordenados de MÁS a MENOS.
 Si el usuario completó datos faltantes del Brief, actualiza `brief` y retira esos campos de `brief.campos_faltantes` recalculando `completitud_pct`.
 
 Devuelve un JSON con exactamente dos claves:
 {{
-  "resumen_cambios": "string corto en español explicando qué se actualizó",
+  "resumen_cambios": "string corto en español, redactado con la voz profesional y ejecutiva de Properto, explicando claramente qué se actualizó",
   "data_actualizada": {{ ... el mismo esquema completo de brief, diagnostico, propuesta y notas_ajuste_manual ... }}
 }}
 
@@ -506,14 +543,11 @@ Devuelve un JSON con exactamente dos claves:
 {instruccion}
 """
 
-    response = client.models.generate_content(
-        model=model_name,
-        contents=prompt_edicion,
-        config={
-            'system_instruction': _build_system_prompt(catalogo, playbook),
-            'response_mime_type': 'application/json',
-            'temperature': 0.25,
-        },
+    response = _llamar_gemini_con_reintento(
+        client,
+        prompt_edicion,
+        _build_system_prompt(catalogo, playbook),
+        temperature=0.25,
     )
     parsed = _limpiar_json_texto(response.text)
     resumen = parsed.get('resumen_cambios') or 'Propuesta actualizada según tu instrucción.'

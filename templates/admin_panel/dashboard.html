@@ -1,4 +1,5 @@
 {% extends "admin_panel/base.html" %}
+{% load static %}
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
@@ -9,8 +10,9 @@
     </div>
     <div class="flex items-center gap-3">
         <a href="{% url 'propuestas:admin_nueva_ia' %}"
-           class="bg-cntxt-gold text-cntxt-dark font-semibold px-5 py-3 rounded-lg hover:bg-cntxt-gold/90 transition flex items-center space-x-2">
-            <span>✨ Nueva con IA</span>
+           class="bg-cntxt-gold text-cntxt-dark font-semibold px-4 py-2.5 rounded-lg hover:bg-cntxt-gold/90 transition flex items-center space-x-2.5">
+            <img src="{% static 'img/properto.jpg' %}" alt="Properto" class="w-7 h-7 rounded-full object-cover border border-cntxt-dark/40">
+            <span>Crear con Properto</span>
         </a>
         <a href="{% url 'propuestas:admin_crear' %}"
            class="bg-cntxt-card border border-cntxt-border text-white font-semibold px-5 py-3 rounded-lg hover:border-cntxt-gold/60 transition flex items-center space-x-2">
@@ -120,8 +122,9 @@
             <div class="flex items-center space-x-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
                 {% if p.solicitud_ia %}
                 <a href="{% url 'propuestas:admin_ia_detalle' pk=p.solicitud_ia.pk %}"
-                   class="px-2.5 py-1.5 rounded-lg bg-cntxt-gold/15 border border-cntxt-gold/30 text-cntxt-gold text-xs font-semibold hover:bg-cntxt-gold/25 transition" title="Ver Diagnóstico IA">
-                    ✨ IA
+                   class="px-2.5 py-1.5 rounded-lg bg-cntxt-gold/15 border border-cntxt-gold/30 text-cntxt-gold text-xs font-semibold hover:bg-cntxt-gold/25 transition flex items-center gap-1.5" title="Revisar con Properto">
+                    <img src="{% static 'img/properto.jpg' %}" alt="Properto" class="w-4 h-4 rounded-full object-cover">
+                    <span>Properto</span>
                 </a>
                 {% endif %}
                 <a href="{% url 'propuestas:admin_editar' pk=p.pk %}"

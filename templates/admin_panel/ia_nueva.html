@@ -1,14 +1,17 @@
 {% extends "admin_panel/base.html" %}
-{% block title %}Nueva Propuesta con IA{% endblock %}
+{% load static %}
+{% block title %}Properto · Nueva Propuesta{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto" x-data="{ procesando: false }">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex items-start gap-5 mb-6 bg-cntxt-card border border-cntxt-border rounded-2xl p-5">
+        <img src="{% static 'img/properto.jpg' %}" alt="Properto"
+             class="w-20 h-20 rounded-xl object-cover border border-cntxt-gold/40 shrink-0 shadow-lg">
         <div>
             <a href="{% url 'propuestas:admin_dashboard' %}" class="text-xs text-cntxt-muted hover:text-cntxt-gold transition">&larr; Volver al Dashboard</a>
-            <h1 class="text-2xl font-bold text-white mt-1">Nueva Propuesta con IA (R.E.D.)</h1>
+            <h1 class="text-2xl font-bold text-white mt-1">Properto · Director Comercial Senior</h1>
             <p class="text-cntxt-muted text-sm mt-1">
-                Carga audios, fotos, videos o notas de la reunión. El motor auditará el Brief (14 campos), diagnosticará según el Playbook R.E.D. y armará 3 niveles de acceso con el catálogo CNTXT ({{ total_servicios }} servicios activos).
+                Hola, soy <strong>Properto</strong>. Compárteme los audios, fotos, videos o notas de la reunión: auditaré el Project Brief (14 campos), diagnosticaré bajo el Playbook R.E.D. y estructuraré 3 niveles de acceso con nuestro catálogo ({{ total_servicios }} servicios activos).
             </p>
         </div>
     </div>
@@ -19,7 +22,8 @@
     </div>
     {% endif %}
 
-    <form method="post" enctype="multipart/form-data" @submit="procesando = true"
+    <form method="post" enctype="multipart/form-data"
+          @submit="procesando = true; window.showPropertoLoader('Properto está construyendo tu propuesta...')"
           class="bg-cntxt-card border border-cntxt-border rounded-2xl p-6 sm:p-8 space-y-6">
         {% csrf_token %}
 
@@ -36,7 +40,7 @@
             </div>
             <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-cntxt-gold mb-2">Nombre del Proyecto (opcional)</label>
-                <input type="text" name="nombre_proyecto_referencia" placeholder="Si lo dejas vacío, la IA lo propone desde el audio"
+                <input type="text" name="nombre_proyecto_referencia" value="{{ proyecto_prefill|default:'' }}" placeholder="Si lo dejas vacío, la IA lo propone desde el audio"
                        class="w-full bg-cntxt-dark border border-cntxt-border rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-cntxt-gold">
             </div>
             <div>
@@ -77,8 +81,8 @@
 
             <button type="submit" :disabled="procesando"
                     class="bg-cntxt-gold text-cntxt-dark font-bold px-8 py-3 rounded-xl hover:bg-cntxt-gold/90 transition disabled:opacity-50 flex items-center justify-center space-x-2">
-                <span x-show="!procesando">✨ Analizar y Construir Propuesta</span>
-                <span x-show="procesando" x-cloak>⏳ Analizando insumos y armando 3 niveles...</span>
+                <span x-show="!procesando">👔 Construir propuesta con Properto</span>
+                <span x-show="procesando" x-cloak>⏳ Properto está analizando los insumos y armando los 3 niveles...</span>
             </button>
         </div>
     </form>

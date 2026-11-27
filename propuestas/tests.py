@@ -134,12 +134,30 @@ class AIProposalEngineTests(TestCase):
         self.assertEqual(self.client.get(reverse('propuestas:admin_catalogo')).status_code, 200)
         self.assertEqual(self.client.get(reverse('propuestas:admin_ia_detalle', args=[sol.pk])).status_code, 200)
         self.assertEqual(self.client.get(reverse('propuestas:admin_ia_print', args=[sol.pk])).status_code, 200)
+        excel_resp = self.client.get(reverse('propuestas:admin_ia_excel', args=[sol.pk]))
+        self.assertEqual(excel_resp.status_code, 200)
+        self.assertIn('spreadsheetml.sheet', excel_resp['Content-Type'])
+        self.assertGreater(len(excel_resp.content), 2000)
 
     def test_slack_url_verification_challenge(self):
-        resp = self.client.post(
-            reverse('propuestas:slack_events'),
-            data=json.dumps({'type': 'url_verification', 'challenge': 'abc123'}),
-            content_type='application/json',
-        )
+        from unittest.mock import patch
+        with patch.dict('os.environ', {'SLACK_SIGNING_SECRET': ''}):
+            resp = self.client.post(
+                reverse('propuestas:slack_events'),
+                data=json.dumps({'type': 'url_verification', 'challenge': 'abc123'}),
+                content_type='application/json',
+            )
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.json(), {'challenge': 'abc123'})
+
+    def test_slack_slash_command_properto(self):
+        from unittest.mock import patch
+        with patch.dict('os.environ', {'SLACK_SIGNING_SECRET': ''}):
+            resp = self.client.post(
+                reverse('propuestas:slack_command'),
+                data={'command': '/properto', 'text': 'Casa El Retiro', 'user_name': 'simon'},
+            )
+        self.assertEqual(resp.status_code, 200)
+        body = resp.json()
+        self.assertEqual(body['response_type'], 'ephemeral')
+        self.assertIn('/admin-panel/nueva-ia/?proyecto=Casa+El+Retiro', body['text'])

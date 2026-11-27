@@ -1,24 +1,41 @@
 {% extends "admin_panel/base.html" %}
-{% block title %}Diagnóstico IA | {{ solicitud.nombre_proyecto_referencia|default:solicitud.cliente_nombre }}{% endblock %}
+{% load static %}
+{% block title %}Properto | {{ solicitud.nombre_proyecto_referencia|default:solicitud.cliente_nombre }}{% endblock %}
 
 {% block content %}
 <div class="space-y-6">
     <!-- HEADER -->
     <div class="flex flex-wrap items-start justify-between gap-4">
-        <div>
-            <a href="{% url 'propuestas:admin_dashboard' %}" class="text-xs text-cntxt-muted hover:text-cntxt-gold">&larr; Volver al Dashboard</a>
-            <div class="flex items-center gap-3 mt-1">
-                <h1 class="text-2xl font-bold text-white">
-                    {% if propuesta %}#{{ propuesta.numero }} · {{ propuesta.nombre_proyecto }}{% else %}{{ solicitud.nombre_proyecto_referencia|default:solicitud.cliente_nombre }}{% endif %}
-                </h1>
-                <span class="text-xs px-2.5 py-1 rounded-full bg-cntxt-gold/20 text-cntxt-gold font-semibold">
-                    {{ solicitud.get_estado_ia_display }}
-                </span>
+        <div class="flex items-center gap-4">
+            <img src="{% static 'img/properto.jpg' %}" alt="Properto"
+                 class="w-14 h-14 rounded-xl object-cover border border-cntxt-gold/40 shrink-0">
+            <div>
+                <a href="{% url 'propuestas:admin_dashboard' %}" class="text-xs text-cntxt-muted hover:text-cntxt-gold">&larr; Volver al Dashboard</a>
+                <div class="flex items-center gap-3 mt-1">
+                    <h1 class="text-2xl font-bold text-white">
+                        {% if propuesta %}#{{ propuesta.numero }} · {{ propuesta.nombre_proyecto }}{% else %}{{ solicitud.nombre_proyecto_referencia|default:solicitud.cliente_nombre }}{% endif %}
+                    </h1>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-cntxt-gold/20 text-cntxt-gold font-semibold">
+                        {{ solicitud.get_estado_ia_display }}
+                    </span>
+                </div>
+                <p class="text-cntxt-muted text-sm mt-1">
+                    Cliente: {{ solicitud.cliente_nombre }}{% if solicitud.empresa_cliente %} | {{ solicitud.empresa_cliente }}{% endif %} · Preparado por <strong class="text-cntxt-gold">Properto</strong>
+                </p>
             </div>
-            <p class="text-cntxt-muted text-sm mt-1">
-                Cliente: {{ solicitud.cliente_nombre }}{% if solicitud.empresa_cliente %} | {{ solicitud.empresa_cliente }}{% endif %}
-            </p>
         </div>
+
+        {% if solicitud.estado_ia == 'error' or not propuesta %}
+        <div class="flex flex-wrap items-center gap-2">
+            <form method="post" action="{% url 'propuestas:admin_ia_reintentar' pk=solicitud.pk %}" class="inline"
+                  onsubmit="window.showPropertoLoader('Properto está reintentando el análisis multimodal...')">
+                {% csrf_token %}
+                <button type="submit" class="px-5 py-2.5 rounded-lg bg-cntxt-gold text-cntxt-dark font-bold text-sm hover:bg-cntxt-gold/90 transition">
+                    🔄 Reintentar análisis con Properto
+                </button>
+            </form>
+        </div>
+        {% endif %}
 
         {% if propuesta %}
         <div class="flex flex-wrap items-center gap-2">
@@ -26,12 +43,17 @@
                class="px-4 py-2 rounded-lg border border-cntxt-border bg-cntxt-card text-sm text-white hover:border-cntxt-gold transition">
                 ✏️ Editar Propuesta Manual
             </a>
+            <a href="{% url 'propuestas:admin_ia_excel' pk=solicitud.pk %}"
+               class="px-4 py-2 rounded-lg border border-emerald-700/60 bg-emerald-950/40 text-sm text-emerald-300 hover:bg-emerald-900/40 transition">
+                📊 Descargar Excel Accesos (.xlsx)
+            </a>
             <a href="{% url 'propuestas:admin_ia_print' pk=solicitud.pk %}" target="_blank"
                class="px-4 py-2 rounded-lg border border-cntxt-border bg-cntxt-card text-sm text-white hover:border-cntxt-gold transition">
                 🖨️ Vista PDF / Imprimir
             </a>
             {% if slack_configurado %}
-            <form method="post" action="{% url 'propuestas:admin_ia_enviar_slack' pk=solicitud.pk %}" class="inline">
+            <form method="post" action="{% url 'propuestas:admin_ia_enviar_slack' pk=solicitud.pk %}" class="inline"
+                  onsubmit="window.showPropertoLoader('Properto está enviando la tarjeta al canal R.E.D. en Slack...')">
                 {% csrf_token %}
                 <button type="submit" class="px-4 py-2 rounded-lg border border-cntxt-gold/40 bg-cntxt-gold/10 text-sm text-cntxt-gold hover:bg-cntxt-gold/20 transition">
                     💬 Notificar a Slack R.E.D.
@@ -39,7 +61,7 @@
             </form>
             {% endif %}
             <form method="post" action="{% url 'propuestas:admin_ia_aprobar_archivar' pk=solicitud.pk %}" class="inline"
-                  onsubmit="return confirm('¿Publicar la propuesta y archivar carpeta + PDF en Google Drive?')">
+                  onsubmit="if(confirm('¿Publicar la propuesta y archivar carpeta + PDF + Excel en Google Drive?')){ window.showPropertoLoader('Properto está publicando y archivando en Google Drive...'); return true; } return false;">
                 {% csrf_token %}
                 <button type="submit" class="px-5 py-2 rounded-lg bg-cntxt-gold text-cntxt-dark font-bold text-sm hover:bg-cntxt-gold/90 transition">
                     ✅ Aprobar y Archivar en Drive
@@ -118,7 +140,11 @@
                 </span>
             </div>
 
-            {% if brief.campos_faltantes %}
+            {% if not brief %}
+            <div class="bg-cntxt-dark border border-cntxt-border rounded-xl p-3 text-sm text-cntxt-muted">
+                Pendiente de análisis IA.
+            </div>
+            {% elif brief.campos_faltantes %}
             <div class="bg-yellow-950/30 border border-yellow-700/40 rounded-xl p-4 space-y-2">
                 <p class="text-xs font-bold uppercase text-yellow-400">Información faltante detectada:</p>
                 {% for f in brief.campos_faltantes %}
@@ -179,16 +205,17 @@
     <!-- BLOQUE 3: AJUSTE CONVERSACIONAL (MISMO MOTOR QUE EL HILO DE SLACK) -->
     {% if propuesta %}
     <div class="bg-cntxt-card border border-cntxt-border rounded-2xl p-6">
-        <h2 class="text-sm font-bold uppercase tracking-wider text-cntxt-gold mb-2">4. Pedir Ajuste a la IA (igual que desde Slack)</h2>
+        <h2 class="text-sm font-bold uppercase tracking-wider text-cntxt-gold mb-2">4. Conversar ajustes con Properto (igual que en Slack)</h2>
         <p class="text-xs text-cntxt-muted mb-3">
-            Escribe qué quieres modificar (ej: "Agrega recorrido 360 al Nivel 2", "Ajusta el precio del Nivel 1 a 48 millones", "El área confirmada es 320 m², completa el Brief").
+            Indícale a Properto qué deseas ajustar (ej: "Agrega recorrido 360 al Nivel 2", "Ajusta el precio del Nivel 1 a 48 millones", "El área confirmada es 320 m², completa el Brief").
         </p>
-        <form method="post" action="{% url 'propuestas:admin_ia_ajustar' pk=solicitud.pk %}" class="flex flex-col sm:flex-row gap-3">
+        <form method="post" action="{% url 'propuestas:admin_ia_ajustar' pk=solicitud.pk %}" class="flex flex-col sm:flex-row gap-3"
+              onsubmit="window.showPropertoLoader('Properto está aplicando tus ajustes a la propuesta...')">
             {% csrf_token %}
-            <input type="text" name="instruccion" required placeholder="Describe el cambio que quieres aplicar a la propuesta..."
+            <input type="text" name="instruccion" required placeholder="Escríbele a Properto qué cambio quieres aplicar..."
                    class="flex-1 bg-cntxt-dark border border-cntxt-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cntxt-gold">
             <button type="submit" class="px-6 py-2.5 rounded-xl bg-cntxt-gold text-cntxt-dark font-semibold text-sm hover:bg-cntxt-gold/90 transition">
-                Aplicar Ajuste IA
+                👔 Pedir ajuste a Properto
             </button>
         </form>
 
